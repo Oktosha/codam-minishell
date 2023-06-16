@@ -16,6 +16,7 @@ fix(#ISSUE_NUM): Heredoc signals
 + No emoji, too!
 + Present tense for verbs
 + No dot in the end
++ No space between feat/fix and the opening bracket
 + Don't repeat words "fix" "feature"
 + Separate multiple issues with commas
 + Try to fit into 50 chars
