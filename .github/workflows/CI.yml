@@ -1,0 +1,41 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  pull_request:
+    branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  ci:
+    name: Minishell tests
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+
+      # Runs a single command using the runners shell
+      - name: Install Dependencies
+        run: ./script/install_dependencies.sh
+      # Runs a single command using the runners shell
+      - name: Norm
+        run: make check/norm
+      # Runs a single command using the runners shell
+      - name: Compile Unit Tests
+        run: make test.out
+      # Runs a single command using the runners shell
+      - name: Run Unit Tests
+        run: make check
+      # Runs a single command using the runners shell
+      - name: Check For Leaks
+        run: make check/leaks      
