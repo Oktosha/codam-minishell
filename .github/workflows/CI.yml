@@ -30,6 +30,9 @@ jobs:
       # Runs a single command using the runners shell
       - name: Norm
         run: ./tests/norm.sh
+        # Runs a single command using the runners shell
+      - name: Minishell tester 1
+        run: ./tests/tester 
 #       # Runs a single command using the runners shell
 #       - name: Compile Unit Tests
 #         run: make test.out
