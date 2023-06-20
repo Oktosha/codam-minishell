@@ -32,7 +32,7 @@ jobs:
         run: ./tests/norm.sh
         # Runs a single command using the runners shell
       - name: Minishell tester 1
-        run: ./tests/tester 
+        run: ./minishell_tester/tester 
 #       # Runs a single command using the runners shell
 #       - name: Compile Unit Tests
 #         run: make test.out
