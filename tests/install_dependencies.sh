@@ -17,3 +17,8 @@ python3 -m pip install norminette
 # Create an alias
 echo 'alias norminette="~/.norminette/norminette.rb"' >> ~/.zshrc
 source ~/.zshrc
+
+# Minishell tester 1
+cd minishell
+git clone https://github.com/LucasKuhn/minishell_tester.git
+cd minishell_tester
