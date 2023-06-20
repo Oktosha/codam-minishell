@@ -13,3 +13,7 @@ sudo apt-get install python3
 # Norminette
 python3 -m pip install --upgrade pip setuptools
 python3 -m pip install norminette
+
+# Create an alias
+echo 'alias norminette="~/.norminette/norminette.rb"' >> ~/.zshrc
+source ~/.zshrc
