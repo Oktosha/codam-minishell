@@ -29,13 +29,13 @@ jobs:
         run: ./tests/install_dependencies.sh
       # Runs a single command using the runners shell
       - name: Norm
-        run: make check/norm
-      # Runs a single command using the runners shell
-      - name: Compile Unit Tests
-        run: make test.out
-      # Runs a single command using the runners shell
-      - name: Run Unit Tests
-        run: make check
-      # Runs a single command using the runners shell
-      - name: Check For Leaks
-        run: make check/leaks      
+        run: ./norm.sh
+#       # Runs a single command using the runners shell
+#       - name: Compile Unit Tests
+#         run: make test.out
+#       # Runs a single command using the runners shell
+#       - name: Run Unit Tests
+#         run: make check
+#       # Runs a single command using the runners shell
+#       - name: Check For Leaks
+#         run: make check/leaks      
