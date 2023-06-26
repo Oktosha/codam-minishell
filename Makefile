@@ -6,7 +6,7 @@
 #    By: evoronin <evoronin@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/12 11:12:29 by evoronin      #+#    #+#                  #
-#    Updated: 2023/06/19 14:33:42 by evoronin      ########   odam.nl          #
+#    Updated: 2023/06/26 15:24:52 by mbp14         ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,10 @@ END=\033[0m
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
+READ_FLAGS = -lreadline
 NAME = minishell
-SRCS =  
+SRCS =  ./src/main.c \
+		./src/lexer_a.c \ 
 		
 OBJ = $(SRCS:.c=.o)
 LIBFT = libft/libft.a
@@ -36,11 +38,8 @@ all:  ${NAME}
 ${NAME}: ${OBJ} ${HEADERS}
 	@make -s -C $(LIBFT_DIR)
 	@echo "${BLUE}Compiling ${NAME}${END}"
-	@$(CC) $(CFLAGS) $(OBJ) ${LIBFT} -o $(NAME)
+	@$(CC) $(CFLAGS) $(READ_FLAGS) $(OBJ) ${LIBFT} -o $(NAME)
 	@echo "${GREEN}Done!${END}"
-
-check/norm:
-	
 
 clean:
 	@make clean -C libft
@@ -50,7 +49,6 @@ clean:
 fclean: clean
 	@make fclean -C libft
 	@echo "${RED}Removing ${NAME}${END}"
-	@rm -rf ${MLX_DIRECTORY}/build
 	@rm -rf ${NAME}
 	@echo "${GREEN}Done!${END}"
 
