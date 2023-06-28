@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   lexer.h                                            :+:    :+:            */
+/*   tokenize.h                                         :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/06/25 13:15:07 by mbp14         #+#    #+#                 */
-/*   Updated: 2023/06/26 17:54:08 by elenavoroni   ########   odam.nl         */
+/*   Created: 2023/06/28 20:00:53 by elenavoroni   #+#    #+#                 */
+/*   Updated: 2023/06/28 20:05:04 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LEXER_H
-# define LEXER_H
-
-# include <stdlib.h>
-# include <stdio.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <sys/errno.h>
+/** @file 
+ * Module that transforms string into tokens (aka lexer).
+ * Namespace prefix: "tk".
+*/
+#ifndef TOKENIZE_H
+# define TOKENIZE_H
 
 typedef enum e_token
 {
@@ -37,7 +35,5 @@ typedef enum s_state
 	quote,
 	normal,
 }	t_state;
-
-void	start_shell(void);
 
 #endif

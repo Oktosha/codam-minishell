@@ -3,54 +3,40 @@
 #                                                         ::::::::             #
 #    Makefile                                           :+:    :+:             #
 #                                                      +:+                     #
-#    By: evoronin <evoronin@student.codam.nl>         +#+                      #
+#    By: elenavoronin <elnvoronin@gmail.com>          +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/12 11:12:29 by evoronin      #+#    #+#                  #
-#    Updated: 2023/06/26 15:24:52 by mbp14         ########   odam.nl          #
+#    Updated: 2023/06/28 20:53:29 by elenavoroni   ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
-RED=\033[1;31m
-GREEN=\033[1;32m
-YELLOW=\033[1;33m
-BLUE=\033[1;34m
-MAGENTA=\033[1;35m
-CYAN=\033[1;36m
-END=\033[0m
-
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror
-READ_FLAGS = -lreadline
+CC = cc
+CFLAGS = -Wall -Wextra -Werror -I ./include
+LDLIBS = -lreadline
 NAME = minishell
-SRCS =  ./src/main.c \
-		./src/lexer_a.c \ 
-		
-OBJ = $(SRCS:.c=.o)
-LIBFT = libft/libft.a
-LIBFT_DIR = libft
-HEADERS =  ./libft ./include/minishell.h
+SRCS_DIR = ./src
+SRCS_NAMES = main.c \
+lifecycle/lifecycle_a.c
+OBJS_NAMES = $(SRCS_NAMES:.c=.o)
+OUT_DIR = ./objs
+OBJS = $(addprefix $(OUT_DIR)/,$(OBJS_NAMES))
+DEPS = $(OBJS:.o=.d)
 
-%.o: %.c $(HEADERS)
-	@$(CC) $(CFLAGS) -c $< -o $@
+all:  $(NAME)
+-include $(DEPS)
 
-all:  ${NAME} 
+$(OBJS): $(OUT_DIR)/%.o: $(SRCS_DIR)/%.c
+	mkdir -p $(@D)
+	$(CC) $(CFLAGS) -c $< -o $@
 
-${NAME}: ${OBJ} ${HEADERS}
-	@make -s -C $(LIBFT_DIR)
-	@echo "${BLUE}Compiling ${NAME}${END}"
-	@$(CC) $(CFLAGS) $(READ_FLAGS) $(OBJ) ${LIBFT} -o $(NAME)
-	@echo "${GREEN}Done!${END}"
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) $(LDLIBS) $(OBJS) -o $(NAME)
 
 clean:
-	@make clean -C libft
-	@rm -f $(OBJ)
-	@echo "${GREEN}Done!${END}"
+	rm -f $(OUT_DIR)
 
 fclean: clean
-	@make fclean -C libft
-	@echo "${RED}Removing ${NAME}${END}"
-	@rm -rf ${NAME}
-	@echo "${GREEN}Done!${END}"
+	rm -rf $(NAME)
 
 re: fclean all
 

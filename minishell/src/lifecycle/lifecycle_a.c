@@ -1,66 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   lexer_a.c                                          :+:    :+:            */
+/*   lifecycle_a.c                                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/26 16:18:32 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/06/28 17:19:50 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/06/28 20:10:59 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "lifecycle.h"
 
-
-// char	**lexer(char **args, char *line)
-// {
-// 	int			i;
-// 	int			j;
-// 	t_state		state;
-// 	int			
-
-// 	i = 0;
-// 	j = 0;
-// 	state.whit
-// 	while (line != '\0')
-// 	{
-// 		if 
-// 	}
-// 	return (args);
-// }
-
-void	start_shell(void)
+/** @brief start shell programm
+ * @param argc number of arguments given to program
+ * @param argv argument givent to program
+ * @param envp enviroment variable
+ * @return shell running on loop
+*/
+void	lc_start_shell(int argc, char **argv, char **envp)
 {
 	char	*line;
 	char	**args;
 	int		status;
-	int i = 0;
+	int		i; 
 
+	i = 0;
 	while (1)
 	{
 		line = readline("kotishell: ");
 		if (!line)
 			exit (EXIT_FAILURE);
 		add_history(line);
-		// args = malloc(sizeof(line));
-		// if (!args)
-		// {
-		// 	free(line);
-		// 	exit (EXIT_FAILURE);
-		// }
 		i = 0;
 		while (line[i] != '\0')
 		{
 			printf("line: %d\n", line[i]);
 			i++;
 		}
-		
-		// args = lexer(args, line);
-		// if (args[0] == exit)
-		// {
-		// 	free(line);
-		// 	exit(errno);
-		// }
 	}
 }

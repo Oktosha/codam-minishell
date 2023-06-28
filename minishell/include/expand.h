@@ -1,19 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   parser.h                                           :+:    :+:            */
+/*   expand.h                                           :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/06/25 15:06:03 by mbp14         #+#    #+#                 */
-/*   Updated: 2023/06/26 16:18:04 by elenavoroni   ########   odam.nl         */
+/*   Created: 2023/06/28 19:57:44 by elenavoroni   #+#    #+#                 */
+/*   Updated: 2023/06/28 20:06:59 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
-
-# define EXIT
-
+/** @file 
+ * Module that expands variables after tokenizing.
+ * Namespace prefix: "ep".
+*/
+#ifndef EXPAND_H
+# define EXPAND_H
 
 #endif

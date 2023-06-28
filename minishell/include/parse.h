@@ -1,19 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   parse.h                                            :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/06/26 16:18:45 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/06/28 20:17:01 by elenavoroni   ########   odam.nl         */
+/*   Created: 2023/06/25 15:06:03 by mbp14         #+#    #+#                 */
+/*   Updated: 2023/06/28 20:04:59 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lifecycle.h"
+/** @file 
+ * Module that transforms tokens into commands.
+ * Variables should be expanded in the previous step.
+ * Namespace prefix: "ps".
+*/
+#ifndef PARSE_H
+# define PARSE_H
 
-int	main(int argc, char **argv, char **envp)
-{
-	lc_start_shell(argc, argv, envp);
-	return (0);
-}
+#endif
