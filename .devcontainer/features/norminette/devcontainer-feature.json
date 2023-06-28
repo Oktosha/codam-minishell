@@ -1,0 +1,17 @@
+{
+    "name": "norminette",
+    "id": "norminette",
+    "version": "0.0.1",
+    "description": "42 school linter for C files",
+    "options": {},
+    "customizations": {
+        "vscode": {
+          "extensions": [
+            "oscarmulder.codamheader"
+          ] 
+      }
+    },
+    "installsAfter": [
+        "ghcr.io/devcontainers/features/python"
+    ]
+}
