@@ -1,0 +1,13 @@
+name: Norm
+run-name: norminette running
+on: [pull_request]
+jobs:
+  Explore-GitHub-Actions:
+    runs-on: ubuntu-latest
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+      - run: python3 -m pip install --upgrade pip setuptools
+      - run: python3 -m pip install norminette
+      - run: norminette minishell
+      - run: echo "This job's status is finalized."
