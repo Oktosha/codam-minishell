@@ -1,15 +1,32 @@
-name: Norm
-run-name: norminette running
-on: [pull_request]
+name: norminette
+
+on: pull_request
+ 
 jobs:
-  Explore-GitHub-Actions:
-    runs-on: ubuntu-latest
+  linter:
+    runs-on: ubuntu-18.04
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
-      - run: python3 -m pip install --upgrade pip setuptools
-      - run: python3 -m pip install norminette
-      - run: pwd
-      - run: find .
-      - run: ./tests/norm.sh
-      - run: echo "This job's status is finalized."
+      - name: Checkout to project repository
+        uses: actions/checkout@v2
+      - name: Checkout linter from public repository
+        uses: actions/checkout@v2
+        with:
+          repository: 42sp/norminette-client
+          path: linter
+      - name: Set up Ruby version
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: '2.6'
+      - name: Install ruby gem bundler
+        run: gem install bundler
+      - name: Install norminette ruby gem
+        run: (cd linter; bundle)
+      - name: Runs norminette linter
+        run: |
+          LOGS=$(mktemp)
+          ./linter/norminette.rb $(find -regex '.*/.*\.\(c\|h\)$' -not -path '*/test/*') | tee $LOGS
+          echo "ERRORS=$(grep -E 'Error|Warning' $LOGS | wc -l)" >> $GITHUB_ENV
+      - name: Checks norminette linter result
+        run: |
+          echo "Norminette errors found: $ERRORS"
+          [[ $ERRORS == 0 ]]
