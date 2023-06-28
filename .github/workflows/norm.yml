@@ -8,4 +8,4 @@ jobs:
       - run: python3 -m pip install --upgrade pip setuptools
       - run: python3 -m pip install norminette
       - run: ../../tests/norm.sh ./src
-      - run: echo "🍏 This job's status is finalized."
+      - run: echo "This job's status is finalized."
