@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   minishell.h                                        :+:    :+:            */
+/*   parser.h                                           :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: mbp14 <mbp14@student.codam.nl>               +#+                     */
+/*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/06/25 13:24:53 by mbp14         #+#    #+#                 */
-/*   Updated: 2023/06/25 14:16:06 by mbp14         ########   odam.nl         */
+/*   Created: 2023/06/25 15:06:03 by mbp14         #+#    #+#                 */
+/*   Updated: 2023/06/26 16:18:04 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef PARSER_H
+# define PARSER_H
 
-# include "lexer.h"
+# define EXIT
+
 
 #endif

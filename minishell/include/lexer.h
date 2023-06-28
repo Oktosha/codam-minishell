@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   lexer.h                                            :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: mbp14 <mbp14@student.codam.nl>               +#+                     */
+/*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/25 13:15:07 by mbp14         #+#    #+#                 */
-/*   Updated: 2023/06/26 15:42:22 by mbp14         ########   odam.nl         */
+/*   Updated: 2023/06/26 17:54:08 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,13 @@
 
 typedef enum e_token
 {
-	word,
-	operator,
-	variable,
-	command,
+	TK_WORD,
+	TK_PIPE,
+	TK_HEREDOC,
+	TK_NEWLINE,
+	TK_LESS,
+	TK_DGREAT,
+	TK_GREAT,
 }	t_token;
 
 

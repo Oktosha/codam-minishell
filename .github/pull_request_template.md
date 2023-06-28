@@ -6,7 +6,7 @@ If you created a feature set title to
 feat(#ISSUE_NUM): Heredoc signals
 ```
 
-If you created a feature set title to
+If you created a fix set title to
 
 ```
 fix(#ISSUE_NUM): Heredoc signals
