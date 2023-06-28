@@ -26,7 +26,8 @@ jobs:
 
       # Installs norminette latest version
       - name: Install Norm
-        run: python3 -m pip install --upgrade pip setuptool; python3 -m pip install norminette
+        run: python3 -m pip install --upgrade pip setuptool
+run: python3 -m pip install norminette
       # Runs norminette
       - name: Norm
         run: ./tests/norm.sh
