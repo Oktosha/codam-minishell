@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 20:00:53 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/06/28 20:05:04 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/06/28 20:57:25 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ typedef enum e_token
 	TK_DGREAT,
 	TK_GREAT,
 }	t_token;
-
 
 typedef enum s_state
 {
