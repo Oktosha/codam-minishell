@@ -7,5 +7,7 @@ jobs:
     steps:
       - run: python3 -m pip install --upgrade pip setuptools
       - run: python3 -m pip install norminette
-      - run: tests/norm.sh ./src
+      - run: pwd
+      - run: find .
+      - run: ./tests/norm.sh
       - run: echo "This job's status is finalized."
