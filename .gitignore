@@ -2,5 +2,6 @@
 *.a
 .DS_Store
 # *.ghc
-.vscode
 objs
+minishell
+.vscode

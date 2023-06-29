@@ -6,7 +6,7 @@
 #    By: elenavoronin <elnvoronin@gmail.com>          +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/12 11:12:29 by evoronin      #+#    #+#                  #
-#    Updated: 2023/06/28 20:53:29 by elenavoroni   ########   odam.nl          #
+#    Updated: 2023/06/29 16:13:24 by elenavoroni   ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,10 +33,10 @@ $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(LDLIBS) $(OBJS) -o $(NAME)
 
 clean:
-	rm -f $(OUT_DIR)
+	rm -rf $(OUT_DIR)
 
 fclean: clean
-	rm -rf $(NAME)
+	rm -f $(NAME)
 
 re: fclean all
 
