@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 20:00:53 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/06/29 18:03:32 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/06/30 13:47:31 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef enum e_tk_token_type
 	TK_DGREAT,
 	TK_GREAT,
 	TK_EMPTY,
+	TK_WHITESPACE,
 }	t_tk_token_type;
 
 typedef enum e_tk_state
@@ -59,6 +60,7 @@ typedef struct s_tk_so_far
 	t_li_node	*head;
 	t_tk_token	last;
 	const char	*error;
+	t_tk_token	new;
 }	t_tk_so_far;
 
 typedef struct s_tk_result
