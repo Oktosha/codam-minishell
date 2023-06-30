@@ -1,0 +1,17 @@
+name: Submit
+run-name: submitting to intra
+on:
+    push:
+      branches:
+        - main
+jobs:
+  Submit-to-Intra:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: webfactory/ssh-agent@v0.7.0
+        with:
+            ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY_FOR_INTRA }}
+      - run: git clone "$INTRA_REPO_URL" intra-minishell
+        env:
+            INTRA_REPO_URL: ${{ secrets.INTRA_REPO_URL }}
+      - run: find .
