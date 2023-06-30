@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/29 16:20:23 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/06/30 13:47:35 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/06/30 14:28:16 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,10 @@ static void	s_tk_word(t_tk_so_far *so_far, t_tk_state *state, char *s)
 	t_tk_symbol_type	symbol;
 
 	symbol = s_tk_get_symbol_type(*s);
-	so_far->last.type = TK_WORD;
+	so_far->head = *s;
+	so_far->last.type = so_far->new.type;
+	so_far->new.type = TK_WORD;
+	
 }
 
 static void	s_tk_whitespace(t_tk_so_far *so_far, t_tk_state *state, char *s)
@@ -56,7 +59,7 @@ static void	s_tk_start(t_tk_so_far *so_far, t_tk_state *state, char *s)
 	if (symbol == TK_SY_EOL)
 	{
 		*state = TK_ST_END;
-		return ;
+		s_tk_end(so_far, state, s);
 	}
 	if (symbol == TK_SY_LETTER)
 	{
@@ -72,10 +75,18 @@ static void	s_tk_start(t_tk_so_far *so_far, t_tk_state *state, char *s)
 		return ;
 }
 
-static t_tk_result	s_tk_end(t_tk_so_far *so_far)
+static t_tk_result	s_tk_end(t_tk_so_far *so_far, char *s)
 {
-	// error copy to end result
-	// if error, free
+	t_tk_symbol_type	symbol;
+
+	symbol = s_tk_get_symbol_type(*s);
+	so_far->last.type = TK_WORD;
+	so_far->last.length += 1;
+	if (so_far->error)
+	{
+		free(so_far);
+		exit (1);
+	}
 }
 
 t_tk_result	tk_tokenize(char *s)
@@ -100,5 +111,5 @@ t_tk_result	tk_tokenize(char *s)
 		s_tk_whitespace(&so_far, &state, s);
 	else if (state == TK_ST_WORD)
 		s_tk_word(&so_far, &state, s);
-	return (s_tk_end(&so_far));
+	return (s_tk_end(&so_far, s));
 }

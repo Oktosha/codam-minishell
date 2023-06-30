@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 20:00:53 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/06/30 13:47:31 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/06/30 14:26:17 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ typedef struct s_tk_token
 typedef struct s_tk_so_far
 {
 	t_li_node	*head;
-	t_tk_token	last;
+	t_li_node	*tail;
+	t_tk_token	token;
 	const char	*error;
-	t_tk_token	new;
 }	t_tk_so_far;
 
 typedef struct s_tk_result
