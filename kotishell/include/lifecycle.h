@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/25 13:15:07 by mbp14         #+#    #+#                 */
-/*   Updated: 2023/06/28 20:10:21 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/06/30 15:24:27 by evoronin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <sys/errno.h>
+# include "lists.h"
+# include "minilibft.h"
 
 void	lc_start_shell(int argc, char **argv, char **envp);
 

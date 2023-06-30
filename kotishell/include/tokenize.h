@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 20:00:53 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/06/30 14:26:17 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/06/30 18:52:45 by evoronin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@
 #ifndef TOKENIZE_H
 # define TOKENIZE_H
 
+# include <stdio.h>
 # include <stdlib.h>
 # include "lists.h"
+# include "minilibft.h"
 
 typedef enum e_tk_token_type
 {
@@ -31,6 +33,7 @@ typedef enum e_tk_token_type
 	TK_GREAT,
 	TK_EMPTY,
 	TK_WHITESPACE,
+	TK_EOL,
 }	t_tk_token_type;
 
 typedef enum e_tk_state
@@ -55,20 +58,28 @@ typedef struct s_tk_token
 	char			*data;
 }	t_tk_token;	
 
+typedef enum e_tk_status
+{
+	TK_SUCCESS = 0,
+	TK_ERR_MALLOC,
+}	t_tk_status;
+
 typedef struct s_tk_so_far
 {
 	t_li_node	*head;
 	t_li_node	*tail;
 	t_tk_token	token;
-	const char	*error;
+	t_tk_status	status;
 }	t_tk_so_far;
 
 typedef struct s_tk_result
 {
 	t_li_node	*tokens;
-	const char	*error;
-}	t_tk_result;	
+	t_tk_status	status;
+}	t_tk_result;
 
-t_tk_result	tk_tokenize(char *s);
+t_tk_result			tk_tokenize(char *s);
+t_tk_symbol_type	s_tk_get_symbol_type(char c);
+void				s_tk_init_so_far(t_tk_so_far *so_far);
 
 #endif
