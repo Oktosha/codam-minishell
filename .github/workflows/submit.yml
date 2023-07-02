@@ -8,4 +8,4 @@ jobs:
   Submit-to-Intra:
     runs-on: ubuntu-latest
     steps:
-      - uses: Oktosha/42-submit-action@0bf888ef0cba5acaf91c9976ce77e245a45e6d4d
+      - uses: Oktosha/42-submit-action@main
