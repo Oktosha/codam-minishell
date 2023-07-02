@@ -8,13 +8,4 @@ jobs:
   Submit-to-Intra:
     runs-on: ubuntu-latest
     steps:
-      - run: eval `ssh-agent -s`
-      - run: echo "$SSH_PRIVATE_KEY_FOR_INTRA" | ssh-add -
-        env:
-          SSH_PRIVATE_KEY_FOR_INTRA: ${{ secrets.SSH_PRIVATE_KEY_FOR_INTRA }}
-      - run: git clone "$INTRA_REPO_URL" intra-repo
-        env:
-          INTRA_REPO_URL: ${{ secrets.INTRA_REPO_URL }}
-      - run: ls
-      - run: ls intra-repo
-      - run: pwd
+      - uses: Oktosha/42-submit-action@0bf888ef0cba5acaf91c9976ce77e245a45e6d4d
