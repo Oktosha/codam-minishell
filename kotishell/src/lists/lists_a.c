@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/29 16:36:32 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/06/30 16:19:16 by evoronin      ########   odam.nl         */
+/*   Updated: 2023/07/03 11:55:51 by evoronin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,44 +29,29 @@ t_li_node	*li_new_list(void *data)
 {
 	t_li_node	*node;
 
-	node = malloc(sizeof(t_li_node));
-	if (!node)
-		li_list_free(node);
+	node = mini_malloc(sizeof(t_li_node));
 	node->data = data;
 	node->next = NULL;
 	return (node);
 }
 
-t_li_node	*li_new_stack(t_li_node *list)
+t_li_node	*li_new_stack(t_li_node *list, void *data)
 {
 	if (!list)
-		list = new_list();
+		list = li_new_list(data);
 	else
-		add_back(list, new_list());
+		add_back(list, new_list(data));
 	return (list);
 }
 
-t_li_node	*li_add_back(t_li_node *list, t_li_node *node, void *data)
+t_li_node	*li_add_back(t_li_node *list, t_li_node *node)
 {
 	t_li_node	*last;
 
 	if (!list)
-		ft_error();
+		exit(EXIT_FAILURE);
 	while (list->next != NULL)
 		list = list->next;
-	list->data = data;
 	list->next = node;
 	return (list);
-}
-
-void	li_add_front(t_li_node *list, void *data)
-{
-	t_li_node	*node;
-
-	node = (t_li_node *)malloc(sizeof(t_li_node));
-	if (!node)
-		return ;
-	node->data = data;
-	node->next = list;
-	list = node;
 }

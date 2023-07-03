@@ -6,12 +6,11 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/26 16:18:32 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/06/30 18:51:51 by evoronin      ########   odam.nl         */
+/*   Updated: 2023/07/03 11:20:28 by evoronin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lifecycle.h"
-
 
 /** @brief start shell programm
  * @param argc number of arguments given to program
@@ -22,8 +21,6 @@
 void	lc_start_shell(int argc, char **argv, char **envp)
 {
 	char	*line;
-	// char	**args;
-	// int		status;
 	int		i;
 
 	i = 0;

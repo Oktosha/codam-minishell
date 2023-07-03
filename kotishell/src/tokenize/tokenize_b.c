@@ -6,7 +6,7 @@
 /*   By: evoronin <evoronin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 16:23:10 by evoronin      #+#    #+#                 */
-/*   Updated: 2023/06/30 16:24:13 by evoronin      ########   odam.nl         */
+/*   Updated: 2023/07/03 11:22:14 by evoronin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,21 @@ t_tk_symbol_type	s_tk_get_symbol_type(char c)
 	if (c == '\0')
 		return (TK_SY_EOL);
 	return (TK_SY_LETTER);
+}
+
+void	s_tk_init_result(t_tk_result result)
+{
+	t_li_node	tokens;
+	t_li_node	status;
+
+	result.tokens = li_new_list(NULL);
+	if (!result.tokens)
+	{
+		li_list_free(result.tokens);
+		result.status = TK_ERR_MALLOC;
+		exit(EXIT_FAILURE);
+	}
+	result.status = NULL;
 }
 
 void	s_tk_init_so_far(t_tk_so_far *so_far)

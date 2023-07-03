@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 20:00:53 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/06/30 18:52:45 by evoronin      ########   odam.nl         */
+/*   Updated: 2023/07/03 14:18:01 by evoronin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ typedef enum e_tk_symbol_type
 
 typedef struct s_tk_token
 {
-	t_tk_token_type	type;
-	int				length;
-	char			*data;
+	t_tk_token_type		type;
+	int					length;
+	char				*data;
 }	t_tk_token;	
 
 typedef enum e_tk_status
@@ -81,5 +81,6 @@ typedef struct s_tk_result
 t_tk_result			tk_tokenize(char *s);
 t_tk_symbol_type	s_tk_get_symbol_type(char c);
 void				s_tk_init_so_far(t_tk_so_far *so_far);
+void				s_tk_init_result(t_tk_result result);
 
 #endif
