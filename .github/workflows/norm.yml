@@ -1,11 +1,11 @@
 name: Norm
 run-name: Norm
-on:
-  workflow_dispatch:
+on: 
+  workflow_dispatch: 
   pull_request:
-    branches: main
+      branches: main
 jobs:
-  Norminette-running
+  Norm-running:
     runs-on: ubuntu-latest
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
