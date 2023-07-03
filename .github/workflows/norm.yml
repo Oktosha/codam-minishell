@@ -1,8 +1,8 @@
 name: Norm
-run-name: norminette running
+run-name: Norm
 on: [pull_request]
 jobs:
-  Explore-GitHub-Actions:
+  Norminette running
     runs-on: ubuntu-latest
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
