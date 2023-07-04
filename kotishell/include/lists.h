@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/29 16:36:52 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/07/03 11:55:46 by evoronin      ########   odam.nl         */
+/*   Updated: 2023/07/04 17:29:05 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,13 @@
 # define LISTS_H
 
 # include <stdlib.h>
+# include <stdio.h>
 # include "minilibft.h"
 
 typedef struct s_li_node
 {
 	void				*data;
-	struct t_li_node	*next;
+	struct s_li_node	*next;
 }	t_li_node;
 
 int			li_list_size(t_li_node *list);

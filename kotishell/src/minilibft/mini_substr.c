@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   mini_substr.c                                      :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: evoronin <evoronin@student.codam.nl>         +#+                     */
+/*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 13:30:03 by evoronin      #+#    #+#                 */
-/*   Updated: 2023/07/03 14:56:16 by evoronin      ########   odam.nl         */
+/*   Updated: 2023/07/04 17:50:29 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*mini_substr(char *s1, unsigned int start, size_t len)
 	size_t			i;
 	size_t			size;
 
-	size = ft_strlen(s1);
+	size = mini_strlen(s1);
 	if (s1 == NULL)
 		return (NULL);
 	if (len >= size)

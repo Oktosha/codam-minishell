@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/29 16:20:23 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/07/03 17:12:18 by evoronin      ########   odam.nl         */
+/*   Updated: 2023/07/04 18:04:56 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,51 +16,54 @@ static void	s_tk_word(t_tk_so_far *so_far, char *s)
 {
 	if (so_far->token.type != TK_WORD && so_far->token.length == 0)
 	{
-		so_far->head = li_new_list(s);
-		so_far->tail = li_new_list(s);
-		so_far->token.type = TK_WORD;
 		so_far->token.length = 1;
-		so_far->token.data = mini_substr(s, s, so_far->token.length);
+		so_far->token.type = TK_WORD;
 	}
-	else if (so_far->token.type == TK_WORD && so_far->token.length > 0)
-	{
+	else
 		so_far->token.length += 1;
-		so_far->token.data = mini_substr(so_far->token.data, 0, so_far->token.length);
-	}
-	printf("%s\n", so_far->token.data);
+	so_far->token.data = mini_substr(s, 0, so_far->token.length);
+	so_far->head->data = li_new_stack(so_far->head, so_far->token.data);
+	printf("head: %s\n", (char *)so_far->head->data);
+	so_far->head->next = NULL;
+	free(so_far->token.data);
+	so_far->status = TK_SUCCESS;
 }
 
 static void	s_tk_whitespace(t_tk_so_far *so_far, char *s)
 {
-	if (so_far->token.type == TK_WHITESPACE)
-	{
-		so_far->token.length += 1;
-		so_far->token.data = mini_substr(s, );
-		so_far->status = TK_SUCCESS;
-	}
-	if (so_far->token.type != TK_WHITESPACE)
+	if (so_far->token.type == !TK_WHITESPACE && so_far->token.length == 0)
 	{
 		so_far->token.type = TK_WHITESPACE;
 		so_far->token.length = 1;
-		so_far->token.data = mini_substr();
-		so_far->tail->data = li_new_stack(so_far->tail->data, s);
-		so_far->tail->next = NULL;
-		so_far->status = TK_SUCCESS;
 	}
+	else
+		so_far->token.length += 1;
+	so_far->token.data = mini_substr(s, 0, so_far->token.length);
+	printf("2%s\n", so_far->token.data);
+	so_far->head->data = li_new_stack(so_far->head, so_far->token.data);
+	so_far->head->next = NULL;
+	free(so_far->token.data);
+	so_far->status = TK_SUCCESS;
 }
 
-static void	s_tk_end(t_tk_so_far *so_far, t_tk_result result, char *s)
+static void	s_tk_end(t_tk_so_far *so_far, char *s)
 {
+		mini_putstr_fd("here\n", 1);
 	if (so_far->token.type != TK_EOL)
 	{
 		so_far->token.type = TK_EOL;
 		so_far->token.length = 1;
-		so_far->token.data = li_new_stack(result.tokens, s);
+		so_far->token.data = mini_substr(s, 0, so_far->token.length);
+		printf("1%s\n", so_far->token.data);
+		so_far->head->data = li_new_stack(so_far->head, so_far->token.data);
+		so_far->head->next = NULL;
 		so_far->status = TK_SUCCESS;
 	}
+	///do I need an else statement in case we have several EOL characters?
+	//is this even possible?
 }
 
-static void	s_tk_start(t_tk_so_far *so_far, t_tk_result	result, t_tk_state	state, char *s)
+static void	s_tk_start(t_tk_so_far *so_far, t_tk_state	state, char *s)
 {
 	t_tk_symbol_type	symbol;
 
@@ -69,17 +72,20 @@ static void	s_tk_start(t_tk_so_far *so_far, t_tk_result	result, t_tk_state	state
 	if (symbol == TK_SY_EOL)
 	{
 		state = TK_ST_END;
-		s_tk_end(so_far, result, s);
+		s_tk_end(so_far, s);
+		printf("[1]: %s\n", so_far->token.data);
 	}
 	if (symbol == TK_SY_LETTER)
 	{
 		state = TK_ST_WORD;
 		s_tk_word(so_far, s);
+		printf("[2]: %s\n", so_far->token.data);
 	}
 	if (symbol == TK_SY_WHITESPACE)
 	{
 		state = TK_ST_WHITESPACE;
 		s_tk_whitespace(so_far, s);
+		printf("[3]: %s\n", so_far->token.data);
 	}
 	else
 		return ;
@@ -92,20 +98,29 @@ t_tk_result	tk_tokenize(char *s)
 	t_tk_result		result;
 	int				i;
 
-	i = mini_strlen(s);
 	result.tokens = NULL;
 	state = TK_ST_START;
+	i = mini_strlen(s);
+	if (!i)
+	if (state == TK_ST_START)
+		s_tk_start(&so_far, state, s);
 	while (i >= 0)
 	{
 		if (state == TK_ST_START)
-			s_tk_start(&so_far, result, state, s);
+			s_tk_start(&so_far, state, s);
 		else if (state == TK_ST_WHITESPACE)
-			s_tk_whitespace(&so_far, result, state, s);
+			s_tk_whitespace(&so_far, s);
 		else if (state == TK_ST_WORD)
-			s_tk_word(&so_far, result, s);
+			s_tk_word(&so_far, s);
 		s++;
 		i--;
 	}
-	result.status = TK_SUCCESS;
+	while (so_far.head->next != NULL)
+	{
+		result.tokens = li_new_stack(result.tokens, so_far.head->data);
+		so_far.head->data = so_far.head->next;
+	}
+	printf("3%s\n", (char *)so_far.head->data);
+	result.status = so_far.status;
 	return (result);
 }

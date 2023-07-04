@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   mini_strlen.c                                      :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: evoronin <evoronin@student.codam.nl>         +#+                     */
+/*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 16:33:22 by evoronin      #+#    #+#                 */
-/*   Updated: 2023/06/30 16:35:51 by evoronin      ########   odam.nl         */
+/*   Updated: 2023/07/04 13:11:20 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,3 +22,4 @@ int	mini_strlen(char *s)
 	i++;
 	return (i);
 }
+

@@ -3,35 +3,31 @@
 #                                                         ::::::::             #
 #    Makefile                                           :+:    :+:             #
 #                                                      +:+                     #
-#    By: evoronin <evoronin@student.codam.nl>         +#+                      #
+#    By: elenavoronin <elnvoronin@gmail.com>          +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/30 19:02:22 by evoronin      #+#    #+#                  #
-#    Updated: 2023/06/30 19:15:10 by evoronin      ########   odam.nl          #
+#    Updated: 2023/07/04 18:06:59 by elenavoroni   ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I ../../../include
-# LDLIBS = -lreadline
+CFLAGS = -Wall -Wextra -Werror -I ../../../include -fsanitize=address-fno-omit-frame-pointer
 NAME = tk_tests
-SRCS_NAMES = ../tokenize_a.c ../tokenize_b.c tk_main.c
+SRCS_NAMES = tk_main.c ../tokenize_a.c ../tokenize_b.c ../../minilibft/mini_malloc.c ../../minilibft/mini_putstr_fd.c \
+../../minilibft/mini_strlen.c ../../minilibft/mini_substr.c ../../lists/lists_a.c ../../lists/lists_b.c
 OBJS_NAMES = $(SRCS_NAMES:.c=.o)
-OUT_DIR = ./tk_objs
-OBJS = $(addprefix $(OUT_DIR)/,$(OBJS_NAMES))
-DEPS = $(OBJS:.o=.d)
+OBJS = $(OBJS_NAMES)
 
 all:  $(NAME)
--include $(DEPS)
+
+%.o: %.c
+	@$(CC) $(CFLAGS) $(INC) -c $^ -o $@
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
-
-$(OBJS): $(OUT_DIR)/%.o: %.c
-	mkdir -p $(@D)
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
 clean:
-	rm -rf $(OUT_DIR)
+	rm $(OBJS_NAMES)
 
 fclean: clean
 	rm -f $(NAME)
