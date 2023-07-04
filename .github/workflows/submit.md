@@ -39,7 +39,7 @@ Multiple events can be enumerated in short form https://docs.github.com/en/actio
 workflow_dispatch option allows to launch the workflow manually
 
 + from a button that appears when you choose the workflow in the 'Actions'
-+ from github command line tools gh workflow run submit.yml --ref main
++ from github command line tools `gh workflow run submit.yml --ref main`
 
 ```yaml
   workflow_dispatch:
