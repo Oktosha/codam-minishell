@@ -1,12 +1,10 @@
+# go to README.md to learn about this folder and github workflows in general
+# go to submit.md to learn about this particular workflow
+
 name: Submit
-run-name: submitting to intra
+run-name: Submit ${{github.sha}} to intra by @${{github.actor}}
 on:
   workflow_dispatch:
-    inputs:
-      commit-message:
-        description: 'Commit message'
-        required: false
-        type: string
   push:
     branches: main
 jobs:
@@ -18,4 +16,3 @@ jobs:
           code-to-submit: kotishell
           intra-repo: ${{ secrets.INTRA_REPO_URL }}
           intra-ssh-key: ${{ secrets.SSH_PRIVATE_KEY_FOR_INTRA }}
-          commit-message: ${{ inputs.commit-message }}
