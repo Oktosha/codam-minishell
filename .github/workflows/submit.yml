@@ -1,5 +1,5 @@
-# go to README.md to learn about this folder and github workflows in general
-# go to submit.md to learn about this particular workflow
+# go to README.md in .github/workflows to learn about github workflows
+# go to submit.md in .github/workflows to learn about this particular workflow
 
 name: Submit
 run-name: Submit ${{github.sha}} to intra by @${{github.actor}}
