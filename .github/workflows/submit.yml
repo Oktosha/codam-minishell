@@ -2,6 +2,11 @@ name: Submit
 run-name: submitting to intra
 on:
   workflow_dispatch:
+    inputs:
+      commit-message:
+        description: 'Commit message'
+        required: false
+        type: string
   push:
     branches: main
 jobs:
@@ -9,3 +14,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: Oktosha/42-submit-action@v0
+        with:
+          code-to-submit: kotishell
+          intra-repo: ${{ secrets.INTRA_REPO_URL }}
+          intra-ssh-key: ${{ secrets.SSH_PRIVATE_KEY_FOR_INTRA }}
+          commit-message: ${{ inputs.commit-message }}
