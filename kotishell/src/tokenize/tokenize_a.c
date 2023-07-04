@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/29 16:20:23 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/07/04 18:04:56 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/07/04 19:07:40 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ static void	s_tk_word(t_tk_so_far *so_far, char *s)
 	else
 		so_far->token.length += 1;
 	so_far->token.data = mini_substr(s, 0, so_far->token.length);
-	so_far->head->data = li_new_stack(so_far->head, so_far->token.data);
 	printf("head: %s\n", (char *)so_far->head->data);
+	so_far->head->data = li_new_stack(so_far->head, so_far->token.data);
 	so_far->head->next = NULL;
 	free(so_far->token.data);
 	so_far->status = TK_SUCCESS;
@@ -53,8 +53,8 @@ static void	s_tk_end(t_tk_so_far *so_far, char *s)
 	{
 		so_far->token.type = TK_EOL;
 		so_far->token.length = 1;
-		so_far->token.data = mini_substr(s, 0, so_far->token.length);
 		printf("1%s\n", so_far->token.data);
+		so_far->token.data = mini_substr(s, 0, so_far->token.length);
 		so_far->head->data = li_new_stack(so_far->head, so_far->token.data);
 		so_far->head->next = NULL;
 		so_far->status = TK_SUCCESS;
@@ -101,9 +101,12 @@ t_tk_result	tk_tokenize(char *s)
 	result.tokens = NULL;
 	state = TK_ST_START;
 	i = mini_strlen(s);
-	if (!i)
-	if (state == TK_ST_START)
+	if (i == 0)
+	{
+		state = TK_ST_START;
 		s_tk_start(&so_far, state, s);
+
+	}
 	while (i >= 0)
 	{
 		if (state == TK_ST_START)

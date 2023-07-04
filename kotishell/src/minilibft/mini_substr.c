@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 13:30:03 by evoronin      #+#    #+#                 */
-/*   Updated: 2023/07/04 17:50:29 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/07/04 18:13:46 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ char	*mini_substr(char *s1, unsigned int start, size_t len)
 	if (s1 == NULL)
 		return (NULL);
 	if (len >= size)
-		s2 = mini_malloc((size) * sizeof(char));
+		s2 = mini_malloc((size + 1) * sizeof(char));
 	else
-		s2 = mini_malloc((len) * sizeof(char));
+		s2 = mini_malloc((len + 1) * sizeof(char));
 	i = 0;
 	while (len > 0 && s1 && start <= size)
 	{
@@ -33,5 +33,6 @@ char	*mini_substr(char *s1, unsigned int start, size_t len)
 		start++;
 		i++;
 	}
+	s2[i] = '\0';
 	return (s2);
 }

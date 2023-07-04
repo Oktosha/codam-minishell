@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 16:33:22 by evoronin      #+#    #+#                 */
-/*   Updated: 2023/07/04 13:11:20 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/07/04 18:14:55 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,5 @@ int	mini_strlen(char *s)
 	i = 0;
 	while (s[i] != '\0')
 		i++;
-	i++;
 	return (i);
 }
-
