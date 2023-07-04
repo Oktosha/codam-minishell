@@ -6,12 +6,12 @@
 #    By: elenavoronin <elnvoronin@gmail.com>          +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/30 19:02:22 by evoronin      #+#    #+#                  #
-#    Updated: 2023/07/04 18:15:50 by elenavoroni   ########   odam.nl          #
+#    Updated: 2023/07/04 19:10:50 by elenavoroni   ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I ../../../include 
+CFLAGS = -Wall -Wextra -Werror -I ../../../include -g
 # -fsanitize=address -fno-omit-frame-pointer
 NAME = tk_tests
 SRCS_NAMES = tk_main.c ../tokenize_a.c ../tokenize_b.c ../../minilibft/mini_malloc.c ../../minilibft/mini_putstr_fd.c \

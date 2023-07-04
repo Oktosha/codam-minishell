@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/29 16:20:23 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/07/04 19:07:40 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/07/04 19:22:06 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,11 @@ static void	s_tk_word(t_tk_so_far *so_far, char *s)
 	{
 		so_far->token.length = 1;
 		so_far->token.type = TK_WORD;
+		so_far->token.data = s;
 	}
 	else
 		so_far->token.length += 1;
-	so_far->token.data = mini_substr(s, 0, so_far->token.length);
-	printf("head: %s\n", (char *)so_far->head->data);
-	so_far->head->data = li_new_stack(so_far->head, so_far->token.data);
-	so_far->head->next = NULL;
-	free(so_far->token.data);
-	so_far->status = TK_SUCCESS;
+	// so_far->head = li_new_stack(so_far->head, so_far->token.data);
 }
 
 static void	s_tk_whitespace(t_tk_so_far *so_far, char *s)
@@ -40,8 +36,7 @@ static void	s_tk_whitespace(t_tk_so_far *so_far, char *s)
 		so_far->token.length += 1;
 	so_far->token.data = mini_substr(s, 0, so_far->token.length);
 	printf("2%s\n", so_far->token.data);
-	so_far->head->data = li_new_stack(so_far->head, so_far->token.data);
-	so_far->head->next = NULL;
+	so_far->head = li_new_stack(so_far->head, so_far->token.data);
 	free(so_far->token.data);
 	so_far->status = TK_SUCCESS;
 }
@@ -55,8 +50,7 @@ static void	s_tk_end(t_tk_so_far *so_far, char *s)
 		so_far->token.length = 1;
 		printf("1%s\n", so_far->token.data);
 		so_far->token.data = mini_substr(s, 0, so_far->token.length);
-		so_far->head->data = li_new_stack(so_far->head, so_far->token.data);
-		so_far->head->next = NULL;
+		so_far->head = li_new_stack(so_far->head, so_far->token.data);
 		so_far->status = TK_SUCCESS;
 	}
 	///do I need an else statement in case we have several EOL characters?
