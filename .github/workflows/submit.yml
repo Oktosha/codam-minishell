@@ -11,7 +11,7 @@ jobs:
   Submit-to-Intra:
     runs-on: ubuntu-latest
     steps:
-      - uses: Oktosha/42-submit-action@v0
+      - uses: Oktosha/42-submit-action@v0.1.0
         with:
           code-to-submit: kotishell
           intra-repo: ${{ secrets.INTRA_REPO_URL }}
