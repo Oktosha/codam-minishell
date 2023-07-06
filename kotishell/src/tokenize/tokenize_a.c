@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/29 16:20:23 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/07/05 20:21:10 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/07/06 16:26:31 by evoronin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	s_tk_start(t_tk_so_far *so_far, t_tk_state	state, char *s)
 	{
 		state = TK_ST_END;
 		s_tk_end(so_far, s);
-		so_far->head = li_new_stack(so_far->head, so_far->token
+		so_far->head
 	}
 	if (symbol == TK_SY_LETTER)
 	{
@@ -59,49 +59,44 @@ static void	s_tk_start(t_tk_so_far *so_far, t_tk_state	state, char *s)
 		return ;
 }
 
-t_tk_result	tk_tokenize(char *s, t_tk_so_far *so_far)
+t_tk_result	tk_tokenize(char *s)
 {
 	t_tk_state		state;
+	t_tk_result		result;
+	t_tk_so_far		so_far;
 	int				i;
 
+	result.tokens = NULL;
 	state = TK_ST_START;
+	s_tk_init_so_far(&so_far);
 	i = mini_strlen(s);
 	if (i == 0)
 	{
 		state = TK_ST_START;
 		s_tk_start(&so_far, state, s);
-
+		result.tokens = li_new_stack(result.tokens, );
 	}
 	while (i >= 0)
 	{
 		if (state == TK_ST_START)
+		{
 			s_tk_start(&so_far, state, s);
+			result.tokens = li_new_stack(result.tokens, &so_far.token);
+		}
 		else if (state == TK_ST_WHITESPACE)
+		{
 			s_tk_whitespace(&so_far, s);
+			result.tokens = li_new_stack(result.tokens, &so_far.token);
+		}
 		else if (state == TK_ST_WORD)
+		{
 			s_tk_word(&so_far, s);
+			result.tokens = li_new_stack(result.tokens, &so_far.token);
+		}
 		s++;
 		i--;
 	}
-
-}
-
-t_tk_result	tk_result(char *s)
-{
-	t_tk_result		result;
-	t_tk_so_far		so_far;
-
-	result.tokens = NULL;
-	s_tk_init_so_far(&so_far);
-	tk_tokenize(s, &so_far);
 	result.status = so_far.status;
-	if (result.status == TK_SUCCESS)
-	{
-		while (so_far.head->next != NULL)
-		{
-			result.tokens = li_new_stack(result.tokens, so_far.head->data);
-			so_far.head->data = so_far.head->next;
-		}
-	}
+	li_print_list(result.tokens);
 	return (result);
 }

@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 15:31:04 by evoronin      #+#    #+#                 */
-/*   Updated: 2023/07/05 20:00:40 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/07/06 16:08:44 by evoronin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	li_print_list(t_li_node *list)
 	i = 0;
 	while (list)
 	{
-		printf("[%d]: %s\n", )
+		printf("[%d]: %s\n", list->data);
+		list->data = list->next;
 	}
 }

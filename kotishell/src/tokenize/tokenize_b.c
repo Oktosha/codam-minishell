@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 16:23:10 by evoronin      #+#    #+#                 */
-/*   Updated: 2023/07/05 20:10:59 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/07/06 18:05:47 by evoronin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,18 @@ t_tk_symbol_type	s_tk_get_symbol_type(char c)
 
 void	s_tk_init_so_far(t_tk_so_far *so_far)
 {
-	so_far->head = NULL;
-	so_far->token.type = TK_EMPTY;
+	so_far->head = li_new_stack(so_far->head, NULL);
+	if (!so_far->head)
+	{
+		so_far->status = TK_ERR_MALLOC;
+		return ;
+	}
+	so_far->head->data = mini_malloc(sizeof(t_tk_token));
+	if (!so_far->head->data)
+	{
+		
+	}
+	// ((t_tk_token *)(so_far->head->data))->type = TK_EMPTY;
 	so_far->token.length = 0;
 	so_far->token.data = NULL;
 	so_far->status = TK_SUCCESS;
