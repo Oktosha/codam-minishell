@@ -1,5 +1,7 @@
+# go to README.md in .github/workflows to learn about github workflows
+# go to norm.md in .github/workflows to learn about this particular workflow
+
 name: Norm
-run-name: Norm
 on: 
   workflow_dispatch: 
   pull_request:
@@ -8,7 +10,6 @@ jobs:
   Norm-running:
     runs-on: ubuntu-latest
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
       - run: python3 -m pip install --upgrade pip setuptools
       - run: python3 -m pip install norminette
