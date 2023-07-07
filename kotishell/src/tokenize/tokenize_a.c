@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/29 16:20:23 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/07/06 16:26:31 by evoronin      ########   odam.nl         */
+/*   Updated: 2023/07/07 11:01:04 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ static void	s_tk_start(t_tk_so_far *so_far, t_tk_state	state, char *s)
 	{
 		state = TK_ST_END;
 		s_tk_end(so_far, s);
-		so_far->head
 	}
 	if (symbol == TK_SY_LETTER)
 	{
 		state = TK_ST_WORD;
 		s_tk_word(so_far, s);
+		tk_so_far_copy(so_far->token, so_far->head);
 	}
 	if (symbol == TK_SY_WHITESPACE)
 	{
@@ -74,29 +74,19 @@ t_tk_result	tk_tokenize(char *s)
 	{
 		state = TK_ST_START;
 		s_tk_start(&so_far, state, s);
-		result.tokens = li_new_stack(result.tokens, );
 	}
 	while (i >= 0)
 	{
 		if (state == TK_ST_START)
-		{
 			s_tk_start(&so_far, state, s);
-			result.tokens = li_new_stack(result.tokens, &so_far.token);
-		}
 		else if (state == TK_ST_WHITESPACE)
-		{
 			s_tk_whitespace(&so_far, s);
-			result.tokens = li_new_stack(result.tokens, &so_far.token);
-		}
 		else if (state == TK_ST_WORD)
-		{
 			s_tk_word(&so_far, s);
-			result.tokens = li_new_stack(result.tokens, &so_far.token);
-		}
 		s++;
 		i--;
 	}
 	result.status = so_far.status;
-	li_print_list(result.tokens);
+	// li_print_list(result.tokens);
 	return (result);
 }
