@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/29 16:20:23 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/07/07 11:01:04 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/07/07 17:50:36 by evoronin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,14 @@ static void	s_tk_start(t_tk_so_far *so_far, t_tk_state	state, char *s)
 	{
 		state = TK_ST_WORD;
 		s_tk_word(so_far, s);
-		tk_so_far_copy(so_far->token, so_far->head);
+		tk_token_copy(so_far);
 	}
 	if (symbol == TK_SY_WHITESPACE)
 	{
 		state = TK_ST_WHITESPACE;
 		s_tk_whitespace(so_far, s);
+		// tk_token_copy(so_far->token, so_far->head);
+		printf("hh: %s\n", so_far->head->data);
 	}
 	else
 		return ;
@@ -69,12 +71,7 @@ t_tk_result	tk_tokenize(char *s)
 	result.tokens = NULL;
 	state = TK_ST_START;
 	s_tk_init_so_far(&so_far);
-	i = mini_strlen(s);
-	if (i == 0)
-	{
-		state = TK_ST_START;
-		s_tk_start(&so_far, state, s);
-	}
+	i = mini_strlen(s) + 1;
 	while (i >= 0)
 	{
 		if (state == TK_ST_START)

@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 16:23:10 by evoronin      #+#    #+#                 */
-/*   Updated: 2023/07/07 11:00:37 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/07/07 18:05:27 by evoronin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,23 +23,11 @@ t_tk_symbol_type	s_tk_get_symbol_type(char c)
 
 void	s_tk_init_so_far(t_tk_so_far *so_far)
 {
-	so_far->head = li_new_stack(so_far->head, NULL);
-	if (!so_far->head)
-	{
-		so_far->status = TK_ERR_MALLOC;
-		return ;
-	}
-	so_far->head->data = mini_malloc(sizeof(t_tk_token));
-	if (!so_far->head->data)
-	{
-		so_far->status = TK_ERR_MALLOC;
-		return ;
-	}
-	so_far->head->data = NULL;
+	so_far->status = TK_SUCCESS;
+	so_far->head = NULL;
 	so_far->token.type = TK_EMPTY;
 	so_far->token.length = 0;
 	so_far->token.data = NULL;
-	so_far->status = TK_SUCCESS;
 }
 
 void	s_tk_word(t_tk_so_far *so_far, char *s)
@@ -52,13 +40,28 @@ void	s_tk_word(t_tk_so_far *so_far, char *s)
 	}
 	else
 		so_far->token.length += 1;
-		printf("%d\n", so_far->token.length);
 }
 
-t_li_node	*tk_so_far_copy(t_tk_token token, t_li_node *head)
+void	tk_token_copy(t_tk_so_far *so_far)
 {
-	((t_tk_token *)(head->data))->type = token.type;
-	((t_tk_token *)(head->data))->type = TK_EMPTY;
-	((t_tk_token *)(head->data))->type = TK_EMPTY;
-	return (head->data);
+	t_tk_token	*ptr_token;
+
+	ptr_token = malloc(sizeof(t_tk_token));
+	if (!ptr_token)
+	{
+		so_far->status = TK_ERR_MALLOC;
+		return ;
+	}
+	ptr_token->data = so_far->token.data;
+	ptr_token->length = so_far->token.length;
+	ptr_token->type = so_far->token.type;
+	so_far->head = li_new_stack(so_far->head, ptr_token);
+	if (!so_far->head)
+	{
+		so_far->status = TK_ERR_MALLOC;
+		return ;
+	}
+	li_print_list(so_far->head);
+	printf("\n");
+	// write(1, ptr_token->data, ptr_token->length);
 }

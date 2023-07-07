@@ -6,11 +6,12 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 15:31:04 by evoronin      #+#    #+#                 */
-/*   Updated: 2023/07/07 10:15:49 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/07/07 18:06:43 by evoronin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lists.h"
+#include "tokenize.h"
 
 void	li_list_free(t_li_node *list)
 {
@@ -24,14 +25,14 @@ void	li_list_free(t_li_node *list)
 	}
 }
 
-// void	li_print_list(t_li_node *list)
-// {
-// 	int	i;
+void	li_print_list(t_li_node *list)
+{
+	t_tk_token	*token;
 
-// 	i = 0;
-// 	while (list)
-// 	{
-// 		printf("[%d]: %s\n", list->data);
-// 		list->data = list->next;
-// 	}
-// }
+	while (list)
+	{
+		token = list->data;
+		write(1, token->data, token->length);
+		list = list->next;
+	}
+}

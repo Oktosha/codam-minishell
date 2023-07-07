@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 20:00:53 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/07/07 10:15:24 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/07/07 17:45:40 by evoronin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,6 @@ t_tk_symbol_type	s_tk_get_symbol_type(char c);
 void				s_tk_init_so_far(t_tk_so_far *so_far);
 void				s_tk_word(t_tk_so_far *so_far, char *s);
 t_tk_result			tk_result(char *s);
-t_li_node			*tk_so_far_copy(t_tk_token token, t_li_node *head);
+void				tk_token_copy( t_tk_so_far *so_far);
 
 #endif
