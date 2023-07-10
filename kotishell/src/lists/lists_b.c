@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 15:31:04 by evoronin      #+#    #+#                 */
-/*   Updated: 2023/07/10 13:00:09 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/07/10 16:05:47 by evoronin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ void	li_print_list(t_li_node *list)
 	{
 		token = list->data;
 		write(1, token->data, token->length);
-		write(1, "\n", 2);
-		write(1, (char *)token->type, 8);
 		list = list->next;
 	}
 }
