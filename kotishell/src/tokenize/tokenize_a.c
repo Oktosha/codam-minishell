@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/29 16:20:23 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/07/07 17:50:36 by evoronin      ########   odam.nl         */
+/*   Updated: 2023/07/10 13:02:43 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,11 @@ static void	s_tk_start(t_tk_so_far *so_far, t_tk_state	state, char *s)
 	{
 		state = TK_ST_WORD;
 		s_tk_word(so_far, s);
-		tk_token_copy(so_far);
 	}
 	if (symbol == TK_SY_WHITESPACE)
 	{
 		state = TK_ST_WHITESPACE;
 		s_tk_whitespace(so_far, s);
-		// tk_token_copy(so_far->token, so_far->head);
-		printf("hh: %s\n", so_far->head->data);
 	}
 	else
 		return ;
@@ -83,7 +80,6 @@ t_tk_result	tk_tokenize(char *s)
 		s++;
 		i--;
 	}
-	result.status = so_far.status;
-	// li_print_list(result.tokens);
+	tk_token_result(&result, &so_far);
 	return (result);
 }

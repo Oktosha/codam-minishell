@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 18:55:46 by evoronin      #+#    #+#                 */
-/*   Updated: 2023/07/07 18:07:12 by evoronin      ########   odam.nl         */
+/*   Updated: 2023/07/10 12:34:09 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	main(void)
 {
-	tk_tokenize("what");
+	tk_tokenize("what ");
 	printf("\n");
 	// tk_tokenize("what");
 	// printf("\n");
