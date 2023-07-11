@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 20:00:53 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/07/10 16:06:57 by evoronin      ########   odam.nl         */
+/*   Updated: 2023/07/11 19:37:19 by evoronin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ typedef struct s_tk_so_far
 	t_li_node	*head;
 	t_tk_token	token;
 	t_tk_status	status;
+	t_tk_state	state;
 }	t_tk_so_far;
 
 typedef struct s_tk_result
@@ -84,6 +85,6 @@ void				s_tk_word(t_tk_so_far *so_far, char *s);
 t_tk_result			tk_result(char *s);
 void				tk_token_copy( t_tk_so_far *so_far);
 void				tk_token_result(t_tk_result *result, t_tk_so_far *so_far);
-int					tk_final_token(t_tk_so_far *so_far, char *s);
+t_tk_state			tk_next_state(t_tk_state state, char *s);
 
 #endif

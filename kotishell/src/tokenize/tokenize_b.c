@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 16:23:10 by evoronin      #+#    #+#                 */
-/*   Updated: 2023/07/10 15:57:57 by evoronin      ########   odam.nl         */
+/*   Updated: 2023/07/11 19:37:51 by evoronin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	s_tk_init_so_far(t_tk_so_far *so_far)
 	so_far->head = NULL;
 	so_far->token.type = TK_EMPTY;
 	so_far->token.length = 0;
+	so_far->state = TK_ST_START;
 	so_far->token.data = NULL;
 }
 
@@ -40,7 +41,11 @@ void	s_tk_word(t_tk_so_far *so_far, char *s)
 	}
 	else
 		so_far->token.length += 1;
-	tk_token_copy(so_far);
+	if (tk_next_state(so_far->state, s) != so_far->state)
+	{
+		tk_token_copy(so_far);
+		so_far->token.length = 0;
+	}
 }
 
 void	tk_token_copy(t_tk_so_far *so_far)
@@ -66,7 +71,7 @@ void	tk_token_copy(t_tk_so_far *so_far)
 
 void	tk_token_result(t_tk_result *result, t_tk_so_far *so_far)
 {
-	while (so_far->head)
+	while (so_far->head->next != NULL)
 	{
 		result->tokens = li_new_stack(result->tokens, so_far->head->data);
 		if (!result->tokens)
