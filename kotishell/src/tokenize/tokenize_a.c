@@ -6,13 +6,13 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/29 16:20:23 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/07/11 19:38:02 by evoronin      ########   odam.nl         */
+/*   Updated: 2023/07/12 14:19:14 by evoronin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tokenize.h"
 
-static void	s_tk_whitespace(t_tk_so_far *so_far, char *s)
+static void	s_tk_whitespace(t_tk_so_far *so_far, char *s, t_tk_result *result)
 {
 	if (so_far->token.type != TK_WHITESPACE && so_far->token.length == 0)
 	{
@@ -22,14 +22,15 @@ static void	s_tk_whitespace(t_tk_so_far *so_far, char *s)
 	}
 	else
 		so_far->token.length += 1;
-	if (tk_next_state(so_far->state, s) != so_far->state)
+	if (tk_next_state(so_far->state, s + 1) != so_far->state)
 	{
-		tk_token_copy(so_far);
+		tk_token_copy(so_far, result);
 		so_far->token.length = 0;
+		so_far->state = tk_next_state(so_far->state, s + 1);
 	}
 }
 
-static void	s_tk_end(t_tk_so_far *so_far, char *s)
+static void	s_tk_end(t_tk_so_far *so_far, char *s, t_tk_result *result)
 {
 	if (so_far->token.type != TK_EOL)
 	{
@@ -37,10 +38,10 @@ static void	s_tk_end(t_tk_so_far *so_far, char *s)
 		so_far->token.length = 1;
 		so_far->token.data = s;
 	}
-	tk_token_copy(so_far);
+	tk_token_copy(so_far, result);
 }
 
-static void	s_tk_start(t_tk_so_far *so_far, char *s)
+static void	s_tk_start(t_tk_so_far *so_far, char *s, t_tk_result *result)
 {
 	t_tk_symbol_type	symbol;
 
@@ -48,17 +49,17 @@ static void	s_tk_start(t_tk_so_far *so_far, char *s)
 	if (symbol == TK_SY_EOL)
 	{
 		so_far->state = TK_ST_END;
-		s_tk_end(so_far, s);
+		s_tk_end(so_far, s, result);
 	}
 	if (symbol == TK_SY_LETTER)
 	{
 		so_far->state = TK_ST_WORD;
-		s_tk_word(so_far, s);
+		s_tk_word(so_far, s, result);
 	}
 	if (symbol == TK_SY_WHITESPACE)
 	{
 		so_far->state = TK_ST_WHITESPACE;
-		s_tk_whitespace(so_far, s);
+		s_tk_whitespace(so_far, s, result);
 	}
 }
 
@@ -74,15 +75,14 @@ t_tk_result	tk_tokenize(char *s)
 	while (i >= 0)
 	{
 		if (so_far.state == TK_ST_START)
-			s_tk_start(&so_far, s);
+			s_tk_start(&so_far, s, &result);
 		if (so_far.state == TK_ST_WORD)
-			s_tk_word(&so_far, s);
+			s_tk_word(&so_far, s, &result);
 		if (so_far.state == TK_ST_WHITESPACE)
-			s_tk_whitespace(&so_far, s);
+			s_tk_whitespace(&so_far, s, &result);
 		s++;
 		i--;
 	}
-	tk_token_result(&result, &so_far);
 	li_print_list(result.tokens);
 	return (result);
 }
