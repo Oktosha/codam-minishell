@@ -1,0 +1,18 @@
+# go to README.md in .github/workflows to learn about github workflows
+# go to submit.md in .github/workflows to learn about this particular workflow
+
+name: Submit
+run-name: Submit ${{github.sha}} to intra by @${{github.actor}}
+on:
+  workflow_dispatch:
+  push:
+    branches: main
+jobs:
+  Submit-to-Intra:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: Oktosha/42-submit-action@v0.1.1
+        with:
+          code-to-submit: kotishell
+          intra-repo: ${{ secrets.INTRA_REPO_URL }}
+          intra-ssh-key: ${{ secrets.SSH_PRIVATE_KEY_FOR_INTRA }}
