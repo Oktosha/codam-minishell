@@ -6,33 +6,49 @@
 #    By: elenavoronin <elnvoronin@gmail.com>          +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/30 19:02:22 by evoronin      #+#    #+#                  #
-#    Updated: 2023/07/10 14:15:43 by evoronin      ########   odam.nl          #
+#    Updated: 2023/07/13 17:22:48 by elenavoroni   ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
-CC = cc
-CFLAGS = -Wall -Wextra -Werror -I ../../../include -g
-# -fsanitize=address -fno-omit-frame-pointer
 NAME = tk_tests
-SRCS_NAMES = tk_main.c ../tokenize_a.c ../tokenize_b.c ../../minilibft/mini_malloc.c ../../minilibft/mini_putstr_fd.c \
-../../minilibft/mini_strlen.c ../../minilibft/mini_substr.c ../../lists/lists_a.c ../../lists/lists_b.c \
-../tokenize_c.c
-OBJS_NAMES = $(SRCS_NAMES:.c=.o)
-OBJS = $(OBJS_NAMES)
+CC = cc
+CFLAGS = -Wall -Wextra -Werror -I ../../kotishell/include -g
+SRCS_FOLDER = ../../kotishell/src
+SRCS_NAMES = tokenize/tokenize_a.c tokenize/tokenize_b.c tokenize/tokenize_c.c \
+lists/lists_a.c lists/lists_b.c \
+minilibft/mini_strlen.c \
+minilibft/mini_malloc.c \
+minilibft/mini_putstr_fd.c \
+minilibft/mini_strjoin.c \
+minilibft/mini_substr.c
+
+TEST_SRCS_NAMES = tk_main.c
+TEST_OBJS = $(addprefix $(OBJS_DIR)/,$(TEST_SRCS_NAMES:.c=.o))
+OBJS_DIR = ./objs
+ABSOLUTE_SRCS_NAMES = $(addprefix $(SRCS_FOLDER)/,$(SRCS_NAMES))
+ABSOLUTE_OBJS = $(addprefix $(OBJS_DIR)/,$(SRCS_NAMES:.c=.o))
 
 all:  $(NAME)
 
-%.o: %.c
-	@$(CC) $(CFLAGS) $(INC) -c $^ -o $@
+$(ABSOLUTE_OBJS): $(OBJS_DIR)/%.o: $(SRCS_FOLDER)/%.c
+	@mkdir -p $(@D)
+	@$(CC) $(CFLAGS) -c $^ -o $@
+
+$(TEST_OBJS): $(OBJS_DIR)/%.o: %.c
+	@mkdir -p $(@D)
+	@$(CC) $(CFLAGS) -c $^ -o $@
+
+OBJS=$(TEST_OBJS) $(ABSOLUTE_OBJS)
 
 $(NAME): $(OBJS)
+	echo $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
 clean:
-	rm $(OBJS_NAMES)
+	rm -rf $(OBJS_DIR)
 
 fclean: clean
-	rm -f $(NAME)
+	rm -rf $(NAME)
 
 re: fclean all
 

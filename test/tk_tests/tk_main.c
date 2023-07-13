@@ -6,13 +6,15 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 18:55:46 by evoronin      #+#    #+#                 */
-/*   Updated: 2023/07/12 18:35:59 by dkolodze      ########   odam.nl         */
+/*   Updated: 2023/07/13 16:59:12 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <assert.h>
 #include <stdlib.h>
 #include "tokenize.h"
+#include "lists.h"
+#include "minilibft.h"
 
 typedef struct s_TK_dummy_token {
 	char *s;
@@ -66,11 +68,6 @@ void TK_test_tokenize(char *input, t_TK_dummy_token *expected, int len)
 
 int	main(void)
 {
-	// tk_tokenize(" what");
-	// printf("\n");
-	// tk_tokenize("");
-	// printf("\n");
-	
 	t_TK_dummy_token expected[6] = {
 		{"\t\t\t\t\t ", TK_WHITESPACE},
 		{"asfa", TK_WORD},
@@ -80,6 +77,5 @@ int	main(void)
 		{"", TK_EOL}
 	};
 	TK_test_tokenize("\t\t\t\t\t asfa tt    ", expected, 6);
-	// printf("\n");
 	return (0);
 } //TODO chceck EOL token - it's not printed right now
