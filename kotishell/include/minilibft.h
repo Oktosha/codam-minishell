@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 15:23:07 by evoronin      #+#    #+#                 */
-/*   Updated: 2023/07/04 17:49:57 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/07/13 18:57:27 by dkolodze      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
-
-
 
 void		mini_putstr_fd(char *s, int fd);
 void		*mini_malloc(size_t size);

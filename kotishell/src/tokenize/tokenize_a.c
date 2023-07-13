@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/29 16:20:23 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/07/13 17:52:53 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/07/13 18:54:20 by dkolodze      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	s_tk_end(t_tk_so_far *so_far, char *s, t_tk_result *result)
 	if (so_far->token.type != TK_EOL)
 	{
 		so_far->token.type = TK_EOL;
-		so_far->token.length = 1;
+		so_far->token.length = 0;
 		so_far->token.data = s;
 	}
 	tk_token_copy(so_far, result);

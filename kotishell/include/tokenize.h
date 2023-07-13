@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 20:00:53 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/07/13 18:29:24 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/07/13 18:57:56 by dkolodze      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,7 @@
 
 typedef enum e_tk_token_type
 {
-	TK_WORD_NORM,
-	TK_WORD_SQ,
-	TK_WORD_DQ,
+	TK_WORD,
 	TK_PIPE,
 	TK_HEREDOC,
 	TK_NEWLINE,
@@ -83,7 +81,7 @@ typedef struct s_tk_result
 t_tk_result			tk_tokenize(char *s);
 t_tk_symbol_type	s_tk_get_symbol_type(char c);
 void				s_tk_init_so_far(t_tk_so_far *so_far);
-void				s_tk_word(t_tk_so_far *so_far, char *s, t_tk_result *result);
+void				s_tk_word(t_tk_so_far *so_far, char *s, t_tk_result *res);
 t_tk_result			tk_result(char *s);
 void				tk_token_copy( t_tk_so_far *so_far, t_tk_result *result);
 void				tk_token_result(t_tk_result *result, t_tk_so_far *so_far);
