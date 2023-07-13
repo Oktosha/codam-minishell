@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 20:00:53 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/07/12 12:21:50 by evoronin      ########   odam.nl         */
+/*   Updated: 2023/07/13 18:29:24 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@
 
 typedef enum e_tk_token_type
 {
-	TK_WORD,
+	TK_WORD_NORM,
+	TK_WORD_SQ,
+	TK_WORD_DQ,
 	TK_PIPE,
 	TK_HEREDOC,
 	TK_NEWLINE,

@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/29 16:20:23 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/07/12 16:17:05 by evoronin      ########   odam.nl         */
+/*   Updated: 2023/07/13 17:52:53 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ t_tk_result	tk_tokenize(char *s)
 			s_tk_word(&so_far, s, &result);
 		else if (so_far.state == TK_ST_WHITESPACE)
 			s_tk_whitespace(&so_far, s, &result);
+		else if (so_far.state == TK_ST_END)
+			s_tk_end(&so_far, s, &result);
 		s++;
 		i--;
 	}

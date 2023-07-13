@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 18:55:46 by evoronin      #+#    #+#                 */
-/*   Updated: 2023/07/13 16:59:12 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/07/13 18:01:37 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,24 +21,29 @@ typedef struct s_TK_dummy_token {
 	t_tk_token_type type;
 } t_TK_dummy_token;
 
-int TK_are_dummy_equal(t_TK_dummy_token expected, t_tk_token real)
+int TK_are_dummy_equal(t_TK_dummy_token expected, t_tk_token real, int i)
 {
 	if (expected.type != real.type)
 	{
-		printf("token types don't match\n");
+		printf("mismatch at token nr: %d\n", i);
+		printf("expected type: %d\n", expected.type);
+		printf("real type: %d\n", real.type);
 		return 0;
 	}
 	int expected_s_len = mini_strlen(expected.s);
 	if (expected_s_len != real.length)
 	{
-		printf("token lengths don't match\n");
+		printf("mismatch at token nr: %d\n", i);
+		printf("expected length: %d\n", expected_s_len);
+		printf("real length: %d\n", real.length);
 		return 0;
 	}
 	for(int i = 0; i < real.length; ++i)
 	{
 		if (expected.s[i] != real.data[i])
 		{
-			printf("token data mismatch\n");
+			printf("mismatch at token nr: %d\n", i);
+			printf("mismatch at length: %d\n", i);
 			return 0;
 		}
 	}
@@ -47,18 +52,13 @@ int TK_are_dummy_equal(t_TK_dummy_token expected, t_tk_token real)
 
 void TK_test_tokenize(char *input, t_TK_dummy_token *expected, int len)
 {
-	// TODO: compare lengths
-	// TODO: check null insead of segfault
 	t_tk_result res = tk_tokenize(input);
 	t_li_node *cur = res.tokens;
 	for (int i = 0; i < len; ++i)
 	{
 		t_tk_token *cur_token = cur->data;
-		if (!TK_are_dummy_equal(expected[i], *cur_token))
+		if (!TK_are_dummy_equal(expected[i], *cur_token, i))
 		{
-			printf("mismatch at %d\n", i);
-			printf("expected type: %d\n", expected[i].type);
-			printf("real type: %d\n", cur_token->type);
 			exit(1);
 		}
 		cur = cur->next;
