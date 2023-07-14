@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 18:55:46 by evoronin      #+#    #+#                 */
-/*   Updated: 2023/07/14 13:19:05 by codespace     ########   odam.nl         */
+/*   Updated: 2023/07/14 15:59:34 by evoronin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int TK_are_dummy_equal(t_TK_dummy_token expected, t_tk_token real, int i)
 		return 0;
 	}
 	int expected_s_len = mini_strlen(expected.s);
-	printf("expected len: %d\n", expected_s_len);
 	if (expected_s_len != real.length)
 	{
 		printf("mismatch at token nr: %d\n", i);
@@ -55,6 +54,7 @@ void TK_test_tokenize(char *input, t_TK_dummy_token *expected, int len)
 {
 	t_tk_result res = tk_tokenize(input);
 	t_li_node *cur = res.tokens;
+	s_tk_print_list(res.tokens);
 	for (int i = 0; i < len; ++i)
 	{
 		t_tk_token *cur_token = cur->data;
