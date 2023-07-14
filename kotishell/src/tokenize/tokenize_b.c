@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 16:23:10 by evoronin      #+#    #+#                 */
-/*   Updated: 2023/07/14 13:21:53 by codespace     ########   odam.nl         */
+/*   Updated: 2023/07/14 16:04:56 by evoronin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 t_tk_symbol_type	s_tk_get_symbol_type(char c)
 {
-	if (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f' || c == '\r')
+	if (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f' 
+		|| c == '\r')
 		return (TK_SY_WHITESPACE);
 	if (c == '\0')
 		return (TK_SY_EOL);

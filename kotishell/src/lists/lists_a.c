@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/29 16:36:32 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/07/14 12:44:14 by codespace     ########   odam.nl         */
+/*   Updated: 2023/07/14 16:05:30 by evoronin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_li_node	*li_new_list(void *data)
 		return (NULL);
 	node->data = data;
 	node->next = NULL;
-	return(node);
+	return (node);
 }
 
 void	li_new_stack(t_li_node **list, void *data)

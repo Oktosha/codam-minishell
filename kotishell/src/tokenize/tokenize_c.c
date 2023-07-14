@@ -6,7 +6,7 @@
 /*   By: evoronin <evoronin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/10 14:12:29 by evoronin      #+#    #+#                 */
-/*   Updated: 2023/07/14 13:17:58 by codespace     ########   odam.nl         */
+/*   Updated: 2023/07/14 16:05:12 by evoronin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,5 @@ void	s_tk_error(t_tk_so_far *so_far, t_tk_result *result)
 {
 	s_li_token_free(so_far->head);
 	s_li_token_free(result->tokens);
-	mini_putstr_fd("Failed malloc\n", 2);	
+	mini_putstr_fd("Failed malloc\n", 2);
 }
