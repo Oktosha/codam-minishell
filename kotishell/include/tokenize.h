@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 20:00:53 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/07/13 18:57:56 by dkolodze      ########   odam.nl         */
+/*   Updated: 2023/07/14 13:07:51 by codespace     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,12 @@ t_tk_result			tk_tokenize(char *s);
 t_tk_symbol_type	s_tk_get_symbol_type(char c);
 void				s_tk_init_so_far(t_tk_so_far *so_far);
 void				s_tk_word(t_tk_so_far *so_far, char *s, t_tk_result *res);
-t_tk_result			tk_result(char *s);
-void				tk_token_copy( t_tk_so_far *so_far, t_tk_result *result);
-void				tk_token_result(t_tk_result *result, t_tk_so_far *so_far);
-t_tk_state			tk_next_state(t_tk_state state, char *s);
+t_tk_result			s_tk_result(char *s);
+void				s_tk_token_copy( t_tk_so_far *so_far, t_tk_result *result);
+void				s_tk_token_result(t_tk_result *result, t_tk_so_far *so_far);
+t_tk_state			s_tk_next_state(t_tk_state state, char *s);
+void				s_tk_print_list(t_li_node *list);
+void				s_li_token_free(t_li_node *list);
+void				s_tk_error(t_tk_so_far *so_far, t_tk_result *result);
 
 #endif

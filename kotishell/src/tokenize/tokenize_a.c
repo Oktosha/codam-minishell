@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/29 16:20:23 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/07/13 18:54:20 by dkolodze      ########   odam.nl         */
+/*   Updated: 2023/07/14 13:24:12 by codespace     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	s_tk_whitespace(t_tk_so_far *so_far, char *s, t_tk_result *result)
 {
-	if (so_far->token.type != TK_WHITESPACE && so_far->token.length == 0)
+	if (so_far->token.type == TK_EMPTY)
 	{
 		so_far->token.length = 1;
 		so_far->token.type = TK_WHITESPACE;
@@ -22,23 +22,26 @@ static void	s_tk_whitespace(t_tk_so_far *so_far, char *s, t_tk_result *result)
 	}
 	else
 		so_far->token.length += 1;
-	if (tk_next_state(so_far->state, s + 1) != so_far->state)
+	if (s_tk_next_state(so_far->state, s + 1) != so_far->state)
 	{
-		tk_token_copy(so_far, result);
+		s_tk_token_copy(so_far, result);
+		so_far->token.type = TK_EMPTY;
 		so_far->token.length = 0;
-		so_far->state = tk_next_state(so_far->state, s + 1);
+		so_far->state = s_tk_next_state(so_far->state, s + 1);
 	}
 }
 
 static void	s_tk_end(t_tk_so_far *so_far, char *s, t_tk_result *result)
 {
-	if (so_far->token.type != TK_EOL)
+	if (so_far->token.type == TK_EMPTY)
 	{
 		so_far->token.type = TK_EOL;
 		so_far->token.length = 0;
 		so_far->token.data = s;
 	}
-	tk_token_copy(so_far, result);
+	s_tk_token_copy(so_far, result);
+	if (so_far->status == TK_ERR_MALLOC)
+		s_tk_error(so_far, result);
 }
 
 static void	s_tk_start(t_tk_so_far *so_far, char *s, t_tk_result *result)
@@ -71,20 +74,18 @@ t_tk_result	tk_tokenize(char *s)
 
 	result.tokens = NULL;
 	s_tk_init_so_far(&so_far);
-	i = mini_strlen(s) + 1;
+	i = mini_strlen(s);
+	s_tk_start(&so_far, s, &result);
 	while (i >= 0)
 	{
-		if (so_far.state == TK_ST_START)
-			s_tk_start(&so_far, s, &result);
-		else if (so_far.state == TK_ST_WORD)
+		if (so_far.state == TK_ST_WORD)
 			s_tk_word(&so_far, s, &result);
 		else if (so_far.state == TK_ST_WHITESPACE)
 			s_tk_whitespace(&so_far, s, &result);
-		else if (so_far.state == TK_ST_END)
-			s_tk_end(&so_far, s, &result);
 		s++;
 		i--;
 	}
-	li_print_list(result.tokens);
+	s_tk_end(&so_far, s, &result);
+	s_tk_print_list(result.tokens);
 	return (result);
 }

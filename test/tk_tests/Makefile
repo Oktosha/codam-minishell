@@ -6,7 +6,7 @@
 #    By: elenavoronin <elnvoronin@gmail.com>          +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/30 19:02:22 by evoronin      #+#    #+#                  #
-#    Updated: 2023/07/13 17:22:48 by elenavoroni   ########   odam.nl          #
+#    Updated: 2023/07/14 13:22:18 by codespace     ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,12 +15,10 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror -I ../../kotishell/include -g
 SRCS_FOLDER = ../../kotishell/src
 SRCS_NAMES = tokenize/tokenize_a.c tokenize/tokenize_b.c tokenize/tokenize_c.c \
-lists/lists_a.c lists/lists_b.c \
+lists/lists_a.c \
 minilibft/mini_strlen.c \
 minilibft/mini_malloc.c \
-minilibft/mini_putstr_fd.c \
-minilibft/mini_strjoin.c \
-minilibft/mini_substr.c
+minilibft/mini_putstr_fd.c
 
 TEST_SRCS_NAMES = tk_main.c
 TEST_OBJS = $(addprefix $(OBJS_DIR)/,$(TEST_SRCS_NAMES:.c=.o))

@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 16:23:10 by evoronin      #+#    #+#                 */
-/*   Updated: 2023/07/12 16:26:35 by evoronin      ########   odam.nl         */
+/*   Updated: 2023/07/14 13:21:53 by codespace     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_tk_symbol_type	s_tk_get_symbol_type(char c)
 {
-	if (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f')
+	if (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f' || c == '\r')
 		return (TK_SY_WHITESPACE);
 	if (c == '\0')
 		return (TK_SY_EOL);
@@ -33,7 +33,7 @@ void	s_tk_init_so_far(t_tk_so_far *so_far)
 
 void	s_tk_word(t_tk_so_far *so_far, char *s, t_tk_result *result)
 {
-	if (so_far->token.type != TK_WORD && so_far->token.length == 0)
+	if (so_far->token.type == TK_EMPTY)
 	{
 		so_far->token.length = 1;
 		so_far->token.type = TK_WORD;
@@ -41,15 +41,18 @@ void	s_tk_word(t_tk_so_far *so_far, char *s, t_tk_result *result)
 	}
 	else
 		so_far->token.length += 1;
-	if (tk_next_state(so_far->state, s + 1) != so_far->state)
+	if (s_tk_next_state(so_far->state, s + 1) != so_far->state)
 	{
-		tk_token_copy(so_far, result);
+		s_tk_token_copy(so_far, result);
+		if (so_far->status == TK_ERR_MALLOC)
+			s_tk_error(so_far, result);
 		so_far->token.length = 0;
-		so_far->state = tk_next_state(so_far->state, s + 1);
+		so_far->token.type = TK_EMPTY;
+		so_far->state = s_tk_next_state(so_far->state, s + 1);
 	}
 }
 
-void	tk_token_copy(t_tk_so_far *so_far, t_tk_result *result)
+void	s_tk_token_copy(t_tk_so_far *so_far, t_tk_result *result)
 {
 	t_tk_token	*ptr_token;
 
@@ -62,16 +65,16 @@ void	tk_token_copy(t_tk_so_far *so_far, t_tk_result *result)
 	ptr_token->data = so_far->token.data;
 	ptr_token->length = so_far->token.length;
 	ptr_token->type = so_far->token.type;
-	so_far->head = li_new_stack(so_far->head, ptr_token);
+	li_new_stack(&so_far->head, ptr_token);
 	if (!so_far->head)
 	{
 		so_far->status = TK_ERR_MALLOC;
 		return ;
 	}
-	tk_token_result(result, so_far);
+	s_tk_token_result(result, so_far);
 }
 
-void	tk_token_result(t_tk_result *result, t_tk_so_far *so_far)
+void	s_tk_token_result(t_tk_result *result, t_tk_so_far *so_far)
 {
 	result->tokens = so_far->head;
 	if (!result->tokens)

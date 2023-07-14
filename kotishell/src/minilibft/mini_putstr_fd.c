@@ -6,20 +6,14 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 15:21:11 by evoronin      #+#    #+#                 */
-/*   Updated: 2023/07/04 17:04:10 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/07/14 12:06:38 by codespace     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minilibft.h"
 
-void	mini_putstr_fd(char *s, int fd)
+int	mini_putstr_fd(char *s, int fd)
 {
-	int	i;
-
-	i = 0;
-	while (s[i] != '\0')
-	{
-		write(fd, &s[i], 1);
-		i++;
-	}
+	return(write(fd, s, mini_strlen(s)));
 }
+
