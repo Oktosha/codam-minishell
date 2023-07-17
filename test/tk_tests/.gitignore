@@ -1,3 +1,4 @@
-# *.o
-# objs
-# tk_tests
+*.o
+objs
+tk_tests
+vgcore.*
