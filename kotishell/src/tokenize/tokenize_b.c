@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 16:23:10 by evoronin      #+#    #+#                 */
-/*   Updated: 2023/07/17 09:19:44 by codespace     ########   odam.nl         */
+/*   Updated: 2023/07/17 12:47:19 by codespace     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,7 @@ void	l_tk_token_copy(t_tk_so_far *so_far)
 	ptr_token->data = so_far->token.data;
 	ptr_token->length = so_far->token.length;
 	ptr_token->type = so_far->token.type;
-	li_new_stack(&so_far->head, ptr_token);
-	if (!so_far->head)
+	if (li_new_stack(&so_far->head, ptr_token) == -1)
 	{
 		so_far->status = TK_ERR_MALLOC;
 		return ;
