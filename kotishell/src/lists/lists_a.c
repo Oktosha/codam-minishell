@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/29 16:36:32 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/07/17 12:51:53 by codespace     ########   odam.nl         */
+/*   Updated: 2023/07/17 13:02:20 by codespace     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,7 @@ t_li_node	*li_new_list(void *data)
 int	li_new_stack(t_li_node *list, void *data)
 {
 	if (!list)
-	{
-		list = malloc(sizeof(t_li_node));
-		if (!list)
-			return (-1);
-		li_new_list(data);
-	}
+		return (-1);
 	else
 		li_add_back(&list, li_new_list(data));
 	return (0);
