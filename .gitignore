@@ -1,7 +1,8 @@
 *.o
 *.a
 .DS_Store
-# *.ghc
+*.h.gch
 objs
 minishell
 .vscode
+vgcore.*

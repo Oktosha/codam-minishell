@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/26 16:18:32 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/06/28 20:10:59 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/07/03 11:20:28 by evoronin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,13 @@
 void	lc_start_shell(int argc, char **argv, char **envp)
 {
 	char	*line;
-	char	**args;
-	int		status;
-	int		i; 
+	int		i;
 
 	i = 0;
+	if (argc == 0)
+		exit(EXIT_FAILURE);
+	argv = NULL;
+	envp = NULL;
 	while (1)
 	{
 		line = readline("kotishell: ");
@@ -33,10 +35,5 @@ void	lc_start_shell(int argc, char **argv, char **envp)
 			exit (EXIT_FAILURE);
 		add_history(line);
 		i = 0;
-		while (line[i] != '\0')
-		{
-			printf("line: %d\n", line[i]);
-			i++;
-		}
 	}
 }

@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   lifecycle.h                                        :+:    :+:            */
+/*   mini_strlen.c                                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/06/25 13:15:07 by mbp14         #+#    #+#                 */
-/*   Updated: 2023/06/30 15:24:27 by evoronin      ########   odam.nl         */
+/*   Created: 2023/06/30 16:33:22 by evoronin      #+#    #+#                 */
+/*   Updated: 2023/07/04 18:14:55 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-/** @file 
- * Module that manages shell life.
- * Namespace prefix: "lc".
-*/
-#ifndef LIFECYCLE_H
-# define LIFECYCLE_H
+#include "minilibft.h"
 
-# include <stdlib.h>
-# include <stdio.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <sys/errno.h>
-# include "lists.h"
-# include "minilibft.h"
+int	mini_strlen(char *s)
+{
+	int	i;
 
-void	lc_start_shell(int argc, char **argv, char **envp);
-
-#endif
+	i = 0;
+	while (s[i] != '\0')
+		i++;
+	return (i);
+}
