@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/29 16:20:23 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/07/17 15:44:33 by dkolodze      ########   odam.nl         */
+/*   Updated: 2023/07/17 14:27:47 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,12 @@ static void	l_tk_whitespace(t_tk_so_far *so_far, char *s)
 
 static void	l_tk_end(t_tk_so_far *so_far, char *s)
 {
-	if (so_far->token.type == TK_EMPTY)
+	if (so_far->status == TK_SUCCESS)
 	{
 		so_far->token.type = TK_EOL;
 		so_far->token.length = 0;
 		so_far->token.data = s;
 		l_tk_token_copy(so_far);
-		if (so_far->status == TK_ERR_MALLOC)
-			return ;
 	}
 	if (so_far->status == TK_ERR_MALLOC)
 		l_tk_error_cleanup(so_far);

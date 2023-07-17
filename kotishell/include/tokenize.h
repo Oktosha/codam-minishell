@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 20:00:53 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/07/17 09:56:20 by codespace     ########   odam.nl         */
+/*   Updated: 2023/07/17 14:28:58 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef enum e_tk_state
 	TK_ST_START,
 	TK_ST_END,
 	TK_ST_ERROR,
+	TK_ST_BUG,
 }	t_tk_state;
 
 typedef enum e_tk_symbol_type

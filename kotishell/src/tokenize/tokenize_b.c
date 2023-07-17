@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 16:23:10 by evoronin      #+#    #+#                 */
-/*   Updated: 2023/07/17 13:58:56 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/07/17 14:1701:00 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	l_tk_token_copy(t_tk_so_far *so_far)
 	if (li_new_stack(&so_far->head, ptr_token) == -1)
 	{
 		so_far->status = TK_ERR_MALLOC;
+		free(ptr_token);
 		return ;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 18:55:46 by evoronin      #+#    #+#                 */
-/*   Updated: 2023/07/17 13:53:41 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/07/17 16:29:59 by dkolodze      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void TK_test_tokenize(char *input, t_TK_dummy_token *expected, int len)
 
 int	main(void)
 {
-	t_TK_dummy_token expected[6] = {
+	t_TK_dummy_token expected1[6] = {
 		{"\t\t\t\t\t ", TK_WHITESPACE},
 		{"asfa", TK_WORD},
 		{" ", TK_WHITESPACE},
@@ -100,6 +100,6 @@ int	main(void)
 		{"    ", TK_WHITESPACE},
 		{"", TK_EOL}
 	};
-	TK_test_tokenize("\t\t\t\t\t asfa tt    ", expected, 6);
+	TK_test_tokenize("\t\t\t\t\t asfa tt    ", expected1, 6);
 	return (0);
 }

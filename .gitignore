@@ -5,3 +5,4 @@
 objs
 minishell
 .vscode
+vgcore.*

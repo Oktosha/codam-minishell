@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/29 16:36:32 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/07/17 13:49:33 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/07/17 14:29:02 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ t_li_node	*li_new_list(void *data)
 
 int	li_new_stack(t_li_node **list, void *data)
 {
+	t_li_node	*node;
+
 	if (!(*list))
 	{
 		*list = li_new_list(data);
@@ -46,7 +48,12 @@ int	li_new_stack(t_li_node **list, void *data)
 			return (-1);
 	}
 	else
-		li_add_back(list, li_new_list(data));
+	{
+		node = li_new_list(data);
+		if (!node)
+			return (-1);
+		li_add_back(list, node);
+	}
 	return (0);
 }
 
