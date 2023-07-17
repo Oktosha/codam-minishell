@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 18:55:46 by evoronin      #+#    #+#                 */
-/*   Updated: 2023/07/17 09:25:06 by codespace     ########   odam.nl         */
+/*   Updated: 2023/07/17 13:53:41 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,20 @@ typedef struct s_TK_dummy_token {
 void	TK_print_list(t_li_node *list)
 {
 	t_tk_token	*token;
+	int			i;
 
+	i = 0;
 	while (list)
 	{
 		token = list->data;
+		printf("[%d]: ", i);
+		fflush(stdout);
 		if (write(1, token->data, token->length) == -1)
 			mini_putstr_fd("Write error\n", 2);
 		if (write(1, "\n", 2) == -1)
 			mini_putstr_fd("Write error\n", 2);
 		list = list->next;
+		i++;
 	}
 }
 
@@ -70,6 +75,8 @@ void TK_test_tokenize(char *input, t_TK_dummy_token *expected, int len)
 {
 	t_tk_result res = tk_tokenize(input);
 	t_li_node *cur = res.tokens;
+	printf("Result status: %d\n", res.status);
+	printf("Result tokens:\n");
 	TK_print_list(res.tokens);
 	for (int i = 0; i < len; ++i)
 	{
