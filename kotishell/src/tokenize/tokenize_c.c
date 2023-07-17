@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/10 14:12:29 by evoronin      #+#    #+#                 */
-/*   Updated: 2023/07/17 14:28:12 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/07/17 14:49:26 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_tk_state	l_tk_next_state(t_tk_state state, char *s)
 {
 	t_tk_symbol_type	symbol;
 
-	(void) (state);
+	(void)(state);
 	symbol = l_tk_get_symbol_type(*s);
 	if (symbol == TK_SY_EOL)
 		return (TK_ST_END);
