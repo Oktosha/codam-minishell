@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 18:55:46 by evoronin      #+#    #+#                 */
-/*   Updated: 2023/07/17 14:30:50 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/07/17 14:32:12 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,4 +103,3 @@ int	main(void)
 	TK_test_tokenize("\t\t\t\t\t asfa tt    ", expected1, 6);
 	return (0);
 }
-
