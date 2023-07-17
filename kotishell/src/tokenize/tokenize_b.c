@@ -6,13 +6,13 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 16:23:10 by evoronin      #+#    #+#                 */
-/*   Updated: 2023/07/14 16:04:56 by evoronin      ########   odam.nl         */
+/*   Updated: 2023/07/17 09:19:44 by codespace     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tokenize.h"
 
-t_tk_symbol_type	s_tk_get_symbol_type(char c)
+t_tk_symbol_type	l_tk_get_symbol_type(char c)
 {
 	if (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f' 
 		|| c == '\r')
@@ -22,7 +22,7 @@ t_tk_symbol_type	s_tk_get_symbol_type(char c)
 	return (TK_SY_LETTER);
 }
 
-void	s_tk_init_so_far(t_tk_so_far *so_far)
+void	l_tk_init_so_far(t_tk_so_far *so_far)
 {
 	so_far->status = TK_SUCCESS;
 	so_far->head = NULL;
@@ -32,8 +32,10 @@ void	s_tk_init_so_far(t_tk_so_far *so_far)
 	so_far->token.data = NULL;
 }
 
-void	s_tk_word(t_tk_so_far *so_far, char *s, t_tk_result *result)
+void	l_tk_word(t_tk_so_far *so_far, char *s)
 {
+	if (so_far->status != TK_SUCCESS)
+		return ;
 	if (so_far->token.type == TK_EMPTY)
 	{
 		so_far->token.length = 1;
@@ -42,18 +44,18 @@ void	s_tk_word(t_tk_so_far *so_far, char *s, t_tk_result *result)
 	}
 	else
 		so_far->token.length += 1;
-	if (s_tk_next_state(so_far->state, s + 1) != so_far->state)
+	if (l_tk_next_state(so_far->state, s + 1) != so_far->state)
 	{
-		s_tk_token_copy(so_far, result);
+		l_tk_token_copy(so_far);
 		if (so_far->status == TK_ERR_MALLOC)
-			s_tk_error(so_far, result);
+			return ;
 		so_far->token.length = 0;
 		so_far->token.type = TK_EMPTY;
-		so_far->state = s_tk_next_state(so_far->state, s + 1);
+		so_far->state = l_tk_next_state(so_far->state, s + 1);
 	}
 }
 
-void	s_tk_token_copy(t_tk_so_far *so_far, t_tk_result *result)
+void	l_tk_token_copy(t_tk_so_far *so_far)
 {
 	t_tk_token	*ptr_token;
 
@@ -72,10 +74,9 @@ void	s_tk_token_copy(t_tk_so_far *so_far, t_tk_result *result)
 		so_far->status = TK_ERR_MALLOC;
 		return ;
 	}
-	s_tk_token_result(result, so_far);
 }
 
-void	s_tk_token_result(t_tk_result *result, t_tk_so_far *so_far)
+void	l_tk_token_result(t_tk_result *result, t_tk_so_far *so_far)
 {
 	result->tokens = so_far->head;
 	if (!result->tokens)

@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 18:55:46 by evoronin      #+#    #+#                 */
-/*   Updated: 2023/07/14 15:59:34 by evoronin      ########   odam.nl         */
+/*   Updated: 2023/07/17 09:25:06 by codespace     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,22 @@ typedef struct s_TK_dummy_token {
 	char *s;
 	t_tk_token_type type;
 } t_TK_dummy_token;
+
+
+void	TK_print_list(t_li_node *list)
+{
+	t_tk_token	*token;
+
+	while (list)
+	{
+		token = list->data;
+		if (write(1, token->data, token->length) == -1)
+			mini_putstr_fd("Write error\n", 2);
+		if (write(1, "\n", 2) == -1)
+			mini_putstr_fd("Write error\n", 2);
+		list = list->next;
+	}
+}
 
 int TK_are_dummy_equal(t_TK_dummy_token expected, t_tk_token real, int i)
 {
@@ -54,7 +70,7 @@ void TK_test_tokenize(char *input, t_TK_dummy_token *expected, int len)
 {
 	t_tk_result res = tk_tokenize(input);
 	t_li_node *cur = res.tokens;
-	s_tk_print_list(res.tokens);
+	TK_print_list(res.tokens);
 	for (int i = 0; i < len; ++i)
 	{
 		t_tk_token *cur_token = cur->data;
@@ -64,7 +80,7 @@ void TK_test_tokenize(char *input, t_TK_dummy_token *expected, int len)
 		}
 		cur = cur->next;
 	}
-	s_li_token_free(res.tokens);
+	l_tk_token_free(res.tokens);
 }
 
 int	main(void)
@@ -79,4 +95,4 @@ int	main(void)
 	};
 	TK_test_tokenize("\t\t\t\t\t asfa tt    ", expected, 6);
 	return (0);
-} //TODO chceck EOL token - it's not printed right now
+}

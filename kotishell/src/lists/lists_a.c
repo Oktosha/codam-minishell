@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/29 16:36:32 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/07/14 16:05:30 by evoronin      ########   odam.nl         */
+/*   Updated: 2023/07/17 10:15:11 by codespace     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,21 +40,35 @@ t_li_node	*li_new_list(void *data)
 void	li_new_stack(t_li_node **list, void *data)
 {
 	if (!(*list))
+	{
+		*list =  malloc(sizeof(t_li_node));
+		if (!list)
+		{
+			mini_putstr_fd("\033[0;31mBUG\n", 2);
+			exit(EXIT_FAILURE);
+		}
 		*list = li_new_list(data);
+		if (!list)
+		{
+			mini_putstr_fd("\033[0;31mBUG\n", 2);
+			exit(EXIT_FAILURE);
+		}
+	}
 	else
 		li_add_back(list, li_new_list(data));
 }
 
-/**
- * TODO: add proper assert function for our errors instead of exit(EXIT_FAILURE)
-*/
+
 void	li_add_back(t_li_node **list, t_li_node *node)
 {
 	t_li_node	*new_list;
 
 	new_list = *list;
 	if (!new_list)
+	{
+		mini_putstr_fd("\033[0;31mBUG\n", 2);
 		exit(EXIT_FAILURE);
+	}
 	while (new_list->next != NULL)
 		new_list = new_list->next;
 	new_list->next = node;

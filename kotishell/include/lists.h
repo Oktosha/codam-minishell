@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/29 16:36:52 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/07/14 12:03:29 by codespace     ########   odam.nl         */
+/*   Updated: 2023/07/17 10:15:23 by codespace     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,5 @@ int			li_list_size(t_li_node *list);
 t_li_node	*li_new_list(void *data);
 void		li_new_stack(t_li_node **list, void *data);
 void		li_add_back(t_li_node **list, t_li_node *node);
-void		li_list_free(t_li_node *list);
 
 #endif
