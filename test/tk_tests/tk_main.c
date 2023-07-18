@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 18:55:46 by evoronin      #+#    #+#                 */
-/*   Updated: 2023/07/17 14:40:25 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/07/18 15:32:53 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ void TK_test_tokenize(char *input, t_TK_dummy_token *expected, int len)
 {
 	t_tk_result res = tk_tokenize(input);
 	t_li_node *cur = res.tokens;
-	printf("Result status: %d\n", res.status);
 	printf("Result tokens:\n");
 	TK_print_list(res.tokens);
 	for (int i = 0; i < len; ++i)
@@ -92,14 +91,37 @@ void TK_test_tokenize(char *input, t_TK_dummy_token *expected, int len)
 
 int	main(void)
 {
-	t_TK_dummy_token expected1[6] = {
-		{"\t\t\t\t\t ", TK_WHITESPACE},
-		{"asfa", TK_WORD},
+	// printf("SIMPLE TEST:\n");
+	// t_TK_dummy_token expected1[6] = {
+	// 	{"\t\t\t\t\t ", TK_WHITESPACE},
+	// 	{"asfa", TK_WORD},
+	// 	{" ", TK_WHITESPACE},
+	// 	{"tt", TK_WORD},
+	// 	{"    ", TK_WHITESPACE},
+	// 	{"", TK_EOL}
+	// };
+	// TK_test_tokenize("\t\t\t\t\t asfa tt    ", expected1, 6);
+	// printf("EMPTY STR TEST:\n");
+	// t_TK_dummy_token expected2[1] = {
+	// 	{"", TK_EOL},
+	// };
+	// TK_test_tokenize("", expected2, 1);
+	printf("ONE PIPE TEST:\n");
+	t_TK_dummy_token expected3[8] = {
+		{"echo", TK_WORD},
 		{" ", TK_WHITESPACE},
-		{"tt", TK_WORD},
-		{"    ", TK_WHITESPACE},
-		{"", TK_EOL}
+		{"'hello'", TK_WORD},
+		{" ", TK_WHITESPACE},
+		{"|", TK_PIPE},
+		{" ", TK_WHITESPACE},
+		{"cat", TK_WORD},
+		{"", TK_EOL},
 	};
-	TK_test_tokenize("\t\t\t\t\t asfa tt    ", expected1, 6);
+	TK_test_tokenize("echo | cat", expected3, 23);
+	// printf("MORE PIPES TEST\n");
+	// t_TK_dummy_token expected4[0] = {
+	// 	{"echo 'wow' || cat", TK_EOL},
+	// };	
+	// TK_test_tokenize("echo 'wow' || cat", expected4, 18);
 	return (0);
 }

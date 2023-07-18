@@ -6,13 +6,39 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/29 16:20:23 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/07/17 14:27:47 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/07/18 15:34:47 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tokenize.h"
 
-static void	l_tk_whitespace(t_tk_so_far *so_far, char *s)
+void	l_tk_pipe(t_tk_so_far *so_far, char *s)
+{
+	if (so_far->status != TK_SUCCESS)
+		return ;
+	if (so_far->token.type == TK_EMPTY)
+	{
+		so_far->token.length = 1;
+		so_far->token.type = TK_PIPE;
+		so_far->token.data = s;
+		l_tk_token_copy(so_far);
+		if (so_far->status == TK_ERR_MALLOC)
+			return ;
+	}
+	if (l_tk_next_state(so_far->state, s + 1) == so_far->state)
+	{
+		so_far->status = TK_ERROR_SYNTAX;
+		return ;
+	}
+	else
+	{
+		so_far->token.type = TK_EMPTY;
+		so_far->token.length = 0;
+		so_far->state = l_tk_next_state(so_far->state, s + 1);
+	}
+}
+
+void	l_tk_whitespace(t_tk_so_far *so_far, char *s)
 {
 	if (so_far->status != TK_SUCCESS)
 		return ;
@@ -35,7 +61,7 @@ static void	l_tk_whitespace(t_tk_so_far *so_far, char *s)
 	}
 }
 
-static void	l_tk_end(t_tk_so_far *so_far, char *s)
+void	l_tk_end(t_tk_so_far *so_far, char *s)
 {
 	if (so_far->status == TK_SUCCESS)
 	{
@@ -48,7 +74,7 @@ static void	l_tk_end(t_tk_so_far *so_far, char *s)
 		l_tk_error_cleanup(so_far);
 }
 
-static void	l_tk_start(t_tk_so_far *so_far, char *s)
+void	l_tk_start(t_tk_so_far *so_far, char *s)
 {
 	t_tk_symbol_type	symbol;
 
@@ -67,6 +93,11 @@ static void	l_tk_start(t_tk_so_far *so_far, char *s)
 	{
 		so_far->state = TK_ST_WHITESPACE;
 		l_tk_whitespace(so_far, s);
+	}
+	if (symbol == TK_SY_PIPE)
+	{
+		so_far->state = TK_ST_PIPE,
+		l_tk_pipe(so_far,s);
 	}
 }
 
@@ -87,6 +118,8 @@ t_tk_result	tk_tokenize(char *s)
 			l_tk_word(&so_far, s);
 		else if (so_far.state == TK_ST_WHITESPACE)
 			l_tk_whitespace(&so_far, s);
+		else if (so_far.state == TK_ST_PIPE)
+			l_tk_pipe(&so_far, s);
 		i--;
 	}
 	s++;

@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 16:23:10 by evoronin      #+#    #+#                 */
-/*   Updated: 2023/07/17 14:49:26 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/07/18 14:10:06 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ t_tk_symbol_type	l_tk_get_symbol_type(char c)
 		return (TK_SY_WHITESPACE);
 	if (c == '\0')
 		return (TK_SY_EOL);
+	if (c == '|')
+		return (TK_SY_PIPE);
 	return (TK_SY_LETTER);
 }
 
