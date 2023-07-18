@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 18:55:46 by evoronin      #+#    #+#                 */
-/*   Updated: 2023/07/18 15:32:53 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/07/18 17:45:01 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,22 +106,22 @@ int	main(void)
 	// 	{"", TK_EOL},
 	// };
 	// TK_test_tokenize("", expected2, 1);
-	printf("ONE PIPE TEST:\n");
-	t_TK_dummy_token expected3[8] = {
-		{"echo", TK_WORD},
-		{" ", TK_WHITESPACE},
-		{"'hello'", TK_WORD},
-		{" ", TK_WHITESPACE},
+	// printf("ONE PIPE TEST:\n");
+	// t_TK_dummy_token expected3[6] = {
+	// 	{"echo", TK_WORD},
+	// 	{" ", TK_WHITESPACE},
+	// 	{"|", TK_PIPE},
+	// 	{" ", TK_WHITESPACE},
+	// 	{"cat", TK_WORD},
+	// 	{"", TK_EOL},
+	// };
+	// TK_test_tokenize("echo | cat", expected3, 6);
+	printf("TWO PIPES TEST\n");
+	t_TK_dummy_token expected4[3] = {
 		{"|", TK_PIPE},
-		{" ", TK_WHITESPACE},
-		{"cat", TK_WORD},
+		{"|", TK_PIPE},
 		{"", TK_EOL},
-	};
-	TK_test_tokenize("echo | cat", expected3, 23);
-	// printf("MORE PIPES TEST\n");
-	// t_TK_dummy_token expected4[0] = {
-	// 	{"echo 'wow' || cat", TK_EOL},
-	// };	
-	// TK_test_tokenize("echo 'wow' || cat", expected4, 18);
+	};	
+	TK_test_tokenize("||", expected4, 3);
 	return (0);
 }
