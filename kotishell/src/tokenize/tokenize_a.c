@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/29 16:20:23 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/07/18 18:20:41 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/07/19 13:07:28 by evoronin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,6 @@ void	l_tk_pipe(t_tk_so_far *so_far, char *s)
 			return ;
 	}
 	if (l_tk_next_state(so_far->state, s + 1) == so_far->state)
-	{
-		so_far->status == TK_ERR_SYNTAX;
-		return ;
-	}
-	else
 	{
 		so_far->token.type = TK_EMPTY;
 		so_far->token.length = 0;
@@ -98,8 +93,8 @@ void	l_tk_start(t_tk_so_far *so_far, char *s)
 	}
 	if (symbol == TK_SY_PIPE)
 	{
-		so_far->state = TK_ST_PIPE,
-		l_tk_pipe(so_far,s);
+		so_far->state = TK_ST_IMPORTANT;
+		l_tk_pipe(so_far, s);
 	}
 }
 
@@ -120,7 +115,7 @@ t_tk_result	tk_tokenize(char *s)
 			l_tk_word(&so_far, s);
 		else if (so_far.state == TK_ST_WHITESPACE)
 			l_tk_whitespace(&so_far, s);
-		else if (so_far.state == TK_ST_PIPE)
+		else if (so_far.state == TK_ST_IMPORTANT)
 			l_tk_pipe(&so_far, s);
 		i--;
 	}
