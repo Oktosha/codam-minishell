@@ -6,7 +6,7 @@
 #    By: elenavoronin <elnvoronin@gmail.com>          +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/30 19:02:22 by evoronin      #+#    #+#                  #
-#    Updated: 2023/07/14 13:22:18 by codespace     ########   odam.nl          #
+#    Updated: 2023/07/19 17:14:43 by evoronin      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror -I ../../kotishell/include -g
 SRCS_FOLDER = ../../kotishell/src
 SRCS_NAMES = tokenize/tokenize_a.c tokenize/tokenize_b.c tokenize/tokenize_c.c \
+tokenize/tokenize_d.c \
 lists/lists_a.c \
 minilibft/mini_strlen.c \
 minilibft/mini_malloc.c \

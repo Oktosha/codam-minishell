@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 20:00:53 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/07/18 19:27:11 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/07/19 17:34:25 by evoronin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef enum e_tk_token_type
 	TK_QUESTION,
 	TK_WHITESPACE,
 	TK_WORD,
+	TK_BUG,
 }	t_tk_token_type;
 
 typedef enum e_tk_state
@@ -45,6 +46,7 @@ typedef enum e_tk_state
 	TK_ST_END,
 	TK_ST_ERROR,
 	TK_ST_IMPORTANT,
+	TK_ST_NEWLINE,
 	TK_ST_OTHER,
 	TK_ST_START,
 	TK_ST_WHITESPACE,
@@ -54,9 +56,19 @@ typedef enum e_tk_state
 typedef enum e_tk_symbol_type
 {
 	TK_SY_EOL,
-	TK_SY_LETTER,
-	TK_SY_PIPE,
+	TK_SY_ALPHANUM,
+	TK_SY_IMPORTANT,
+	// TK_SY_PIPE,
 	TK_SY_WHITESPACE,
+	TK_SY_NEWLINE,
+	// TK_SY_QUOTE_1,
+	// TK_SY_QUOTE_2,
+	// TK_SY_QUESTION,
+	// TK_SY_LESS,
+	// TK_SY_GREAT,
+	TK_SY_OTHER,
+	// TK_SY_DOLLAR,
+	TK_SY_BUG,
 }	t_tk_symbol_type;
 
 typedef struct s_tk_token
@@ -98,10 +110,11 @@ void				l_tk_token_result(t_tk_result *result, t_tk_so_far *so_far);
 t_tk_state			l_tk_next_state(t_tk_state state, char *s);
 void				l_tk_token_free(t_li_node *list);
 void				l_tk_error_cleanup(t_tk_so_far *so_far);
-void				l_tk_pipe(t_tk_so_far *so_far, char *s);
+void				l_tk_important(t_tk_so_far *so_far, char *s);
 void				l_tk_end(t_tk_so_far *so_far, char *s);
 void				l_tk_start(t_tk_so_far *so_far, char *s);
 void				l_tk_whitespace(t_tk_so_far *so_far, char *s);
-void				l_tk_error_syntax(t_tk_so_far *so_far);
+t_tk_token_type		l_tk_get_token_type(char c);
+t_tk_symbol_type	l_tk_get_symbol_whitespaces(char c);
 
 #endif

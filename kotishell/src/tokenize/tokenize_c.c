@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/10 14:12:29 by evoronin      #+#    #+#                 */
-/*   Updated: 2023/07/18 18:27:18 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/07/19 17:26:52 by evoronin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,14 @@ t_tk_state	l_tk_next_state(t_tk_state state, char *s)
 		return (TK_ST_END);
 	if (symbol == TK_SY_WHITESPACE)
 		return (TK_ST_WHITESPACE);
-	if (symbol == TK_SY_LETTER)
+	if (symbol == TK_SY_ALPHANUM)
 		return (TK_ST_WORD);
-	if (symbol == TK_SY_PIPE)
-		return (TK_ST_PIPE);
+	if (symbol == TK_SY_IMPORTANT)
+		return (TK_ST_IMPORTANT);
+	if (symbol == TK_SY_NEWLINE)
+		return (TK_ST_NEWLINE);
+	if (symbol == TK_SY_OTHER)
+		return (TK_ST_OTHER);
 	return (TK_ST_BUG);
 }
 

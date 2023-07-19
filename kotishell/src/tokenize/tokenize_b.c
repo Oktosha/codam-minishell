@@ -6,23 +6,11 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 16:23:10 by evoronin      #+#    #+#                 */
-/*   Updated: 2023/07/18 18:15:40 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/07/19 17:15:12 by evoronin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tokenize.h"
-
-t_tk_symbol_type	l_tk_get_symbol_type(char c)
-{
-	if (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f' 
-		|| c == '\r')
-		return (TK_SY_WHITESPACE);
-	if (c == '\0')
-		return (TK_SY_EOL);
-	if (c == '|')
-		return (TK_SY_PIPE);
-	return (TK_SY_LETTER);
-}
 
 void	l_tk_init_so_far(t_tk_so_far *so_far)
 {
