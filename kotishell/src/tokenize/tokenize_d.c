@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/19 17:12:15 by evoronin      #+#    #+#                 */
-/*   Updated: 2023/07/20 15:14:08 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/07/20 16:49:16 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ t_tk_token_type	l_tk_get_token_type(char c)
 		return (TK_GREAT);
 	if (c == '?')
 		return (TK_QUESTION);
+	if (c == '\n')
+		return (TK_NEWLINE);
 	return (TK_BUG);
 }
 
@@ -59,15 +61,13 @@ t_tk_symbol_type	l_tk_get_symbol_whitespaces(char c)
 	if (c == ' ' || c == '\t' || c == '\v' || c == '\f' 
 		|| c == '\r')
 		return (TK_SY_WHITESPACE);
-	if (c == '\n')
-		return (TK_SY_NEWLINE);
 	return (TK_SY_BUG);
 }
 
 t_tk_symbol_type	l_tk_get_symbol_type(char c)
 {
 	if (c == '"' || c == '$' || c == '\'' || c == '<' || c == '>' || c == '?'
-		|| c == '|')
+		|| c == '|' || c == '\n')
 		return (TK_SY_IMPORTANT);
 	if (c == ' ' || c == '\t' || c == '\v' || c == '\f' || c == '\r' 
 		|| c == '\n')
