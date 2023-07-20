@@ -3,14 +3,35 @@
 /*                                                        ::::::::            */
 /*   tokenize_d.c                                       :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: evoronin <evoronin@student.codam.nl>         +#+                     */
+/*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/19 17:12:15 by evoronin      #+#    #+#                 */
-/*   Updated: 2023/07/19 17:51:13 by evoronin      ########   odam.nl         */
+/*   Updated: 2023/07/20 15:14:08 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tokenize.h"
+
+t_tk_state	l_tk_next_state(t_tk_state state, char *s)
+{
+	t_tk_symbol_type	symbol;
+
+	(void)(state);
+	symbol = l_tk_get_symbol_type(*s);
+	if (symbol == TK_SY_EOL)
+		return (TK_ST_END);
+	if (symbol == TK_SY_WHITESPACE)
+		return (TK_ST_WHITESPACE);
+	if (symbol == TK_SY_ALPHANUM)
+		return (TK_ST_WORD);
+	if (symbol == TK_SY_IMPORTANT)
+		return (TK_ST_IMPORTANT);
+	if (symbol == TK_SY_NEWLINE)
+		return (TK_ST_NEWLINE);
+	if (symbol == TK_SY_OTHER)
+		return (TK_ST_OTHER);
+	return (TK_ST_BUG);
+}
 
 t_tk_token_type	l_tk_get_token_type(char c)
 {

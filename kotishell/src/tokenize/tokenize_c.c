@@ -6,31 +6,47 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/10 14:12:29 by evoronin      #+#    #+#                 */
-/*   Updated: 2023/07/19 17:26:52 by evoronin      ########   odam.nl         */
+/*   Updated: 2023/07/20 15:55:28 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tokenize.h"
 
-t_tk_state	l_tk_next_state(t_tk_state state, char *s)
+void	l_tk_init_so_far(t_tk_so_far *so_far)
 {
-	t_tk_symbol_type	symbol;
+	so_far->status = TK_SUCCESS;
+	so_far->head = NULL;
+	so_far->token.type = TK_EMPTY;
+	so_far->token.length = 0;
+	so_far->state = TK_ST_START;
+	so_far->token.data = NULL;
+}
 
-	(void)(state);
-	symbol = l_tk_get_symbol_type(*s);
-	if (symbol == TK_SY_EOL)
-		return (TK_ST_END);
-	if (symbol == TK_SY_WHITESPACE)
-		return (TK_ST_WHITESPACE);
-	if (symbol == TK_SY_ALPHANUM)
-		return (TK_ST_WORD);
-	if (symbol == TK_SY_IMPORTANT)
-		return (TK_ST_IMPORTANT);
-	if (symbol == TK_SY_NEWLINE)
-		return (TK_ST_NEWLINE);
-	if (symbol == TK_SY_OTHER)
-		return (TK_ST_OTHER);
-	return (TK_ST_BUG);
+void	l_tk_token_copy(t_tk_so_far *so_far)
+{
+	t_tk_token	*ptr_token;
+
+	ptr_token = malloc(sizeof(t_tk_token));
+	if (!ptr_token)
+	{
+		so_far->status = TK_ERR_MALLOC;
+		return ;
+	}
+	ptr_token->data = so_far->token.data;
+	ptr_token->length = so_far->token.length;
+	ptr_token->type = so_far->token.type;
+	if (li_new_stack(&so_far->head, ptr_token) == -1)
+	{
+		so_far->status = TK_ERR_MALLOC;
+		free(ptr_token);
+		return ;
+	}
+}
+
+void	l_tk_token_result(t_tk_result *result, t_tk_so_far *so_far)
+{
+	result->tokens = so_far->head;
+	result->status = so_far->status;
 }
 
 void	l_tk_token_free(t_li_node *list)

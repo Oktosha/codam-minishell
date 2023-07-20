@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 20:00:53 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/07/19 17:34:25 by evoronin      ########   odam.nl         */
+/*   Updated: 2023/07/20 15:19:09 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,16 +58,9 @@ typedef enum e_tk_symbol_type
 	TK_SY_EOL,
 	TK_SY_ALPHANUM,
 	TK_SY_IMPORTANT,
-	// TK_SY_PIPE,
 	TK_SY_WHITESPACE,
 	TK_SY_NEWLINE,
-	// TK_SY_QUOTE_1,
-	// TK_SY_QUOTE_2,
-	// TK_SY_QUESTION,
-	// TK_SY_LESS,
-	// TK_SY_GREAT,
 	TK_SY_OTHER,
-	// TK_SY_DOLLAR,
 	TK_SY_BUG,
 }	t_tk_symbol_type;
 
@@ -116,5 +109,6 @@ void				l_tk_start(t_tk_so_far *so_far, char *s);
 void				l_tk_whitespace(t_tk_so_far *so_far, char *s);
 t_tk_token_type		l_tk_get_token_type(char c);
 t_tk_symbol_type	l_tk_get_symbol_whitespaces(char c);
+void				l_tk_other(t_tk_so_far *so_far, char *s);
 
 #endif

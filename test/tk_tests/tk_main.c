@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 18:55:46 by evoronin      #+#    #+#                 */
-/*   Updated: 2023/07/19 17:40:59 by evoronin      ########   odam.nl         */
+/*   Updated: 2023/07/20 15:55:06 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,12 +124,22 @@ int	main(void)
 	};	
 	TK_test_tokenize("||", expected4, 3);
 	printf("OTHER CHAR TEST\n");
-	t_TK_dummy_token expected5[4] = {
-		{"$", TK_OTHER},
-		{"&", TK_OTHER},
-		{"@", TK_OTHER},
+	t_TK_dummy_token expected5[3] = {
+		{"$", TK_DOLLAR},
+		{"&@", TK_OTHER},
 		{"", TK_EOL},
 	};	
-	TK_test_tokenize("||", expected5, 4);
+	TK_test_tokenize("$&@", expected5, 3);
+	printf("NEWLINE TEST\n");
+	t_TK_dummy_token expected6[7] = {
+		{"\n", TK_NEWLINE},
+		{"&", TK_OTHER},
+		{"@", TK_OTHER},
+		{"\"", TK_QUOTE_2},
+		{"abcdsd1234", TK_WORD},
+		{"\"", TK_QUOTE_2},
+		{"", TK_EOL},
+	};	
+	TK_test_tokenize("\n&@\"abcdsd1234\"", expected6, 7);
 	return (0);
 }
