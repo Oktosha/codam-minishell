@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   mini_strlen.c                                      :+:    :+:            */
+/*   mini_main.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/06/30 16:33:22 by evoronin      #+#    #+#                 */
-/*   Updated: 2023/07/21 15:35:46 by elenavoroni   ########   odam.nl         */
+/*   Created: 2023/07/21 15:33:10 by elenavoroni   #+#    #+#                 */
+/*   Updated: 2023/07/21 15:33:36 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minilibft.h"
 
-int	mini_strlen(const char *s)
+int main (void)
 {
-	int	i;
-
-	i = 0;
-	while (s[i] != '\0')
-		i++;
-	return (i);
+	int size = 0;
+	mini_malloc(size);
+	return (0);
 }

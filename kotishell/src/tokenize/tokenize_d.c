@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/19 17:12:15 by evoronin      #+#    #+#                 */
-/*   Updated: 2023/07/20 16:49:16 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/07/21 17:57:18 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,11 @@ t_tk_state	l_tk_next_state(t_tk_state state, char *s)
 		return (TK_ST_WHITESPACE);
 	if (symbol == TK_SY_ALPHANUM)
 		return (TK_ST_WORD);
-	if (symbol == TK_SY_IMPORTANT)
+	if (symbol == TK_SY_IMPORTANT || symbol == TK_SY_NEWLINE)
 		return (TK_ST_IMPORTANT);
-	if (symbol == TK_SY_NEWLINE)
-		return (TK_ST_NEWLINE);
 	if (symbol == TK_SY_OTHER)
 		return (TK_ST_OTHER);
-	return (TK_ST_BUG);
+	return (TK_ST_ERROR);
 }
 
 t_tk_token_type	l_tk_get_token_type(char c)
@@ -53,28 +51,29 @@ t_tk_token_type	l_tk_get_token_type(char c)
 		return (TK_QUESTION);
 	if (c == '\n')
 		return (TK_NEWLINE);
-	return (TK_BUG);
-}
-
-t_tk_symbol_type	l_tk_get_symbol_whitespaces(char c)
-{
-	if (c == ' ' || c == '\t' || c == '\v' || c == '\f' 
-		|| c == '\r')
-		return (TK_SY_WHITESPACE);
-	return (TK_SY_BUG);
+	return (TK_BAD);
 }
 
 t_tk_symbol_type	l_tk_get_symbol_type(char c)
 {
+	if (c == '\0')
+		return (TK_SY_EOL);
 	if (c == '"' || c == '$' || c == '\'' || c == '<' || c == '>' || c == '?'
 		|| c == '|' || c == '\n')
 		return (TK_SY_IMPORTANT);
-	if (c == ' ' || c == '\t' || c == '\v' || c == '\f' || c == '\r' 
-		|| c == '\n')
-		return (l_tk_get_symbol_whitespaces(c));
+	if (c == ' ' || c == '\t' || c == '\v' || c == '\f' || c == '\r')
+		return (TK_SY_WHITESPACE);
 	if ((c >= 48 && c <= 57) || (c >= 65 && c <= 90) || (c >= 97 && c <= 122))
 		return (TK_SY_ALPHANUM);
 	if (c >= 32 && c <= 126)
 		return (TK_SY_OTHER);
-	return (TK_SY_BUG);
+	return (TK_SY_BAD);
+}
+
+void	l_tk_symbol_error(t_tk_so_far *so_far)
+{
+	so_far->status = TK_ERR_SYMBOL;
+	mini_putstr_fd("Unsupported symbol: ", 2);
+	mini_putstr_fd((const char *)so_far, 2);
+	exit(EXIT_FAILURE);
 }
