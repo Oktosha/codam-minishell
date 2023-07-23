@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/29 16:20:23 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/07/21 17:58:23 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/07/23 12:35:20 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	l_tk_start_a(t_tk_so_far *so_far, char *s)
 {
 	t_tk_symbol_type	symbol;
 
+	l_tk_init_so_far(so_far);
 	symbol = l_tk_get_symbol_type(*s);
 	if (symbol == TK_SY_EOL)
 	{
@@ -76,8 +77,6 @@ t_tk_result	tk_tokenize(char *s)
 	t_tk_so_far		so_far;
 	int				i;
 
-	result.tokens = NULL;
-	l_tk_init_so_far(&so_far);
 	i = mini_strlen(s);
 	l_tk_start_a(&so_far, s);
 	while (i > 0)

@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 20:00:53 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/07/21 17:55:17 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/07/23 12:34:07 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void				l_tk_error_cleanup(t_tk_so_far *so_far);
 void				l_tk_important(t_tk_so_far *so_far, char *s);
 void				l_tk_end(t_tk_so_far *so_far, char *s);
 void				l_tk_start_a(t_tk_so_far *so_far, char *s);
-void				l_tk_start_b(t_tk_so_far *so_far, char *s, t_tk_symbol_type smbl);
+void				l_tk_start_b(t_tk_so_far *sf, char *s, t_tk_symbol_type sy);
 void				l_tk_whitespace(t_tk_so_far *so_far, char *s);
 t_tk_token_type		l_tk_get_token_type(char c);
 t_tk_symbol_type	l_tk_get_symbol_whitespaces(char c);
