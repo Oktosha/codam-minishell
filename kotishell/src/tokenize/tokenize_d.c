@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/19 17:12:15 by evoronin      #+#    #+#                 */
-/*   Updated: 2023/07/24 11:37:55 by evoronin      ########   odam.nl         */
+/*   Updated: 2023/07/24 15:05:19 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ t_tk_state	l_tk_next_state(t_tk_state state, char *s)
 		return (TK_ST_IMPORTANT);
 	if (symbol == TK_SY_OTHER)
 		return (TK_ST_OTHER);
+	if (symbol == TK_SY_BAD)
+		return (TK_ST_ERROR);
 	return (TK_ST_ERROR);
 }
 

@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/29 16:20:23 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/07/23 12:35:20 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/07/24 15:25:56 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	l_tk_start_b(t_tk_so_far *so_far, char *s, t_tk_symbol_type smbl)
 		so_far->state = TK_ST_OTHER;
 		l_tk_other(so_far, s);
 	}
-	if (smbl == TK_SY_OTHER)
+	if (smbl == TK_SY_BAD)
 	{
 		so_far->state = TK_ST_ERROR;
 		l_tk_bad(so_far, s);

@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 16:23:10 by evoronin      #+#    #+#                 */
-/*   Updated: 2023/07/24 12:18:05 by evoronin      ########   odam.nl         */
+/*   Updated: 2023/07/24 15:33:35 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	l_tk_other(t_tk_so_far *so_far, char *s)
 		so_far->token.type = TK_OTHER;
 		so_far->token.data = s;
 	}
-	else
+	else if (so_far->token.type == TK_OTHER)
 		so_far->token.length += 1;
 	if (l_tk_next_state(so_far->state, s + 1) != so_far->state)
 	{
