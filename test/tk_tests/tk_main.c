@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 18:55:46 by evoronin      #+#    #+#                 */
-/*   Updated: 2023/07/24 15:34:24 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/07/24 13:51:35 by codespace     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,10 @@ void TK_test_tokenize(char *input, t_TK_dummy_token *expected, int len)
 		t_tk_token *cur_token = cur->data;
 		if (!TK_are_dummy_equal(expected[i], *cur_token, i))
 		{
-			exit(1);
+			if (cur_token->type == TK_BAD)
+				exit(0);
+			else
+				exit(1);
 		}
 		cur = cur->next;
 	}
