@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 18:55:46 by evoronin      #+#    #+#                 */
-/*   Updated: 2023/07/24 13:55:31 by codespace     ########   odam.nl         */
+/*   Updated: 2023/07/24 15:57:29 by evoronin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,7 @@ int	main(void)
 		{"\"", TK_QUOTE_2},
 		{"", TK_EOL},
 	};	
-	// TK_test_tokenize("\n&@\"abcdsd1234\"", expected6, 6);
+	TK_test_tokenize("\n&@\"abcdsd1234\"", expected6, 6);
 	// printf("UNSUPORTED TEST\n");
 	// t_TK_dummy_token expected7[7] = {
 	// 	{"&@", TK_OTHER},
