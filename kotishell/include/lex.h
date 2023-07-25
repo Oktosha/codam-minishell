@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   mini_strlen.c                                      :+:    :+:            */
+/*   lex.h                                              :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/06/30 16:33:22 by evoronin      #+#    #+#                 */
-/*   Updated: 2023/07/21 15:35:46 by elenavoroni   ########   odam.nl         */
+/*   Created: 2023/07/18 19:05:28 by elenavoroni   #+#    #+#                 */
+/*   Updated: 2023/07/18 20:06:42 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minilibft.h"
+/** @file 
+ * Module that takes small tokens and groups them.
+ * Result is tokens with variables for expansion.
+ * Group << and >> .
+ * Group pipes.
+ * Namespace prefix: "le".
+*/
+#ifndef LEX_H
+# define LEX_H
 
-int	mini_strlen(const char *s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i] != '\0')
-		i++;
-	return (i);
-}
+#endif
