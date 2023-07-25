@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 16:23:10 by evoronin      #+#    #+#                 */
-/*   Updated: 2023/07/24 15:33:35 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/07/25 08:15:41 by codespace     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	l_tk_whitespace(t_tk_so_far *so_far, char *s)
 
 void	l_tk_bad(t_tk_so_far *so_far, char *s)
 {
-	if (so_far->status != TK_SUCCESS)
+	if (so_far->status == TK_ERR_MALLOC)
 		return ;
 	if (so_far->token.type == TK_EMPTY)
 	{
