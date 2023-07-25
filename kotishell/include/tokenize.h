@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 20:00:53 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/07/23 12:34:07 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/07/25 17:30:23 by dkolodze      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ t_tk_result			l_tk_result(char *s);
 void				l_tk_token_copy( t_tk_so_far *so_far);
 void				l_tk_token_result(t_tk_result *result, t_tk_so_far *so_far);
 t_tk_state			l_tk_next_state(t_tk_state state, char *s);
-void				l_tk_token_free(t_li_node *list);
+void				tk_token_free(t_li_node *list);
 void				l_tk_error_cleanup(t_tk_so_far *so_far);
 void				l_tk_important(t_tk_so_far *so_far, char *s);
 void				l_tk_end(t_tk_so_far *so_far, char *s);

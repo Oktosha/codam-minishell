@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/18 19:05:28 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/07/18 20:06:42 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/07/25 18:57:12 by dkolodze      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,49 @@
  * Result is tokens with variables for expansion.
  * Group << and >> .
  * Group pipes.
- * Namespace prefix: "le".
+ * Namespace prefix: "lx".
 */
 #ifndef LEX_H
 # define LEX_H
+# include "lists.h"
+# include "tokenize.h"
+
+typedef enum e_lx_token_type
+{
+	LX_BAD,
+	LX_HEREDOC,
+	LX_APPEND,
+	LX_OUTPUT,
+	LX_EMPTY,
+	LX_INPUT,
+	LX_OTHER,
+	LX_PIPE,
+	LX_QUOTE_1,
+	LX_QUOTE_2,
+	LX_VARIABLE,
+	LX_WHITESPACE,
+	LX_WORD,
+}	t_lx_token_type;
+
+/**
+ * Included in LX_ERR_SYNTAX:
+ * unclosed quote, 
+ * newline before EOL
+*/
+typedef enum e_lx_status
+{
+	LX_SUCCESS = 0,
+	LX_ERR_MALLOC,
+	LX_ERR_SYNTAX, 
+}	t_lx_status;
+
+typedef struct s_lx_result
+{
+	t_li_node	*tokens;
+	t_lx_status	status;
+}	t_lx_result;
+
+t_lx_result	lx_lex(t_li_node *tokens);
+void		lx_token_free(t_li_node *list);
 
 #endif

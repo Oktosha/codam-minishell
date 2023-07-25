@@ -6,34 +6,48 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/26 16:18:32 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/07/18 14:00:35 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/07/25 18:57:40 by dkolodze      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lifecycle.h"
 
-/** @brief start shell programm
- * @param argc number of arguments given to program
- * @param argv argument givent to program
- * @param envp enviroment variable
- * @return shell running on loop
-*/
+t_ks_status	l_lc_init_kotistate(t_ks_kotistate *kotistate, char **envp)
+{
+	(void) envp;
+	kotistate->status_code = 0;
+	kotistate->cur_directory = getcwd(NULL, 0);
+	if (kotistate->cur_directory == NULL)
+		return (KS_ERR_INIT);
+	kotistate->env = NULL;
+	return (KS_SUCCESS);
+}
+
+void	l_lc_clear_kotistate(t_ks_kotistate *kotistate)
+{
+	free(kotistate->cur_directory);
+	kotistate->cur_directory = NULL;
+}
+
 void	lc_start_shell(int argc, char **argv, char **envp)
 {
-	char	*line;
-	int		i;
+	char			*line;
+	t_ks_kotistate	kotistate;
 
-	i = 0;
-	if (argc == 0)
-		exit(EXIT_FAILURE);
-	argv = NULL;
-	envp = NULL;
+	(void) argc;
+	(void) argv;
+	l_lc_init_kotistate(&kotistate, envp);
 	while (1)
 	{
 		line = readline("kotishell: ");
 		if (!line)
-			exit (EXIT_FAILURE);
+		{
+			rl_clear_history();
+			l_lc_clear_kotistate(&kotistate);
+			exit(EXIT_SUCCESS);
+		}
+		l_lc_process_line(line, &kotistate);
 		add_history(line);
-		i = 0;
+		free(line);
 	}
 }
