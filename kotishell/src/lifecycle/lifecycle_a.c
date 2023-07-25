@@ -6,10 +6,9 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/26 16:18:32 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/07/25 18:10:51 by dkolodze      ########   odam.nl         */
+/*   Updated: 2023/07/25 18:57:40 by dkolodze      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "lifecycle.h"
 
@@ -24,7 +23,7 @@ t_ks_status	l_lc_init_kotistate(t_ks_kotistate *kotistate, char **envp)
 	return (KS_SUCCESS);
 }
 
-void l_lc_clear_kotistate(t_ks_kotistate *kotistate)
+void	l_lc_clear_kotistate(t_ks_kotistate *kotistate)
 {
 	free(kotistate->cur_directory);
 	kotistate->cur_directory = NULL;

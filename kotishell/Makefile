@@ -6,14 +6,27 @@
 #    By: elenavoronin <elnvoronin@gmail.com>          +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/12 11:12:29 by evoronin      #+#    #+#                  #
-#    Updated: 2023/07/25 18:11:06 by dkolodze      ########   odam.nl          #
+#    Updated: 2023/07/25 18:36:26 by dkolodze      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -I ./include
-LDLIBS = -lreadline
+
+UNAME_S := $(shell uname -s)
+
+ifeq ($(UNAME_S), Darwin)
+	READLINELINKFLAGS := -lreadline -L $(shell brew --prefix readline)/lib
+else
+	READLINELINKFLAGS := -lreadline
+endif
+
+ifeq ($(UNAME_S), Darwin)
+	READLINEFLAGS ?= -I $(shell brew --prefix readline)/include
+endif
+
 NAME = minishell
+
 SRCS_DIR = ./src
 SRCS_NAMES = \
 expand/expand_a.c \
@@ -44,10 +57,10 @@ all:  $(NAME)
 
 $(OBJS): $(OUT_DIR)/%.o: $(SRCS_DIR)/%.c
 	mkdir -p $(@D)
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) $(READLINEFLAGS) -c $< -o $@
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(LDLIBS) $(OBJS) -o $(NAME)
+	$(CC) $(CFLAGS) $(READLINELINKFLAGS) $(OBJS) -o $(NAME)
 
 clean:
 	rm -rf $(OUT_DIR)

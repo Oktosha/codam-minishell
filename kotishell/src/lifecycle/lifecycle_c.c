@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 17:55:03 by dkolodze      #+#    #+#                 */
-/*   Updated: 2023/07/25 18:11:00 by dkolodze      ########   odam.nl         */
+/*   Updated: 2023/07/25 18:59:23 by dkolodze      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ void	l_lc_handle_tokenize_status(t_tk_status tk_status, \
 	{
 		kotistate->status_code = 27;
 	}
-    else
-    {
-        mini_assert(0, "unknown tokenize status");
-    }
+	else
+	{
+		mini_assert(0, "unknown tokenize status");
+	}
 	*lc_status = LC_ERROR;
 }
 
@@ -45,10 +45,10 @@ void	l_lc_handle_lex_status(t_lx_status lx_status, \
 	{
 		kotistate->status_code = 258;
 	}
-    else
-    {
-        mini_assert(0, "unknown lex status");
-    }
+	else
+	{
+		mini_assert(0, "unknown lex status");
+	}
 	*lc_status = LC_ERROR;
 }
 
@@ -61,10 +61,10 @@ void	l_lc_handle_expand_status(t_lx_status ep_status, \
 	{
 		kotistate->status_code = 42;
 	}
-    else
-    {
-        mini_assert(0, "unknown expand status");
-    }
+	else
+	{
+		mini_assert(0, "unknown expand status");
+	}
 	*lc_status = LC_ERROR;
 }
 
@@ -77,9 +77,9 @@ void	l_lc_handle_parse_status(t_ps_status ps_status, \
 	{
 		kotistate->status_code = 42;
 	}
-    else
-    {
-        mini_assert(0, "unknown parse status");
-    }
+	else
+	{
+		mini_assert(0, "unknown parse status");
+	}
 	*lc_status = LC_ERROR;
 }

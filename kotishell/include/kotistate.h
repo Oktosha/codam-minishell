@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 15:52:34 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/07/25 17:14:47 by dkolodze      ########   odam.nl         */
+/*   Updated: 2023/07/25 18:29:22 by dkolodze      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,5 @@ typedef struct s_ks_kotistate
 	char		*cur_directory;
 	t_li_node	*env;
 }	t_ks_kotistate;
-
-
 
 #endif

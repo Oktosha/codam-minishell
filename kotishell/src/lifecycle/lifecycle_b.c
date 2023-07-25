@@ -6,13 +6,13 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 17:53:02 by dkolodze      #+#    #+#                 */
-/*   Updated: 2023/07/25 18:11:03 by dkolodze      ########   odam.nl         */
+/*   Updated: 2023/07/25 18:56:28 by dkolodze      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lifecycle.h"
 
-void l_lc_process_data_cleanup(t_lc_process_data	*data)
+void	l_lc_process_data_cleanup(t_lc_process_data *data)
 {
 	tk_token_free(data->tk_result.tokens);
 	lx_token_free(data->lx_result.tokens);
@@ -20,7 +20,7 @@ void l_lc_process_data_cleanup(t_lc_process_data	*data)
 	ps_cmds_free(data->ps_result.cmds);
 }
 
-void	l_lc_init_process_data(t_lc_process_data	*data)
+void	l_lc_init_process_data(t_lc_process_data *data)
 {
 	data->tk_result.tokens = NULL;
 	data->lx_result.tokens = NULL;
@@ -53,6 +53,6 @@ void	l_lc_process_line(char *line, t_ks_kotistate *kotistate)
 		l_lc_handle_parse_status(data.ps_result.status, kotistate, &status);
 	}
 	if (status == LC_SUCCESS)
-		ex_execute(&kotistate, data.ps_result.cmds);
-	l_lc_cleanup(&data);
+		ex_execute(kotistate, data.ps_result.cmds);
+	l_lc_process_data_cleanup(&data);
 }

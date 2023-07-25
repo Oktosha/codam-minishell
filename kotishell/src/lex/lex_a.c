@@ -6,13 +6,13 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 14:19:41 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/07/25 18:11:20 by dkolodze      ########   odam.nl         */
+/*   Updated: 2023/07/25 18:41:00 by dkolodze      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lex.h"
 
-t_lx_result	lx_lex(t_tk_result *tokens)
+t_lx_result	lx_lex(t_li_node *tokens)
 {
 	t_lx_result	result;
 
