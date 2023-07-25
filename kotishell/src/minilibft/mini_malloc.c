@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   mini_malloc.c                                      :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: evoronin <evoronin@student.codam.nl>         +#+                     */
+/*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 15:43:54 by evoronin      #+#    #+#                 */
-/*   Updated: 2023/06/30 16:16:28 by evoronin      ########   odam.nl         */
+/*   Updated: 2023/07/21 15:30:40 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,7 @@ void	*mini_malloc(size_t size)
 {
 	void	*ptr;
 
-	if (size == 0)
-	{
-		mini_putstr_fd("BUG", 2);
-		exit(EXIT_FAILURE);
-	}
+	mini_assert(size > 0, "SIZE IN MALLOC GREATER THAN 0");
 	ptr = malloc(size);
 	return (ptr);
 }
