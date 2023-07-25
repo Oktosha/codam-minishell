@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   lex_a.c                                            :+:    :+:            */
+/*   execute_a.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/07/25 14:19:41 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/07/25 15:31:08 by elenavoroni   ########   odam.nl         */
+/*   Created: 2023/07/25 15:48:11 by elenavoroni   #+#    #+#                 */
+/*   Updated: 2023/07/25 15:48:51 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lex.h"
+#include "execute.h"
 
-t_lx_result	lx_lex(t_tk_result *tokens)
+void	ex_execute(t_lc_kotistate *state, t_li_node *cmds)
 {
-	t_lx_result	result;
-
-	result.tokens = NULL;
-	result.status = LX_SUCCESS;
-	printf("I AM LEX\n");
-	return (result);
+	(void) state;
+	(void) cmds;
+	printf("I AM EXECUTING\n");
 }

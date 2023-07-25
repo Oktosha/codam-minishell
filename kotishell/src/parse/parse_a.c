@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   lex_a.c                                            :+:    :+:            */
+/*   parse_a.c                                          :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/07/25 14:19:41 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/07/25 15:31:08 by elenavoroni   ########   odam.nl         */
+/*   Created: 2023/07/25 15:17:18 by elenavoroni   #+#    #+#                 */
+/*   Updated: 2023/07/25 15:34:55 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lex.h"
+#include "parse.h"
 
-t_lx_result	lx_lex(t_tk_result *tokens)
+t_ps_result	ps_parse(t_li_node *tokens)
 {
-	t_lx_result	result;
+	t_ps_result	result;
 
-	result.tokens = NULL;
-	result.status = LX_SUCCESS;
-	printf("I AM LEX\n");
+	result.cmds = NULL;
+	result.status = PS_SUCCESS;
+	printf("I AM PARSE\n");
 	return (result);
 }

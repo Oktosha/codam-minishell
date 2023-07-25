@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 19:57:44 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/06/28 20:06:59 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/07/25 15:56:47 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,22 @@
 */
 #ifndef EXPAND_H
 # define EXPAND_H
+# include "kotistate.h"
+# include "lex.h"
+# include "lists.h"
+
+typedef enum e_ep_status
+{
+	EP_SUCCESS = 0,
+	EP_ERR_MALLOC,
+}	t_ep_status;
+
+typedef struct s_ep_result
+{
+	t_li_node	*tokens;
+	t_ep_status	status;
+}	t_ep_result;
+
+t_ep_result	ep_expand(t_ks_kotistate *state, t_li_node *tokens);
 
 #endif

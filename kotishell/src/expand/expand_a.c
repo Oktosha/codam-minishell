@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   lex_a.c                                            :+:    :+:            */
+/*   expand_a.c                                         :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/07/25 14:19:41 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/07/25 15:31:08 by elenavoroni   ########   odam.nl         */
+/*   Created: 2023/07/25 15:01:09 by elenavoroni   #+#    #+#                 */
+/*   Updated: 2023/07/25 15:57:52 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lex.h"
+#include "expand.h"
 
-t_lx_result	lx_lex(t_tk_result *tokens)
+t_ep_result	ep_expand(t_ks_kotistate *kotistate, t_li_node *tokens)
 {
-	t_lx_result	result;
+	t_ep_result	result;
 
+	(void) kotistate;
+	(void) tokens;
 	result.tokens = NULL;
-	result.status = LX_SUCCESS;
-	printf("I AM LEX\n");
+	result.status = EP_SUCCESS;
+	printf("I AM EXPAND\n");
 	return (result);
 }

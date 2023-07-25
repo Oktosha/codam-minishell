@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/18 19:05:28 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/07/25 14:46:53 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/07/25 15:25:44 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 */
 #ifndef LEX_H
 # define LEX_H
+# include "lists.h"
 # include "tokenize.h"
 
 typedef enum e_lx_token_type
@@ -42,7 +43,25 @@ typedef enum e_lx_token_type
 	LX_WORD,
 }	t_lx_token_type;
 
-// typedef
+/**
+ * Included in LX_ERR_SYNTAX:
+ * unclosed quote, 
+ * newline before EOL
+*/
+typedef enum e_lx_status
+{
+	LX_SUCCESS = 0,
+	LX_ERR_MALLOC,
+	LX_ERR_SYNTAX, 
+}	t_lx_status;
 
+
+typedef struct s_lx_result
+{
+	t_li_node	*tokens;
+	t_lx_status	status;
+}	t_lx_result;
+
+t_lx_result	lx_lex(t_tk_result *tokens);
 
 #endif

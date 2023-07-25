@@ -1,23 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   lex_a.c                                            :+:    :+:            */
+/*   kotistate.h                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/07/25 14:19:41 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/07/25 15:31:08 by elenavoroni   ########   odam.nl         */
+/*   Created: 2023/07/25 15:52:34 by elenavoroni   #+#    #+#                 */
+/*   Updated: 2023/07/25 16:11:17 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lex.h"
+/** @file 
+ * Module that expands variables after tokenizing.
+ * Namespace prefix: "ks".
+*/
+#ifndef KOTISTATE_H
+# define KOTISTATE_H
+# include "lists.h"
 
-t_lx_result	lx_lex(t_tk_result *tokens)
+typedef enum s_ks_status
 {
-	t_lx_result	result;
+	KS_SUCCESS,
+	KS_ERR_MALLOC,
+	KS_ERR_SYNTAX,
+	KS_ERR_SYMBOL,
+}	t_ks_status;
 
-	result.tokens = NULL;
-	result.status = LX_SUCCESS;
-	printf("I AM LEX\n");
-	return (result);
-}
+typedef struct s_ks_kotistate
+{
+	int			status_code;
+	char		*cur_directory;
+	t_li_node	*env;
+}	t_ks_kotistate;
+
+
+
+#endif
