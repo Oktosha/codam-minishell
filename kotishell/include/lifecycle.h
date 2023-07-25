@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/25 13:15:07 by mbp14         #+#    #+#                 */
-/*   Updated: 2023/07/25 18:42:02 by dkolodze      ########   odam.nl         */
+/*   Updated: 2023/07/25 19:05:06 by dkolodze      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ void		l_lc_handle_tokenize_status(t_tk_status tk_status, \
 			t_ks_kotistate *kotistate, t_lc_status *lc_status);
 void		l_lc_handle_lex_status(t_lx_status lx_status, \
 			t_ks_kotistate *kotistate, t_lc_status *lc_status);
-void		l_lc_handle_expand_status(t_ep_status tk_status, \
+void		l_lc_handle_expand_status(t_ep_status ep_status, \
 			t_ks_kotistate *kotistate, t_lc_status *lc_status);
-void		l_lc_handle_parse_status(t_ps_status lx_status, \
+void		l_lc_handle_parse_status(t_ps_status ps_status, \
 			t_ks_kotistate *kotistate, t_lc_status *lc_status);	
 
 #endif
