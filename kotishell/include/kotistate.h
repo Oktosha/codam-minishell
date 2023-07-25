@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 15:52:34 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/07/25 16:11:17 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/07/25 17:14:47 by dkolodze      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 typedef enum s_ks_status
 {
 	KS_SUCCESS,
+	KS_ERR_INIT,
 	KS_ERR_MALLOC,
 	KS_ERR_SYNTAX,
 	KS_ERR_SYMBOL,

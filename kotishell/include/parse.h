@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/25 15:06:03 by mbp14         #+#    #+#                 */
-/*   Updated: 2023/07/25 15:34:04 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/07/25 17:30:07 by dkolodze      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,6 @@ typedef struct s_ps_result
 }	t_ps_result;
 
 t_ps_result	ps_parse(t_li_node *tokens);
+void		ps_cmds_free(t_li_node *list);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 19:59:36 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/07/25 15:55:16 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/07/25 17:28:53 by dkolodze      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include "kotistate.h"
 # include "lists.h"
 # include "lifecycle.h"
+# include "parse.h"
 
 void	ex_execute(t_ks_kotistate *state, t_li_node *cmds);
 

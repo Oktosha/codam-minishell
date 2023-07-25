@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/10 14:12:29 by evoronin      #+#    #+#                 */
-/*   Updated: 2023/07/21 17:48:45 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/07/25 18:14:37 by dkolodze      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	l_tk_token_result(t_tk_result *result, t_tk_so_far *so_far)
 	result->status = so_far->status;
 }
 
-void	l_tk_token_free(t_li_node *list)
+void	tk_token_free(t_li_node *list)
 {
 	t_li_node	*temp;
 
@@ -64,7 +64,7 @@ void	l_tk_token_free(t_li_node *list)
 
 void	l_tk_error_cleanup(t_tk_so_far *so_far)
 {
-	l_tk_token_free(so_far->head);
+	tk_token_free(so_far->head);
 	so_far->head = NULL;
 	mini_putstr_fd("Failed malloc\n", 2);
 }

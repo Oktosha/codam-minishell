@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/18 19:05:28 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/07/25 15:25:44 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/07/25 18:10:51 by dkolodze      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,6 @@ typedef struct s_lx_result
 }	t_lx_result;
 
 t_lx_result	lx_lex(t_tk_result *tokens);
+void		lx_token_free(t_li_node *list);
 
 #endif

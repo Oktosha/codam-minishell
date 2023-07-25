@@ -6,7 +6,7 @@
 #    By: elenavoronin <elnvoronin@gmail.com>          +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/12 11:12:29 by evoronin      #+#    #+#                  #
-#    Updated: 2023/07/25 16:08:37 by elenavoroni   ########   odam.nl          #
+#    Updated: 2023/07/25 18:11:06 by dkolodze      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,25 @@ CFLAGS = -Wall -Wextra -Werror -I ./include
 LDLIBS = -lreadline
 NAME = minishell
 SRCS_DIR = ./src
-SRCS_NAMES = main.c \
-lifecycle/lifecycle_a.c
+SRCS_NAMES = \
+expand/expand_a.c \
+lex/lex_a.c \
+lists/lists_a.c \
+parse/parse_a.c \
+lifecycle/lifecycle_c.c \
+lifecycle/lifecycle_a.c \
+lifecycle/lifecycle_b.c \
+main.c \
+minilibft/mini_strlen.c \
+minilibft/mini_assert.c \
+minilibft/mini_malloc.c \
+minilibft/mini_putstr_fd.c \
+execute/execute_a.c \
+tokenize/tokenize_d.c \
+tokenize/tokenize_c.c \
+tokenize/tokenize_b.c \
+tokenize/tokenize_a.c
+
 OBJS_NAMES = $(SRCS_NAMES:.c=.o)
 OUT_DIR = ./objs
 OBJS = $(addprefix $(OUT_DIR)/,$(OBJS_NAMES))

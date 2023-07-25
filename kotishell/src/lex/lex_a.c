@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 14:19:41 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/07/25 15:31:08 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/07/25 18:11:20 by dkolodze      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,22 @@ t_lx_result	lx_lex(t_tk_result *tokens)
 {
 	t_lx_result	result;
 
+	(void) tokens;
 	result.tokens = NULL;
 	result.status = LX_SUCCESS;
 	printf("I AM LEX\n");
 	return (result);
+}
+
+void	lx_token_free(t_li_node *list)
+{
+	t_li_node	*temp;
+
+	while (list)
+	{
+		temp = list;
+		free(temp->data);
+		list = list->next;
+		free(temp);
+	}
 }
