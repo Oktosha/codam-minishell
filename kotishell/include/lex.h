@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/18 19:05:28 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/07/27 13:43:09 by evoronin      ########   odam.nl         */
+/*   Updated: 2023/07/27 16:40:24 by evoronin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef enum e_lx_token_type
 	LX_APPEND,
 	LX_OUTPUT,
 	LX_EMPTY,
+	LX_EOL,
 	LX_INPUT,
 	LX_OTHER,
 	LX_PIPE,

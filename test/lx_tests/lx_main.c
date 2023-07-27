@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 14:16:36 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/07/27 13:26:32 by evoronin      ########   odam.nl         */
+/*   Updated: 2023/07/27 16:48:21 by evoronin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int LX_are_dummy_equal(t_LX_dummy_token expected, t_lx_token real, int i)
 
 void	LX_test_tokenize(t_tk_result *tk_res, t_LX_dummy_token *expected, int len)
 {
-	t_lx_result res = lx_lex(tk_res);
+	t_lx_result res = lx_lex(tk_res->tokens);
 	t_li_node 	*cur = res.tokens;
 	printf("LX Result tokens:\n");
 	LX_print_list(res.tokens);
@@ -93,11 +93,11 @@ void	LX_test_tokenize(t_tk_result *tk_res, t_LX_dummy_token *expected, int len)
 
 int	main(void)
 {
-	printf("UNCLOSED QUOTE TEST:\n");
+	printf("SIMPLE TEST:\n");
 	t_LX_dummy_token expected1[1] = {
-		{"\"whatever\"", LX_QUOTE_2},
+		{"whatever", LX_WORD},
 	};
-	t_tk_result tk_res = tk_tokenize("\"whatever\"");
+	t_tk_result tk_res = tk_tokenize("whatever");
 	LX_test_tokenize(&tk_res, expected1, 1);
 	return (0);
 }
