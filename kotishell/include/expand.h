@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 19:57:44 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/07/27 17:36:58 by evoronin      ########   odam.nl         */
+/*   Updated: 2023/07/27 18:12:17 by evoronin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,24 @@ typedef enum e_ep_token_type
 	EP_EMPTY,
 	EP_EOL,
 	EP_INPUT,
-	EP_OTHER,
 	EP_PIPE,
 	EP_QUOTE_1,
 	EP_QUOTE_2,
 	EP_WHITESPACE,
 	EP_WORD,
 }	t_ep_token_type;
+
+typedef enum e_lx_state
+{
+	EP_ST_BUG,
+	EP_ST_ERROR,
+	EP_ST_HEREDOC,
+	EP_ST_IMPORTANT,
+	EP_ST_OTHER,
+	EP_ST_START,
+	EP_ST_VARIABLE,
+	EP_ST_WORD,
+}	t_ep_state;
 
 typedef enum e_ep_status
 {
@@ -50,6 +61,13 @@ typedef struct s_ep_token
 	char				*data;
 }	t_ep_token;	
 
+typedef struct s_tk_so_far
+{
+	t_li_node	*head;
+	t_ep_token	token;
+	t_ep_status	status;
+	t_ep_state	state;
+}	t_ep_so_far;
 
 typedef struct s_ep_result
 {
