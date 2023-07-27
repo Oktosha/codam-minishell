@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 14:16:36 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/07/26 14:08:27 by codespace     ########   odam.nl         */
+/*   Updated: 2023/07/27 11:16:36 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int	main(void)
 {
 	printf("UNCLOSED QUOTE TEST:\n");
 	t_LX_dummy_token expected1[1] = {
-		{"\"whatever\"", LX_ST_QUOTE_1},
+		{"\"whatever", LX_QUOTE_1},
 	};
 	t_tk_result tk_res = tk_tokenize("\"whatever\"");
 	LX_test_tokenize(&tk_res, expected1, 1);

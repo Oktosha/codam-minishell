@@ -6,31 +6,11 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 14:19:41 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/07/26 14:49:38 by codespace     ########   odam.nl         */
+/*   Updated: 2023/07/27 11:38:50 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lex.h"
-
-void	LX_print_list(t_li_node *list)
-{
-	t_lx_token	*token;
-	int			i;
-
-	i = 0;
-	while (list)
-	{
-		token = list->data;
-		printf("[%d]: ", i);
-		fflush(stdout);
-		if (write(1, token->data, token->length) == -1)
-			mini_putstr_fd("Write error\n", 2);
-		if (write(1, "\n", 2) == -1)
-			mini_putstr_fd("Write error\n", 2);
-		list = list->next;
-		i++;
-	}
-}
 
 void	l_lx_token_copy(t_tk_so_far *so_far)
 {
@@ -52,10 +32,11 @@ void	l_lx_token_copy(t_tk_so_far *so_far)
 		return ;
 	}
 }
+
 void	lx_token_free(t_li_node *list)
 {
 	t_li_node	*temp;
-	
+
 	while (list)
 	{
 		temp = list;
@@ -77,31 +58,25 @@ void	l_lx_init_so_far(t_lx_so_far *so_far)
 
 void	l_lx_start(t_lx_so_far *so_far, t_tk_result *tk_res)
 {
-	l_lx_init_so_far(so_far);
-	if (tk_token->type == TK_QUOTE_1)
+	t_li_node	*tk_tk;
+	t_tk_token	*tk_token;
+
+	tk_tk = tk_res->tokens;
+	tk_token = tk_tk->data;
+	if (tk_token->type == TK_QUOTE_2)
 	{
-		so_far->state = LX_ST_QUOTE_1;
-		l_lx_quotes_1(so_far, tk_token);
-	}	
+		so_far->state = LX_ST_QUOTE_2;
+		l_lx_quotes_2(so_far, tk_res);
+	}
 }
 
 t_lx_result	lx_lex(t_tk_result *tk_res)
 {
 	t_lx_result	result;
 	t_lx_so_far	so_far;
-	t_li_node	*tk_tk;
-	t_tk_token	*tk_token;
-	
-	tk_tk = tk_res->tokens;
-	while (tk_token->type != TK_EOL)
-	{
-		tk_token = tk_tk->data;
-		l_lx_start(&so_far, tk_token);
-		if(tk_token->type == TK_QUOTE_1)
-			l_lx_quotes_1(&so_far, tk_res);
-		printf("WAW\n");
-	}	
+
+	l_lx_init_so_far(&so_far);
+	l_lx_start(&so_far, tk_res);
 	l_lx_token_result(&result, &so_far);
 	return (result);
 }
-

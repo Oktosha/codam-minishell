@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/18 19:05:28 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/07/26 14:42:20 by codespace     ########   odam.nl         */
+/*   Updated: 2023/07/27 11:07:55 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void		lx_token_free(t_li_node *list);
 void		l_lx_start(t_lx_so_far *so_far, t_tk_result *tk_res);
 void		l_lx_init_so_far(t_lx_so_far *so_far);
 void		l_lx_token_copy(t_tk_so_far *so_far);
-void		l_lx_quotes_1(t_lx_so_far *so_far, t_tk_result *tk_res);
+void		l_lx_quotes_2(t_lx_so_far *so_far, t_tk_result *tk_res);
 void		l_lx_token_result(t_lx_result *result, t_lx_so_far *so_far);
 
 #endif
