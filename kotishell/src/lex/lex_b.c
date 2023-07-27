@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 12:08:29 by codespace     #+#    #+#                 */
-/*   Updated: 2023/07/27 11:40:05 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/07/27 13:20:45 by evoronin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ void	l_lx_quotes_2(t_lx_so_far *so_far, t_tk_result *tk_res)
 			so_far->token.length += tk_token->length;
 		}
 		tk_tk = tk_res->tokens->next;
-		else
-			l_lx_err_unclosed_quote(so_far);
 	}
 }//TO_DO: after this step, check variables within quote states
 
