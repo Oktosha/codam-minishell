@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 19:57:44 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/07/27 18:12:17 by evoronin      ########   odam.nl         */
+/*   Updated: 2023/07/30 14:44:21 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef enum e_ep_token_type
 	EP_WORD,
 }	t_ep_token_type;
 
-typedef enum e_lx_state
+typedef enum e_ep_state
 {
 	EP_ST_BUG,
 	EP_ST_ERROR,
@@ -61,7 +61,7 @@ typedef struct s_ep_token
 	char				*data;
 }	t_ep_token;	
 
-typedef struct s_tk_so_far
+typedef struct s_ep_so_far
 {
 	t_li_node	*head;
 	t_ep_token	token;
@@ -77,5 +77,6 @@ typedef struct s_ep_result
 
 t_ep_result	ep_expand(t_ks_kotistate *state, t_li_node *tokens);
 void		ep_token_free(t_li_node *list);
+void		l_ep_token_result(t_ep_result *result, t_ep_so_far *so_far);
 
 #endif

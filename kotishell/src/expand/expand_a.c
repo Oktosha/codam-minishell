@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 15:01:09 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/07/28 13:10:43 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/07/30 14:52:28 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	l_ep_token_copy(t_ep_so_far *so_far)
 	}
 }
 
-void	l_ep_init_so_far(t_lx_so_far *so_far)
+void	l_ep_init_so_far(t_ep_so_far *so_far)
 {
 	so_far->status = EP_SUCCESS;
 	so_far->head = NULL;
@@ -50,7 +50,7 @@ void	l_ep_token_dup(t_ep_so_far *so_far, t_lx_token *lx_token, t_ep_token_type e
 	so_far->token.data = lx_token->data;
 	l_ep_token_copy(so_far);
 }
-void	l_ep_replace_token(t_li_node *lx_tk, t_lx_so_far *so_far)
+void	l_ep_replace_token(t_li_node *lx_tk, t_ep_so_far *so_far)
 {
 	t_lx_token	*lx_token;
 
@@ -83,19 +83,22 @@ void	l_ep_replace_token(t_li_node *lx_tk, t_lx_so_far *so_far)
 			l_ep_token_dup(so_far, lx_token, EP_WHITESPACE);
 		if (lx_token->type == LX_WORD)
 			l_ep_token_dup(so_far, lx_token, EP_WORD);
+		if (lx_token->type == LX_PIPE)
+			l_ep_token_dup(so_far, lx_token, EP_PIPE);
 		lx_tk = lx_tk->next;
 	}
 }
 
-t_ep_result	ep_expand(t_ks_kotistate *kotistate, t_li_node *tokens)
+t_ep_result	ep_expand(t_ks_kotistate *kotistate, t_li_node *lx_tokens)
 {
 	t_ep_result	result;
+	t_ep_so_far	so_far;
 
 	(void) kotistate;
-	(void) tokens;
 	result.tokens = NULL;
 	result.status = EP_SUCCESS;
-	
-
+	l_ep_init_so_far(&so_far);
+	l_ep_replace_token(lx_tokens, &so_far);
+	l_ep_token_result(&result, &so_far);
 	return (result);
 }

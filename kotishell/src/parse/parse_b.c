@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   expand_b.c                                         :+:    :+:            */
+/*   parse_b.c                                          :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/07/27 18:00:38 by evoronin      #+#    #+#                 */
-/*   Updated: 2023/07/30 15:03:21 by elenavoroni   ########   odam.nl         */
+/*   Created: 2023/07/30 15:02:03 by elenavoroni   #+#    #+#                 */
+/*   Updated: 2023/07/30 15:03:48 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "expand.h"
+#include "parse.h"
 
-
-
-void	ep_token_free(t_li_node *list)
+void	ps_cmds_free(t_li_node *list)
 {
 	t_li_node	*temp;
 
@@ -25,4 +23,10 @@ void	ep_token_free(t_li_node *list)
 		list = list->next;
 		free(temp);
 	}
+}
+
+void	l_ps_result(t_ps_result *result, t_ps_so_far *so_far)
+{
+	result->cmds = so_far->head;
+	result->status = so_far->status;
 }
