@@ -6,7 +6,7 @@
 #    By: elenavoronin <elnvoronin@gmail.com>          +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/30 19:02:22 by evoronin      #+#    #+#                  #
-#    Updated: 2023/07/21 15:36:09 by elenavoroni   ########   odam.nl          #
+#    Updated: 2023/07/31 21:50:02 by dkolodze      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,10 +14,15 @@ NAME = mini_tests
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -I ../../kotishell/include -g
 SRCS_FOLDER = ../../kotishell/src
-SRCS_NAMES = minilibft/mini_strlen.c \
+SRCS_NAMES = \
+minilibft/mini_free.c \
+minilibft/mini_strlen.c \
+minilibft/mini_find.c \
+minilibft/mini_assert.c \
+minilibft/mini_strdup.c \
 minilibft/mini_malloc.c \
 minilibft/mini_putstr_fd.c \
-minilibft/mini_assert.c
+minilibft/mini_concat.c
 
 TEST_SRCS_NAMES =  mini_main.c
 TEST_OBJS = $(addprefix $(OBJS_DIR)/,$(TEST_SRCS_NAMES:.c=.o))
