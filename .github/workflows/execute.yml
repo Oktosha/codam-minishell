@@ -4,7 +4,7 @@ on:
   pull_request:
       branches: main
 jobs:
-  Tokenize-testing:
+  Execute-testing:
     runs-on: ubuntu-latest
     steps:
       - run: sudo apt-get install valgrind
