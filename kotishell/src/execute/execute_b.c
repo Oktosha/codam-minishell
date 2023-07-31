@@ -6,7 +6,7 @@
 /*   By: dkolodze <dkolodze@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/31 21:58:38 by dkolodze      #+#    #+#                 */
-/*   Updated: 2023/07/31 22:18:15 by dkolodze      ########   odam.nl         */
+/*   Updated: 2023/07/31 21:22:36 by dkolodze      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char	**l_ex_add_suffix_to_all(char **array, char *suf)
 	int		i;
 
 	len = l_ex_n_records_before_null(array);
-	answer = mini_malloc(len * (sizeof(char *) + 1));
+	answer = mini_malloc((len + 1) * sizeof(char *));
 	if (answer == NULL)
 		return (NULL);
 	answer[len] = NULL;
