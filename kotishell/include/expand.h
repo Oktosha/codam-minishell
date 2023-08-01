@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 19:57:44 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/07/30 14:44:21 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/08/01 17:57:05 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,6 @@ typedef struct s_ep_result
 t_ep_result	ep_expand(t_ks_kotistate *state, t_li_node *tokens);
 void		ep_token_free(t_li_node *list);
 void		l_ep_token_result(t_ep_result *result, t_ep_so_far *so_far);
+void		l_ep_token_copy(t_ep_so_far *so_far);
 
 #endif

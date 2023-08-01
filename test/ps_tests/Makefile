@@ -6,7 +6,7 @@
 #    By: elenavoronin <elnvoronin@gmail.com>          +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/30 19:02:22 by evoronin      #+#    #+#                  #
-#    Updated: 2023/08/01 08:20:35 by elenavoroni   ########   odam.nl          #
+#    Updated: 2023/08/01 13:37:38 by elenavoroni   ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,8 +22,9 @@ tokenize/tokenize_d.c \
 lists/lists_a.c \
 minilibft/mini_strlen.c \
 minilibft/mini_malloc.c \
-minilibft/mini_putstr_fd.c\
-minilibft/mini_assert.c
+minilibft/mini_putstr_fd.c \
+minilibft/mini_assert.c \
+minilibft/mini_substr.c
 
 TEST_SRCS_NAMES = ps_main.c
 TEST_OBJS = $(addprefix $(OBJS_DIR)/,$(TEST_SRCS_NAMES:.c=.o))

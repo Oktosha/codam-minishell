@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 14:16:36 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/08/01 09:03:24 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/08/01 17:46:16 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,36 +18,29 @@
 #include "tokenize.h"
 #include "expand.h"
 #include "parse.h"
+#include <string.h>
 
 typedef struct s_PS_dummy_cmd {
-	char			*argv;
-	char			*inputs;
-	char			*outputs;
-	char			*appends;
-	char			*heredoc;
+	t_li_node			*argv;
+	t_li_node			*inputs;
+	t_li_node			*outputs;
 } 	t_PS_dummy_cmd;
 
-void	PS_print_cmds(t_li_node *argv)
+void	PS_print_cmds(char *cmd, int i)
 {
-	int			i;
-
-	i = 0;
-	while (argv)
-	{
-		printf("[%d]: ", i);
-		fflush(stdout);
-		if (mini_putstr_fd(argv->data, 1) == -1)
-			mini_putstr_fd("Write error\n", 2);
-		if (write(1, "\n", 2) == -1)
-			mini_putstr_fd("Write error\n", 2);
-		argv = argv->next;
-		i++;
-	}
+	printf("[%d]: ", i);
+	fflush(stdout);
+	if (mini_putstr_fd(cmd, 1) == -1)
+		mini_putstr_fd("Write error\n", 2);
+	if (write(1, "\n", 1) == -1)
+		mini_putstr_fd("Write error\n", 2);
 }
 
 int PS_are_dummy_equal(t_PS_dummy_cmd expected, t_ps_single_command real, int i)
 {
-	int expected_s_len = mini_strlen(expected.argv);
+	char *exp_cmd = NULL;
+	char *real_cmd = NULL;
+	int expected_s_len = mini_strlen(expected.argv->data);
 	int	real_len = mini_strlen(real.argv->data);
 	if (expected_s_len != real_len)
 	{
@@ -56,16 +49,18 @@ int PS_are_dummy_equal(t_PS_dummy_cmd expected, t_ps_single_command real, int i)
 		printf("real length: %d\n", real_len);
 		return 0;
 	}
-	for(int i = 0; i < real_len; ++i)
+	for(int j = 0; j <= i; ++j)
 	{
-		char *exp_cmd = expected.argv;
-		char *real_cmd = real.argv->data;
-		if (exp_cmd[i] != real_cmd[i])
+		exp_cmd = mini_substr(expected.argv->data, expected_s_len);
+		real_cmd = mini_substr(real.argv->data, real_len);
+		PS_print_cmds(real_cmd, i);
+		if (exp_cmd[j] != real_cmd[j])
 		{
-			printf("mismatch at token nr: %d\n", i);
-			printf("mismatch at length: %d\n", i);
+			printf("mismatch at cmd nr: %d\n", j);
+			printf("mismatch at length: %d\n", j);
 			return 0;
 		}
+		expected.argv = expected.argv->next;
 		real.argv = real.argv->next;
 	}
 	return 1;
@@ -76,7 +71,6 @@ void	PS_test_parse(t_ep_result *ep_res, t_PS_dummy_cmd *expected, int len)
 	t_ps_result res = ps_parse(ep_res->tokens);
 	t_li_node 	*cur = res.cmds;
 	printf("PS Result commands:\n");
-	PS_print_cmds(res.cmds);
 	for (int i = 0; i < len; ++i)
 	{
 		t_ps_single_command *cur_cmd = cur->data;
@@ -92,11 +86,17 @@ void	PS_test_parse(t_ep_result *ep_res, t_PS_dummy_cmd *expected, int len)
 int	main(void)
 {
 	t_ks_kotistate *kotistate;
+	t_li_node		*cmds;
 
 	kotistate = NULL;
 	printf("SINGLE COMMAND TEST:\n");
+	cmds = li_new_list("ls");
+	if (!cmds)
+	{
+		return (-1);
+	}
 	t_PS_dummy_cmd expected1[1] = {
-		{"ls", "", "", "", ""},
+		{cmds, NULL, NULL},
 	};
 	t_tk_result tk_res1 = tk_tokenize("ls");
 	t_lx_result lx_res1 = lx_lex(tk_res1.tokens);

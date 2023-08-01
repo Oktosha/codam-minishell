@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/25 15:06:03 by mbp14         #+#    #+#                 */
-/*   Updated: 2023/07/31 15:53:36 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/08/01 17:47:01 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # define PARSE_H
 # include "expand.h"
 # include "lists.h"
+# include "minilibft.h"
 
 typedef enum e_ps_token_type
 {
@@ -32,13 +33,23 @@ typedef enum e_ps_token_type
 	PS_INPUT,
 }	t_ps_token_type;
 
+typedef struct s_ps_input
+{
+	char	*name;
+	int		type;	
+}	t_ps_input;
+
+typedef struct s_ps_output
+{
+	char	*name;
+	int		type;	
+}	t_ps_output;
+
 typedef struct s_ps_single_command
 {
 	t_li_node		*argv;
 	t_li_node		*inputs;
 	t_li_node		*outputs;
-	t_li_node		*appends;
-	t_li_node		*heredoc;
 }	t_ps_single_command;
 
 /**
@@ -66,6 +77,7 @@ typedef struct s_ps_so_far
 	t_li_node			*head;
 	t_ps_single_command	*cmd;
 	int					cmd_length;
+	char				*cmd_data;
 	t_ps_status			status;
 	t_ps_state			state;
 }	t_ps_so_far;
@@ -78,5 +90,10 @@ typedef struct s_ps_result
 
 t_ps_result	ps_parse(t_li_node *tokens);
 void		ps_cmds_free(t_li_node *list);
+char		*mini_substr(char *src, int len);
+void		l_ps_result(t_ps_result *result, t_ps_so_far *so_far);
+void		l_ps_end(t_ps_so_far *so_far);
+void		l_ps_error_cleanup(t_ps_so_far *so_far);
+void		l_ps_syntax_error(t_ps_so_far *so_far);
 
 #endif
