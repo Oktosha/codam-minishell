@@ -6,7 +6,7 @@
 #    By: elenavoronin <elnvoronin@gmail.com>          +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/12 11:12:29 by evoronin      #+#    #+#                  #
-#    Updated: 2023/07/26 14:05:09 by elenavoroni   ########   odam.nl          #
+#    Updated: 2023/08/01 18:08:50 by elenavoroni   ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,10 +29,10 @@ NAME = minishell
 
 SRCS_DIR = ./src
 SRCS_NAMES = \
-expand/expand_a.c \
-lex/lex_a.c \
+expand/expand_a.c expand/expand_b.c \
+lex/lex_a.c lex/lex_b.c lex/lex_c.c \
 lists/lists_a.c \
-parse/parse_a.c \
+parse/parse_a.c parse/parse_b.c \
 lifecycle/lifecycle_c.c \
 lifecycle/lifecycle_a.c \
 lifecycle/lifecycle_b.c \
@@ -41,6 +41,7 @@ minilibft/mini_strlen.c \
 minilibft/mini_assert.c \
 minilibft/mini_malloc.c \
 minilibft/mini_putstr_fd.c \
+minilibft/mini_substr.c \
 execute/execute_a.c \
 tokenize/tokenize_d.c \
 tokenize/tokenize_c.c \
