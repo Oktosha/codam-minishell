@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 14:16:36 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/07/30 15:00:05 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/08/01 09:03:24 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,78 +19,74 @@
 #include "expand.h"
 #include "parse.h"
 
-typedef struct s_EP_dummy_token {
-	char *s;
-	t_ep_token_type type;
-} t_EP_dummy_token;
+typedef struct s_PS_dummy_cmd {
+	char			*argv;
+	char			*inputs;
+	char			*outputs;
+	char			*appends;
+	char			*heredoc;
+} 	t_PS_dummy_cmd;
 
-void	EP_print_list(t_li_node *list)
+void	PS_print_cmds(t_li_node *argv)
 {
-	t_ep_token	*token;
 	int			i;
 
 	i = 0;
-	while (list)
+	while (argv)
 	{
-		token = list->data;
 		printf("[%d]: ", i);
 		fflush(stdout);
-		if (write(1, token->data, token->length) == -1)
+		if (mini_putstr_fd(argv->data, 1) == -1)
 			mini_putstr_fd("Write error\n", 2);
 		if (write(1, "\n", 2) == -1)
 			mini_putstr_fd("Write error\n", 2);
-		list = list->next;
+		argv = argv->next;
 		i++;
 	}
 }
 
-int LX_are_dummy_equal(t_EP_dummy_token expected, t_ep_token real, int i)
+int PS_are_dummy_equal(t_PS_dummy_cmd expected, t_ps_single_command real, int i)
 {
-	if (expected.type != real.type)
+	int expected_s_len = mini_strlen(expected.argv);
+	int	real_len = mini_strlen(real.argv->data);
+	if (expected_s_len != real_len)
 	{
-		printf("mismatch at token nr: %d\n", i);
-		printf("expected type: %d\n", expected.type);
-		printf("real type: %d\n", real.type);
-		return 0;
-	}
-	int expected_s_len = mini_strlen(expected.s);
-	if (expected_s_len != real.length)
-	{
-		printf("mismatch at token nr: %d\n", i);
+		printf("mismatch at cmd nr: %d\n", i);
 		printf("expected length: %d\n", expected_s_len);
-		printf("real length: %d\n", real.length);
+		printf("real length: %d\n", real_len);
 		return 0;
 	}
-	for(int i = 0; i < real.length; ++i)
+	for(int i = 0; i < real_len; ++i)
 	{
-		if (expected.s[i] != real.data[i])
+		char *exp_cmd = expected.argv;
+		char *real_cmd = real.argv->data;
+		if (exp_cmd[i] != real_cmd[i])
 		{
 			printf("mismatch at token nr: %d\n", i);
 			printf("mismatch at length: %d\n", i);
 			return 0;
 		}
+		real.argv = real.argv->next;
 	}
 	return 1;
 }
 
-void	LX_test_tokenize(t_ks_kotistate *kotistate, t_lx_result *lx_res, t_EP_dummy_token *expected, int len)
+void	PS_test_parse(t_ep_result *ep_res, t_PS_dummy_cmd *expected, int len)
 {
-	t_ep_result res = ep_expand(kotistate, lx_res->tokens);
-	t_li_node 	*cur = res.tokens;
-	printf("EP Result tokens:\n");
-	EP_print_list(res.tokens);
+	t_ps_result res = ps_parse(ep_res->tokens);
+	t_li_node 	*cur = res.cmds;
+	printf("PS Result commands:\n");
+	PS_print_cmds(res.cmds);
 	for (int i = 0; i < len; ++i)
 	{
-		t_ep_token *cur_token = cur->data;
-		if (cur_token->type == LX_BAD)
-			break ;
-		if (!LX_are_dummy_equal(expected[i], *cur_token, i))
+		t_ps_single_command *cur_cmd = cur->data;
+		if (!PS_are_dummy_equal(expected[i], *cur_cmd, i))
 		{
 			exit(1);
 		}
 		cur = cur->next;
 	}
-	ep_token_free(res.tokens);
+	ps_cmds_free(res.cmds);
 }
 
 int	main(void)
@@ -98,23 +94,13 @@ int	main(void)
 	t_ks_kotistate *kotistate;
 
 	kotistate = NULL;
-	printf("SIMPLE TEST:\n");
-	t_EP_dummy_token expected1[1] = {
-		{"whatever", EP_WORD},
+	printf("SINGLE COMMAND TEST:\n");
+	t_PS_dummy_cmd expected1[1] = {
+		{"ls", "", "", "", ""},
 	};
-	t_tk_result tk_res1 = tk_tokenize("whatever");
+	t_tk_result tk_res1 = tk_tokenize("ls");
 	t_lx_result lx_res1 = lx_lex(tk_res1.tokens);
-	LX_test_tokenize(kotistate, &lx_res1, expected1, 1);
-	printf("PIPE TEST:\n");
-	t_EP_dummy_token expected2[5] = {
-		{"cmd1", EP_WORD},
-		{"|", EP_PIPE},
-		{"cmd2", EP_WORD},
-		{"##", EP_WORD},
-		{" ", EP_WHITESPACE},
-	};
-	t_tk_result tk_res2 = tk_tokenize("cmd1|cmd2## ");
-	t_lx_result lx_res2 = lx_lex(tk_res2.tokens);
-	LX_test_tokenize(kotistate, &lx_res2, expected2, 5);
+	t_ep_result ep_res1 = ep_expand(kotistate, lx_res1.tokens);
+	PS_test_parse(&ep_res1, expected1, 1);
 	return (0);
 }
