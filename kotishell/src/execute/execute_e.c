@@ -6,7 +6,7 @@
 /*   By: dkolodze <dkolodze@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/01 17:17:21 by dkolodze      #+#    #+#                 */
-/*   Updated: 2023/08/02 16:50:30 by dkolodze      ########   odam.nl         */
+/*   Updated: 2023/08/02 15:07:21 by dkolodze      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ char	*l_ex_kotivar_to_str(t_ks_kotivar *var)
 	s[i] = '=';
 	while(++i < (len_name + len_value + 1))
 		s[i] = var->value[i - len_name - 1];
+	s[len_name + len_value + 1] = '\0';
 	return (s);
 }
 

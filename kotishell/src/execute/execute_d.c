@@ -6,7 +6,7 @@
 /*   By: dkolodze <dkolodze@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/01 13:53:24 by dkolodze      #+#    #+#                 */
-/*   Updated: 2023/08/02 16:53:11 by dkolodze      ########   odam.nl         */
+/*   Updated: 2023/08/02 15:04:58 by dkolodze      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,11 @@ void	l_ex_fork(\
 	if (!cmd_candidates || !argv || !envp)
 		exit(88);
 	i = 0;
-	while (cmd_candidates[i] && execve(cmd_candidates[i], argv, envp))
+	while (cmd_candidates[i])
+	{
+		execve(cmd_candidates[i], argv, envp);
 		++i;
+	}
 	printf("execve failed for some reason\n");
 }
 

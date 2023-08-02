@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 19:59:36 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/08/02 16:11:19 by dkolodze      ########   odam.nl         */
+/*   Updated: 2023/08/02 15:02:00 by dkolodze      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 */
 #ifndef EXECUTE_H
 # define EXECUTE_H
+# include <sys/wait.h>
 # include "kotistate.h"
 # include "lists.h"
 # include "lifecycle.h"
