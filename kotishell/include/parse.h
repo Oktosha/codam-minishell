@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/25 15:06:03 by mbp14         #+#    #+#                 */
-/*   Updated: 2023/07/25 17:30:07 by dkolodze      ########   odam.nl         */
+/*   Updated: 2023/08/02 14:41:51 by dkolodze      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,10 @@
 
 typedef struct s_ps_single_command
 {
-	char			**argv;
-	t_li_node		*inputs;
-	t_li_node		*outputs;
-	t_li_node		*appends;
-	t_li_node		*heredoc;
+	t_li_node	*argv;
+	t_li_node	*inputs;
+	t_li_node	*outputs;
+	int			pid;
 }	t_ps_single_command;
 
 /**

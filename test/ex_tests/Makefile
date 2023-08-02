@@ -6,7 +6,7 @@
 #    By: elenavoronin <elnvoronin@gmail.com>          +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/30 19:02:22 by evoronin      #+#    #+#                  #
-#    Updated: 2023/07/31 22:23:25 by dkolodze      ########   odam.nl          #
+#    Updated: 2023/08/02 15:56:54 by dkolodze      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,9 @@ minilibft/mini_putstr_fd.c \
 minilibft/mini_concat.c \
 execute/execute_b.c \
 execute/execute_a.c \
-execute/execute_c.c
+execute/execute_c.c \
+execute/execute_d.c \
+execute/execute_e.c 
 
 TEST_SRCS_NAMES =  ex_main.c
 TEST_OBJS = $(addprefix $(OBJS_DIR)/,$(TEST_SRCS_NAMES:.c=.o))
