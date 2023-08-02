@@ -6,7 +6,7 @@
 /*   By: dkolodze <dkolodze@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/01 17:17:21 by dkolodze      #+#    #+#                 */
-/*   Updated: 2023/08/02 16:17:41 by dkolodze      ########   odam.nl         */
+/*   Updated: 2023/08/02 16:50:30 by dkolodze      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,15 @@ t_ex_pipe_array l_ex_create_pipes(int n_pipes)
 	}
 	pipes[0][0] = STDIN_FILENO;
 	pipes[n_pipes + 1][1] = STDOUT_FILENO;
-	i = -1;
-	while (++i <= n_pipes)
+	i = 1;
+	while (i <= n_pipes)
 	{
-		if (pipe(pipes[i + 1]) == -1)
+		if (pipe(pipes[i]) == -1)
 		{
 			printf("TODO: pipe error creating pipe %d in pipe array\n", i);
 			return (l_ex_cleanup_pipes(i, &pipes));
 		}
+		i += 1;
 	}
 	return (pipes);
 }

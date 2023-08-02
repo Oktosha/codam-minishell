@@ -6,7 +6,7 @@
 /*   By: dkolodze <dkolodze@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/01 13:53:24 by dkolodze      #+#    #+#                 */
-/*   Updated: 2023/08/02 16:17:10 by dkolodze      ########   odam.nl         */
+/*   Updated: 2023/08/02 16:53:11 by dkolodze      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	l_ex_launch_all(\
 {
 	int i;
 
-	i = 0;
+	i = 1;
 	while (cmds)
 	{
 		l_ex_fork(state, cmds->data, pipes[i - 1][0], pipes[i][1]);
