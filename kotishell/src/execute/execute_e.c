@@ -6,7 +6,7 @@
 /*   By: dkolodze <dkolodze@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/01 17:17:21 by dkolodze      #+#    #+#                 */
-/*   Updated: 2023/08/02 15:07:21 by dkolodze      ########   odam.nl         */
+/*   Updated: 2023/08/02 15:12:05 by dkolodze      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	*l_ex_cleanup_pipes(int n_pipes, t_ex_pipe_array *pipes)
 {
-	int i;
+	int	i;
 
 	i = 1;
 	while (i <= n_pipes)
@@ -28,7 +28,7 @@ void	*l_ex_cleanup_pipes(int n_pipes, t_ex_pipe_array *pipes)
 	return (NULL);
 }
 
-t_ex_pipe_array l_ex_create_pipes(int n_pipes)
+t_ex_pipe_array	l_ex_create_pipes(int n_pipes)
 {
 	t_ex_pipe_array	pipes;
 	int				i;
@@ -67,10 +67,10 @@ char	*l_ex_kotivar_to_str(t_ks_kotivar *var)
 	if (s == NULL)
 		return (NULL);
 	i = -1;
-	while(++i < len_name)
+	while (++i < len_name)
 		s[i] = var->name[i];
 	s[i] = '=';
-	while(++i < (len_name + len_value + 1))
+	while (++i < (len_name + len_value + 1))
 		s[i] = var->value[i - len_name - 1];
 	s[len_name + len_value + 1] = '\0';
 	return (s);

@@ -6,7 +6,7 @@
 /*   By: dkolodze <dkolodze@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/01 13:53:24 by dkolodze      #+#    #+#                 */
-/*   Updated: 2023/08/02 15:04:58 by dkolodze      ########   odam.nl         */
+/*   Updated: 2023/08/02 15:13:52 by dkolodze      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	**l_ex_to_array(t_li_node *list)
 		return (NULL);
 	array[len] = NULL;
 	i = 0;
-	while(list)
+	while (list)
 	{
 		array[i] = list->data;
 		list = list->next;
@@ -36,11 +36,13 @@ char	**l_ex_to_array(t_li_node *list)
 char	*l_ex_get_path_value(t_li_node *env)
 {
 	t_ks_kotivar	*variable;
-	while(env)
+
+	while (env)
 	{
 		variable = env->data;
 		if (mini_strcmp(variable->name, "PATH") == 0)
 			return (variable->value);
+		env = env->next;
 	}
 	return ("");
 }
@@ -78,7 +80,7 @@ void	l_ex_fork(\
 void	l_ex_launch_all(\
 	t_ks_kotistate *state, t_li_node *cmds, t_ex_pipe_array pipes)
 {
-	int i;
+	int	i;
 
 	i = 1;
 	while (cmds)
@@ -91,10 +93,10 @@ void	l_ex_launch_all(\
 
 int	l_ex_wait_all(t_li_node *cmds)
 {
-	t_ps_single_command *cmd;
+	t_ps_single_command	*cmd;
 	int					status;
 
-	while(cmds)
+	while (cmds)
 	{
 		cmd = cmds->data;
 		if (cmd->pid > 0)

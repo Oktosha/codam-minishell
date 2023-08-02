@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 19:59:36 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/08/02 15:02:00 by dkolodze      ########   odam.nl         */
+/*   Updated: 2023/08/02 15:11:25 by dkolodze      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,5 @@ char			**l_ex_env_to_array(t_li_node *env);
 int				l_ex_is_builtin(char *name);
 
 // f
-int				l_ex_builtin(t_ks_kotistate *state, t_ps_single_command *cmd);			
+int				l_ex_builtin(t_ks_kotistate *state, t_ps_single_command *cmd);
 #endif
