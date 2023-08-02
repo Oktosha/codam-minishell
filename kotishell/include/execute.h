@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 19:59:36 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/08/02 15:56:10 by dkolodze      ########   odam.nl         */
+/*   Updated: 2023/08/02 16:11:19 by dkolodze      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,8 @@ t_ex_pipe_array	l_ex_create_pipes(int n_pipes);
 void			*l_ex_cleanup_pipes(int n_pipes, t_ex_pipe_array *pipes);
 char			*l_ex_kotivar_to_str(t_ks_kotivar *var);
 char			**l_ex_env_to_array(t_li_node *env);
+int				l_ex_is_builtin(char *name);
 
+// f
+int				l_ex_builtin(t_ks_kotistate *state, t_ps_single_command *cmd);			
 #endif

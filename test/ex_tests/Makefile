@@ -6,7 +6,7 @@
 #    By: elenavoronin <elnvoronin@gmail.com>          +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/30 19:02:22 by evoronin      #+#    #+#                  #
-#    Updated: 2023/08/02 15:56:54 by dkolodze      ########   odam.nl          #
+#    Updated: 2023/08/02 16:19:03 by dkolodze      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,15 +19,18 @@ minilibft/mini_free.c \
 minilibft/mini_strlen.c \
 minilibft/mini_find.c \
 minilibft/mini_assert.c \
+minilibft/mini_strcmp.c \
 minilibft/mini_strdup.c \
 minilibft/mini_malloc.c \
 minilibft/mini_putstr_fd.c \
 minilibft/mini_concat.c \
+lists/lists_a.c \
 execute/execute_b.c \
 execute/execute_a.c \
 execute/execute_c.c \
 execute/execute_d.c \
-execute/execute_e.c 
+execute/execute_e.c \
+execute/execute_f.c
 
 TEST_SRCS_NAMES =  ex_main.c
 TEST_OBJS = $(addprefix $(OBJS_DIR)/,$(TEST_SRCS_NAMES:.c=.o))

@@ -6,7 +6,7 @@
 /*   By: dkolodze <dkolodze@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/01 13:53:24 by dkolodze      #+#    #+#                 */
-/*   Updated: 2023/08/02 15:44:49 by dkolodze      ########   odam.nl         */
+/*   Updated: 2023/08/02 16:17:10 by dkolodze      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ char	**l_ex_to_array(t_li_node *list)
 	if (array == NULL)
 		return (NULL);
 	array[len] = NULL;
+	i = 0;
 	while(list)
 	{
 		array[i] = list->data;
@@ -55,6 +56,10 @@ void	l_ex_fork(\
 	cmd->pid = fork();
 	if (cmd->pid <= 0)
 		return ;
+	dup2(fd_in, STDIN_FILENO);
+	dup2(fd_out, STDOUT_FILENO);
+	if (l_ex_is_builtin(cmd->argv->data))
+		exit(l_ex_builtin(state, cmd));
 	cmd_candidates = l_ex_get_cmd_candidates(cmd->argv->data, \
 		l_ex_get_path_value(state->env));
 	argv = l_ex_to_array(cmd->argv);

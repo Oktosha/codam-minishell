@@ -6,7 +6,7 @@
 /*   By: dkolodze <dkolodze@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/01 17:17:21 by dkolodze      #+#    #+#                 */
-/*   Updated: 2023/08/02 15:54:09 by dkolodze      ########   odam.nl         */
+/*   Updated: 2023/08/02 16:17:41 by dkolodze      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,12 @@ void	*l_ex_cleanup_pipes(int n_pipes, t_ex_pipe_array *pipes)
 	i = 1;
 	while (i <= n_pipes)
 	{
-		close(pipes[i][1]);
-		close(pipes[i][0]);
+		close((*pipes)[i][1]);
+		close((*pipes)[i][0]);
 		i += 1;
 	}
-	free(pipes);
+	free(*pipes);
+	*pipes = NULL;
 	return (NULL);
 }
 
@@ -46,7 +47,7 @@ t_ex_pipe_array l_ex_create_pipes(int n_pipes)
 		if (pipe(pipes[i + 1]) == -1)
 		{
 			printf("TODO: pipe error creating pipe %d in pipe array\n", i);
-			return (l_ex_cleanup_pipes(i, pipes));
+			return (l_ex_cleanup_pipes(i, &pipes));
 		}
 	}
 	return (pipes);
@@ -97,4 +98,10 @@ char	**l_ex_env_to_array(t_li_node *env)
 		i += 1;
 	}
 	return (arr);
+}
+
+int	l_ex_is_builtin(char *name)
+{
+	(void) name;
+	return (0);
 }

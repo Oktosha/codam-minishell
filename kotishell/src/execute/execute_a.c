@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 15:48:11 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/08/02 15:19:48 by dkolodze      ########   odam.nl         */
+/*   Updated: 2023/08/02 15:59:14 by dkolodze      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,6 @@ int	ex_execute(t_ks_kotistate *state, t_li_node *cmds)
 		return (88);
 	l_ex_launch_all(state, cmds, pipes);
 	retcode = l_ex_wait_all(cmds);
-	l_ex_cleanup_pipes(n_pipes, pipes);
+	l_ex_cleanup_pipes(n_pipes, &pipes);
 	return (retcode);
 }
