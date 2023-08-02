@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 14:16:36 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/08/01 17:46:16 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/08/02 17:45:45 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	PS_test_parse(t_ep_result *ep_res, t_PS_dummy_cmd *expected, int len)
 {
 	t_ps_result res = ps_parse(ep_res->tokens);
 	t_li_node 	*cur = res.cmds;
-	printf("PS Result commands:\n");
+	// printf("PS Result commands:\n");
 	for (int i = 0; i < len; ++i)
 	{
 		t_ps_single_command *cur_cmd = cur->data;
@@ -80,7 +80,7 @@ void	PS_test_parse(t_ep_result *ep_res, t_PS_dummy_cmd *expected, int len)
 		}
 		cur = cur->next;
 	}
-	ps_cmds_free(res.cmds);
+	ps_cmds_free(cur);
 }
 
 int	main(void)
@@ -89,18 +89,34 @@ int	main(void)
 	t_li_node		*cmds;
 
 	kotistate = NULL;
-	printf("SINGLE COMMAND TEST:\n");
-	cmds = li_new_list("ls");
+	// printf("SINGLE COMMAND TEST:\n");
+	// cmds = li_new_list("ls -la");
+	// if (!cmds)
+	// {
+	// 	return (-1);
+	// }
+	// t_PS_dummy_cmd expected1[1] = {
+	// 	{cmds, NULL, NULL},
+	// };
+	// t_tk_result tk_res1 = tk_tokenize("ls -la");
+	// t_lx_result lx_res1 = lx_lex(tk_res1.tokens);
+	// t_ep_result ep_res1 = ep_expand(kotistate, lx_res1.tokens);
+	// PS_test_parse(&ep_res1, expected1, 1);
+	// free(cmds);
+	printf("SINGLE PIPE TEST:\n");
+	cmds = NULL;
+	li_new_stack(&cmds, "ls");
+	li_new_stack(&cmds, "cat");
 	if (!cmds)
 	{
 		return (-1);
 	}
-	t_PS_dummy_cmd expected1[1] = {
+	t_PS_dummy_cmd expected2[1] = {
 		{cmds, NULL, NULL},
 	};
-	t_tk_result tk_res1 = tk_tokenize("ls");
-	t_lx_result lx_res1 = lx_lex(tk_res1.tokens);
-	t_ep_result ep_res1 = ep_expand(kotistate, lx_res1.tokens);
-	PS_test_parse(&ep_res1, expected1, 1);
+	t_tk_result tk_res2 = tk_tokenize("ls|cat");
+	t_lx_result lx_res2 = lx_lex(tk_res2.tokens);
+	t_ep_result ep_res2 = ep_expand(kotistate, lx_res2.tokens);
+	PS_test_parse(&ep_res2, expected2, 2);
 	return (0);
 }

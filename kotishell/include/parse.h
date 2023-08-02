@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/25 15:06:03 by mbp14         #+#    #+#                 */
-/*   Updated: 2023/08/01 17:47:01 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/08/02 15:49:35 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,14 @@ typedef struct s_ps_input
 {
 	char	*name;
 	int		type;	
+	int		fd; //-1
 }	t_ps_input;
 
 typedef struct s_ps_output
 {
 	char	*name;
-	int		type;	
+	int		type;
+	int		fd; //-1
 }	t_ps_output;
 
 typedef struct s_ps_single_command
@@ -50,6 +52,7 @@ typedef struct s_ps_single_command
 	t_li_node		*argv;
 	t_li_node		*inputs;
 	t_li_node		*outputs;
+	int				pid;
 }	t_ps_single_command;
 
 /**
@@ -67,8 +70,13 @@ typedef enum e_ps_state
 {
 	PS_ST_BUG,
 	PS_ST_COMMAND,
+	PS_ST_END,
 	PS_ST_ERROR,
 	PS_ST_HEREDOC,
+	PS_ST_INPUT,
+	PS_ST_OUTPUT,
+	PS_ST_QUOTE,
+	PS_ST_PIPE,
 	PS_ST_START,
 }	t_ps_state;
 
@@ -95,5 +103,10 @@ void		l_ps_result(t_ps_result *result, t_ps_so_far *so_far);
 void		l_ps_end(t_ps_so_far *so_far);
 void		l_ps_error_cleanup(t_ps_so_far *so_far);
 void		l_ps_syntax_error(t_ps_so_far *so_far);
+t_ps_state	l_ps_next_state(t_ep_token_type ep_tk);
+void		l_ps_input(t_li_node *ep_tk, t_ps_so_far *so_far);
+void		l_ps_pipe(t_li_node *ep_tk, t_ps_so_far *so_far);
+void		l_ps_init_so_far(t_ps_so_far *so_far);
+void		l_ps_start(t_li_node *ep_tk, t_ps_so_far *so_far);
 
 #endif
