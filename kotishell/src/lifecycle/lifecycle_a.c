@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/26 16:18:32 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/08/01 18:23:54 by dkolodze      ########   odam.nl         */
+/*   Updated: 2023/08/02 15:22:03 by dkolodze      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@ t_ks_status	l_lc_init_kotistate(t_ks_kotistate *kotistate, char **envp)
 	kotistate->status_code = 0;
 	kotistate->env = NULL;
 	return (KS_SUCCESS);
+}
+
+void	l_lc_clear_kotistate(t_ks_kotistate *kotistate)
+{
+	(void) kotistate;
 }
 
 void	lc_start_shell(int argc, char **argv, char **envp)
