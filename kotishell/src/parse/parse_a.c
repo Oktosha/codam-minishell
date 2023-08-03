@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 15:17:18 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/08/02 17:54:44 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/08/03 07:37:11 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	l_ps_cmd(t_li_node *ep_tk, t_ps_so_far *so_far)
 }
 
 void	l_ps_pipe(t_li_node *ep_tk, t_ps_so_far *so_far)
-{	
+{
 	t_ep_token	*tk;
 
 	if (so_far->status != PS_SUCCESS)
@@ -94,11 +94,6 @@ void	l_ps_start(t_li_node *ep_tk, t_ps_so_far *so_far)
 		so_far->state = PS_ST_COMMAND;
 		l_ps_cmd(ep_tk, so_far);
 	}
-	// if (ep_token->type == EP_HEREDOC || ep_token->type == EP_INPUT)
-	// {
-	// 	so_far->state = PS_ST_INPUT;
-	// 	l_ps_input(ep_tk, so_far);
-	// }
 	if (ep_token->type == EP_EOL)
 	{
 		so_far->state = PS_ST_END;
@@ -121,13 +116,11 @@ t_ps_result	ps_parse(t_li_node *ep_tk)
 	l_ps_start(ep_tk, &so_far);
 	while (ep_tk->next != NULL)
 	{
+		ep_tk = ep_tk->next;
 		if (so_far.state == PS_ST_COMMAND)
 			l_ps_cmd(ep_tk, &so_far);
 		if (so_far.state == PS_ST_PIPE)
 			l_ps_pipe(ep_tk, &so_far);
-		// ep_tk = ep_tk->next;
-		// if (so_far.state == PS_ST_WHITESPACE)
-		// 	l_ps_whitespace()
 	}
 	l_ps_end(&so_far);
 	l_ps_result(&result, &so_far);
