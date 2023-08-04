@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 15:48:11 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/08/02 15:59:14 by dkolodze      ########   odam.nl         */
+/*   Updated: 2023/08/04 14:27:43 by dkolodze      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ex_execute(t_ks_kotistate *state, t_li_node *cmds)
 	int					retcode;
 
 	if (li_list_size(cmds) == 0)
-		return (0);
+		return (state->status_code);
 	if (li_list_size(cmds) == 1 \
 		&& l_ex_is_builtin(((t_ps_single_command *)cmds->data)->argv->data))
 		return (l_ex_builtin(state, cmds->data));
