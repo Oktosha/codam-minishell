@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 17:53:02 by dkolodze      #+#    #+#                 */
-/*   Updated: 2023/07/25 18:56:28 by dkolodze      ########   odam.nl         */
+/*   Updated: 2023/08/02 15:38:12 by dkolodze      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,6 @@ void	l_lc_process_line(char *line, t_ks_kotistate *kotistate)
 		l_lc_handle_parse_status(data.ps_result.status, kotistate, &status);
 	}
 	if (status == LC_SUCCESS)
-		ex_execute(kotistate, data.ps_result.cmds);
+		kotistate->status_code = ex_execute(kotistate, data.ps_result.cmds);
 	l_lc_process_data_cleanup(&data);
 }

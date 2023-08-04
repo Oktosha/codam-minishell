@@ -1,0 +1,14 @@
+name: Execute
+on: 
+  workflow_dispatch: 
+  pull_request:
+      branches: main
+jobs:
+  Execute-testing:
+    runs-on: ubuntu-latest
+    steps:
+      - run: sudo apt-get install valgrind
+      - uses: actions/checkout@v3
+      - run: make && valgrind --error-exitcode=23 --leak-check=full -s ./ex_tests
+        working-directory: test/ex_tests
+      - run: echo "Execute tests complete"
