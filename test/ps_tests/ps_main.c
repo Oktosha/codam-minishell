@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 14:16:36 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/08/02 17:45:45 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/08/04 16:34:42 by evoronin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,103 +20,149 @@
 #include "parse.h"
 #include <string.h>
 
-typedef struct s_PS_dummy_cmd {
-	t_li_node			*argv;
-	t_li_node			*inputs;
-	t_li_node			*outputs;
-} 	t_PS_dummy_cmd;
 
-void	PS_print_cmds(char *cmd, int i)
+void	PS_print_cmd(t_ps_single_command *cmd)
 {
-	printf("[%d]: ", i);
-	fflush(stdout);
-	if (mini_putstr_fd(cmd, 1) == -1)
-		mini_putstr_fd("Write error\n", 2);
-	if (write(1, "\n", 1) == -1)
-		mini_putstr_fd("Write error\n", 2);
+	t_li_node *node = cmd->argv;
+	while (node)
+	{
+		printf(" %s", node->data);
+		node = node->next;
+	}
+	printf("\n");
 }
 
-int PS_are_dummy_equal(t_PS_dummy_cmd expected, t_ps_single_command real, int i)
+void	PS_print_cmds(t_li_node *cmds)
 {
-	char *exp_cmd = NULL;
-	char *real_cmd = NULL;
-	int expected_s_len = mini_strlen(expected.argv->data);
-	int	real_len = mini_strlen(real.argv->data);
-	if (expected_s_len != real_len)
+	int i;
+
+	i = 0;
+	while(cmds)
+	{
+		printf("[%d]", i);
+		PS_print_cmd(cmds->data);
+		cmds = cmds->next;
+		i += 1;
+	}
+}
+
+int PS_are_equal(t_ps_single_command *expected, t_ps_single_command *real, int i)
+{
+	int expected_argv_len = li_list_size(expected->argv);
+	int	real_argv_len = li_list_size(real->argv);
+	if (expected_argv_len != real_argv_len)
 	{
 		printf("mismatch at cmd nr: %d\n", i);
-		printf("expected length: %d\n", expected_s_len);
-		printf("real length: %d\n", real_len);
+		printf("expected argv length: %d\n", expected_argv_len);
+		printf("real argv length: %d\n", real_argv_len);
 		return 0;
 	}
-	for(int j = 0; j <= i; ++j)
+	t_li_node *exp_argv_node = expected->argv;
+	t_li_node *real_argv_node = real->argv;
+	for(int j = 0; j < real_argv_len; ++j)
 	{
-		exp_cmd = mini_substr(expected.argv->data, expected_s_len);
-		real_cmd = mini_substr(real.argv->data, real_len);
-		PS_print_cmds(real_cmd, i);
-		if (exp_cmd[j] != real_cmd[j])
+		char *exp_s = exp_argv_node->data;
+		char *real_s = real_argv_node->data;
+		if (strcmp(exp_s, real_s))
 		{
-			printf("mismatch at cmd nr: %d\n", j);
-			printf("mismatch at length: %d\n", j);
+			printf("mismatch at cmd nr: %d arg nr %d\n", i, j);
+			printf("expected arg: %s\n", exp_s);
+			printf("real arg: %s\n", real_s);
 			return 0;
 		}
-		expected.argv = expected.argv->next;
-		real.argv = real.argv->next;
+		exp_argv_node = exp_argv_node->next;
+		real_argv_node = real_argv_node->next;
 	}
 	return 1;
 }
 
-void	PS_test_parse(t_ep_result *ep_res, t_PS_dummy_cmd *expected, int len)
+void	PS_test_parse(t_ep_result *ep_res, t_li_node *expected)
 {
 	t_ps_result res = ps_parse(ep_res->tokens);
+	PS_print_cmds(res.cmds);
 	t_li_node 	*cur = res.cmds;
-	// printf("PS Result commands:\n");
+	int			len = li_list_size(expected);
+	t_li_node	*cur_expected = expected;
+	int real_len = li_list_size(res.cmds);
+	if (real_len != len)
+	{
+		printf("Wrong number of cmds: expcted=%d, real=%d\n", len, real_len);
+		exit(1);
+	}
 	for (int i = 0; i < len; ++i)
 	{
 		t_ps_single_command *cur_cmd = cur->data;
-		if (!PS_are_dummy_equal(expected[i], *cur_cmd, i))
+		t_ps_single_command *cur_expected_cmd = cur_expected->data;
+		if (!PS_are_equal(cur_expected_cmd, cur_cmd, i))
 		{
 			exit(1);
 		}
 		cur = cur->next;
+		cur_expected = cur_expected->next;
 	}
 	ps_cmds_free(cur);
 }
 
+t_ps_single_command	*create_cmd(char **argv)
+{
+	t_ps_single_command *cmd;
+	cmd = malloc(sizeof(t_ps_single_command));
+	if (!cmd)
+	{
+		mini_putstr_fd("Cmd malloc bug\n", 2);
+		exit(EXIT_FAILURE);
+	}
+	cmd->pid = -1;
+	cmd->inputs = NULL;
+	cmd->outputs = NULL;
+
+	t_li_node	*argv_node = NULL;
+	int i = 0;
+	while (argv[i] != '\0')
+	{
+		li_new_stack(&argv_node, argv[i]);
+		i++;
+	}
+	cmd->argv = argv_node;
+	return (cmd);
+}
+
+
+t_li_node *ps_create_expected_ls(void)
+{
+	char *argv_ls[2] = {strdup("ls"), NULL};
+	t_ps_single_command *cmd_ls = create_cmd(argv_ls);
+	t_li_node *expected_cmds = NULL;
+	li_new_stack(&expected_cmds, cmd_ls);
+	return expected_cmds;
+}
+
+t_li_node *ps_create_expected_ls__cat(void)
+{
+	char *argv_ls[2] = {strdup("ls"), NULL};
+	char *argv_cat[2] = {strdup("cat"), NULL};
+	t_ps_single_command *cmd_ls = create_cmd(argv_ls);
+	t_ps_single_command *cmd_cat = create_cmd(argv_cat);
+	t_li_node *expected_cmds = NULL;
+	li_new_stack(&expected_cmds, cmd_ls);
+	li_new_stack(&expected_cmds, cmd_cat);
+	return expected_cmds;
+}
+
+void ps_test_full_parse(char *name, char *s, t_li_node *cmds_generator())
+{
+	printf("%s: %s\n", name, s);
+	t_li_node *expected_cmds = cmds_generator();
+	t_tk_result tk_res2 = tk_tokenize(s);
+	t_lx_result lx_res2 = lx_lex(tk_res2.tokens);
+	t_ep_result ep_res2 = ep_expand(NULL, lx_res2.tokens);
+	PS_test_parse(&ep_res2, expected_cmds);
+	ps_cmds_free(expected_cmds);
+}
+
 int	main(void)
 {
-	t_ks_kotistate *kotistate;
-	t_li_node		*cmds;
-
-	kotistate = NULL;
-	// printf("SINGLE COMMAND TEST:\n");
-	// cmds = li_new_list("ls -la");
-	// if (!cmds)
-	// {
-	// 	return (-1);
-	// }
-	// t_PS_dummy_cmd expected1[1] = {
-	// 	{cmds, NULL, NULL},
-	// };
-	// t_tk_result tk_res1 = tk_tokenize("ls -la");
-	// t_lx_result lx_res1 = lx_lex(tk_res1.tokens);
-	// t_ep_result ep_res1 = ep_expand(kotistate, lx_res1.tokens);
-	// PS_test_parse(&ep_res1, expected1, 1);
-	// free(cmds);
-	printf("SINGLE PIPE TEST:\n");
-	cmds = NULL;
-	li_new_stack(&cmds, "ls");
-	li_new_stack(&cmds, "cat");
-	if (!cmds)
-	{
-		return (-1);
-	}
-	t_PS_dummy_cmd expected2[1] = {
-		{cmds, NULL, NULL},
-	};
-	t_tk_result tk_res2 = tk_tokenize("ls|cat");
-	t_lx_result lx_res2 = lx_lex(tk_res2.tokens);
-	t_ep_result ep_res2 = ep_expand(kotistate, lx_res2.tokens);
-	PS_test_parse(&ep_res2, expected2, 2);
+	ps_test_full_parse("SINGLE CMD TEST", "ls", ps_create_expected_ls);
+	ps_test_full_parse("SINGLE PIPE TEST", "ls|cat", ps_create_expected_ls__cat);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 15:01:09 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/08/01 17:55:51 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/08/04 15:08:47 by evoronin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	l_ep_replace_token_2(t_lx_token *lx_token, t_ep_so_far *so_far)
 	if (lx_token->type == LX_VARIABLE)
 		l_ep_token_dup(so_far, lx_token, EP_WORD);
 	if (lx_token->type == LX_WHITESPACE)
-		l_ep_token_dup(so_far, lx_token, EP_WHITESPACE);
+		return ;
 	if (lx_token->type == LX_WORD)
 		l_ep_token_dup(so_far, lx_token, EP_WORD);
 	if (lx_token->type == LX_PIPE)

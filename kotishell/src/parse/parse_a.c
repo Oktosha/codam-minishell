@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 15:17:18 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/08/04 14:52:41 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/08/04 15:11:55 by evoronin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,20 +49,6 @@ void	l_ps_cmd(t_li_node *ep_tk, t_ps_so_far *so_far)
 		so_far->cmd_length += tk->length;
 		ep_tk = ep_tk->next;
 		tk = ep_tk->data;
-	}
-	while (tk->type != EP_PIPE && tk->type != EP_EOL && ep_tk->next != NULL)
-	{
-		if (tk->type == EP_WHITESPACE)
-		{
-			ep_tk = ep_tk->next;
-			tk = ep_tk->data;
-		}
-		if (tk->type == EP_WORD)
-		{
-			so_far->cmd_length += tk->length + 1;
-			ep_tk = ep_tk->next;
-			tk = ep_tk->data;
-		}
 	}
 	l_ps_cmd_copy(so_far);
 	so_far->state = l_ps_next_state(tk->type);
@@ -110,19 +96,17 @@ t_ps_result	ps_parse(t_li_node *ep_tk)
 {
 	t_ps_result	result;
 	t_ps_so_far	so_far;
-	t_li_node	*ep_so_far;
 
-	ep_so_far = ep_tk;
 	result.cmds = NULL;
 	result.status = PS_SUCCESS;
 	l_ps_start(ep_tk, &so_far);
-	while (ep_so_far->next != NULL)
+	while (ep_tk->next != NULL)
 	{
 		if (so_far.state == PS_ST_COMMAND)
-			l_ps_cmd(ep_so_far, &so_far);
-		if (so_far.state == PS_ST_PIPE)
+			l_ps_cmd(ep_tk, &so_far);
+		else if (so_far.state == PS_ST_PIPE)
 			l_ps_pipe(ep_tk, &so_far);
-		ep_so_far = ep_tk->next;
+		ep_tk = ep_tk->next;
 	}
 	l_ps_end(&so_far);
 	l_ps_result(&result, &so_far);

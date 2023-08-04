@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 19:57:44 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/08/02 14:41:39 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/08/04 15:07:55 by evoronin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ typedef enum e_ep_token_type
 	EP_PIPE,
 	EP_QUOTE_1,
 	EP_QUOTE_2,
-	EP_WHITESPACE,
 	EP_WORD,
 }	t_ep_token_type;
 
