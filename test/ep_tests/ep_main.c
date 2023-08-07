@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 14:16:36 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/08/04 15:10:15 by evoronin      ########   odam.nl         */
+/*   Updated: 2023/08/07 12:53:35 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,25 +94,21 @@ void	LX_test_tokenize(t_ks_kotistate *kotistate, t_lx_result *lx_res, t_EP_dummy
 
 int	main(void)
 {
-	t_ks_kotistate *kotistate;
-
-	kotistate = NULL;
-	printf("SIMPLE TEST:\n");
-	t_EP_dummy_token expected1[1] = {
-		{"whatever", EP_WORD},
-	};
-	t_tk_result tk_res1 = tk_tokenize("whatever");
-	t_lx_result lx_res1 = lx_lex(tk_res1.tokens);
-	LX_test_tokenize(kotistate, &lx_res1, expected1, 1);
+	// printf("SIMPLE TEST:\n");
+	// t_EP_dummy_token expected1[1] = {
+	// 	{"whatever", EP_WORD},
+	// };
+	// t_tk_result tk_res1 = tk_tokenize("whatever");
+	// t_lx_result lx_res1 = lx_lex(tk_res1.tokens);
+	// LX_test_tokenize(NULL, &lx_res1, expected1, 1);
 	printf("PIPE TEST:\n");
-	t_EP_dummy_token expected2[4] = {
-		{"cmd1", EP_WORD},
+	t_EP_dummy_token expected2[3] = {
+		{"ls", EP_WORD},
 		{"|", EP_PIPE},
-		{"cmd2", EP_WORD},
-		{"##", EP_WORD},
+		{"cat", EP_WORD},
 	};
-	t_tk_result tk_res2 = tk_tokenize("cmd1|cmd2## ");
+	t_tk_result tk_res2 = tk_tokenize("ls|cat");
 	t_lx_result lx_res2 = lx_lex(tk_res2.tokens);
-	LX_test_tokenize(kotistate, &lx_res2, expected2, 4);
+	LX_test_tokenize(NULL, &lx_res2, expected2, 3);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/02 14:12:11 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/08/02 15:49:11 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/08/07 13:25:08 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,15 @@ t_ps_state	l_ps_next_state(t_ep_token_type ep_tk)
 {
 	if (ep_tk == EP_WORD)
 		return (PS_ST_COMMAND);
-	if (ep_tk == EP_APPEND || ep_tk == EP_HEREDOC)
+	else if (ep_tk == EP_APPEND || ep_tk == EP_HEREDOC)
 		return (PS_ST_INPUT);
-	if (ep_tk == EP_OUTPUT || ep_tk == EP_HEREDOC)
+	else if (ep_tk == EP_OUTPUT || ep_tk == EP_HEREDOC)
 		return (PS_ST_OUTPUT);
-	if (ep_tk == EP_EOL)
+	else if (ep_tk == EP_EOL)
 		return (PS_ST_END);
-	if (ep_tk == EP_PIPE)
+	else if (ep_tk == EP_PIPE)
 		return (PS_ST_PIPE);
-	if (ep_tk == EP_QUOTE_1 || ep_tk == EP_QUOTE_2)
+	else if (ep_tk == EP_QUOTE_1 || ep_tk == EP_QUOTE_2)
 		return (PS_ST_QUOTE);
 	return (PS_ST_ERROR);
 }

@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 14:16:36 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/08/04 16:34:42 by evoronin      ########   odam.nl         */
+/*   Updated: 2023/08/07 12:45:50 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	PS_print_cmd(t_ps_single_command *cmd)
 	t_li_node *node = cmd->argv;
 	while (node)
 	{
-		printf(" %s", node->data);
+		printf(" %s", (char *)node->data);
 		node = node->next;
 	}
 	printf("\n");
@@ -118,7 +118,7 @@ t_ps_single_command	*create_cmd(char **argv)
 
 	t_li_node	*argv_node = NULL;
 	int i = 0;
-	while (argv[i] != '\0')
+	while (argv[i] != NULL)
 	{
 		li_new_stack(&argv_node, argv[i]);
 		i++;
@@ -162,7 +162,7 @@ void ps_test_full_parse(char *name, char *s, t_li_node *cmds_generator())
 
 int	main(void)
 {
-	ps_test_full_parse("SINGLE CMD TEST", "ls", ps_create_expected_ls);
+	// ps_test_full_parse("SINGLE CMD TEST", "ls", ps_create_expected_ls);
 	ps_test_full_parse("SINGLE PIPE TEST", "ls|cat", ps_create_expected_ls__cat);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 14:16:36 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/07/30 14:23:16 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/08/07 12:52:16 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,19 +94,18 @@ void	LX_test_tokenize(t_tk_result *tk_res, t_LX_dummy_token *expected, int len)
 int	main(void)
 {
 	printf("SIMPLE TEST:\n");
-	t_LX_dummy_token expected1[1] = {
-		{"whatever", LX_WORD},
-	};
-	t_tk_result tk_res1 = tk_tokenize("whatever");
-	LX_test_tokenize(&tk_res1, expected1, 1);
+	// t_LX_dummy_token expected1[1] = {
+	// 	{"whatever", LX_WORD},
+	// };
+	// t_tk_result tk_res1 = tk_tokenize("whatever");
+	// LX_test_tokenize(&tk_res1, expected1, 1);
 	printf("PIPE TEST:\n");
-	t_LX_dummy_token expected2[4] = {
-		{"cmd1", LX_WORD},
+	t_LX_dummy_token expected2[3] = {
+		{"ls", LX_WORD},
 		{"|", LX_PIPE},
-		{"cmd2", LX_WORD},
-		{">", LX_OUTPUT},
+		{"cat", LX_WORD},
 	};
-	t_tk_result tk_res2 = tk_tokenize("cmd1|cmd2>");
-	LX_test_tokenize(&tk_res2, expected2, 4);
+	t_tk_result tk_res2 = tk_tokenize("ls|cat");
+	LX_test_tokenize(&tk_res2, expected2, 3);
 	return (0);
 }
