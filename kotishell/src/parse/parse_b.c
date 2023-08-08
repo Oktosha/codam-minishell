@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/30 15:02:03 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/08/07 17:57:15 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/08/08 09:19:42 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,16 @@
 
 void	l_ps_end(t_ps_so_far *so_far)
 {
+	while (so_far->cmd->argv->next != NULL)
+	{
+		if (li_new_stack(&so_far->head, &so_far->cmd->argv) == -1)
+		{
+			so_far->status = PS_ERR_MALLOC;
+			free(so_far->cmd->argv);
+			return ;
+		}
+		so_far->cmd->argv = so_far->cmd->argv->next;
+	}
 	if (so_far->status == PS_ERR_MALLOC)
 		l_ps_error_cleanup(so_far);
 	if (so_far->status == PS_ERR_SYNTAX)
