@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/30 15:02:03 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/08/08 09:19:42 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/08/08 09:24:29 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,4 @@ void	l_ps_error_cleanup(t_ps_so_far *so_far)
 	ps_cmd_free(so_far->cmd);
 	so_far->cmd = NULL;
 	mini_putstr_fd("Failed malloc\n", 2);
-}
-
-void	l_ps_syntax_error(t_ps_so_far *so_far)
-{
-	mini_putstr_fd(" \033[0;31m\x1B[1m-> syntax error near token \n\033[0m", 2);
-	mini_putstr_fd(so_far->cmd->argv->data, 2);
 }

@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/25 15:06:03 by mbp14         #+#    #+#                 */
-/*   Updated: 2023/08/07 15:58:30 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/08/08 09:25:50 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,14 @@ typedef struct s_ps_input
 {
 	char	*name;
 	int		type;	
-	int		fd; //-1
+	int		fd;
 }	t_ps_input;
 
 typedef struct s_ps_output
 {
 	char	*name;
 	int		type;
-	int		fd; //-1
+	int		fd;
 }	t_ps_output;
 
 typedef struct s_ps_single_command
