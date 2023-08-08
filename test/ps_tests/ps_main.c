@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 14:16:36 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/08/07 12:45:50 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/08/08 08:28:07 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	PS_test_parse(t_ep_result *ep_res, t_li_node *expected)
 		cur = cur->next;
 		cur_expected = cur_expected->next;
 	}
-	ps_cmds_free(cur);
+	ps_node_free(cur);
 }
 
 t_ps_single_command	*create_cmd(char **argv)
@@ -157,7 +157,7 @@ void ps_test_full_parse(char *name, char *s, t_li_node *cmds_generator())
 	t_lx_result lx_res2 = lx_lex(tk_res2.tokens);
 	t_ep_result ep_res2 = ep_expand(NULL, lx_res2.tokens);
 	PS_test_parse(&ep_res2, expected_cmds);
-	ps_cmds_free(expected_cmds);
+	ps_node_free(expected_cmds);
 }
 
 int	main(void)

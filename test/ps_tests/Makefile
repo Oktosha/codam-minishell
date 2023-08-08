@@ -6,13 +6,13 @@
 #    By: elenavoronin <elnvoronin@gmail.com>          +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/30 19:02:22 by evoronin      #+#    #+#                  #
-#    Updated: 2023/08/04 15:16:28 by evoronin      ########   odam.nl          #
+#    Updated: 2023/08/07 17:44:13 by elenavoroni   ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = ps_tests
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I ../../kotishell/include -g -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -I ../../kotishell/include -g #-fsanitize=address
 SRCS_FOLDER = ../../kotishell/src
 SRCS_NAMES = parse/parse_a.c parse/parse_b.c parse/parse_c.c \
 expand/expand_a.c expand/expand_b.c \

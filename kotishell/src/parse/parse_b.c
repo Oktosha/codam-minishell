@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/30 15:02:03 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/08/01 17:51:38 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/08/07 17:57:15 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	l_ps_end(t_ps_so_far *so_far)
 		return ;
 }
 
-void	ps_cmds_free(t_li_node *list)
+void	ps_node_free(t_li_node *list)
 {
 	t_li_node	*temp;
 
@@ -35,6 +35,14 @@ void	ps_cmds_free(t_li_node *list)
 	}
 }
 
+void	ps_cmd_free(t_ps_single_command *cmd)
+{
+	ps_node_free(cmd->argv);
+	ps_node_free(cmd->inputs);
+	ps_node_free(cmd->outputs);
+	free(cmd);
+}
+
 void	l_ps_result(t_ps_result *result, t_ps_so_far *so_far)
 {
 	result->cmds = so_far->head;
@@ -43,9 +51,7 @@ void	l_ps_result(t_ps_result *result, t_ps_so_far *so_far)
 
 void	l_ps_error_cleanup(t_ps_so_far *so_far)
 {
-	ps_cmds_free(so_far->cmd->argv);
-	ps_cmds_free(so_far->cmd->inputs);
-	ps_cmds_free(so_far->cmd->outputs);
+	ps_cmd_free(so_far->cmd);
 	so_far->cmd = NULL;
 	mini_putstr_fd("Failed malloc\n", 2);
 }

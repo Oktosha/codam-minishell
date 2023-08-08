@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/25 15:06:03 by mbp14         #+#    #+#                 */
-/*   Updated: 2023/08/04 14:47:48 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/08/07 15:58:30 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ typedef struct s_ps_result
 }	t_ps_result;
 
 t_ps_result	ps_parse(t_li_node *tokens);
-void		ps_cmds_free(t_li_node *list);
+void		ps_node_free(t_li_node *list);
 char		*mini_substr(char *src, int len);
 void		l_ps_result(t_ps_result *result, t_ps_so_far *so_far);
 void		l_ps_end(t_ps_so_far *so_far);
@@ -108,5 +108,6 @@ void		l_ps_input(t_li_node *ep_tk, t_ps_so_far *so_far);
 void		l_ps_pipe(t_li_node *ep_tk, t_ps_so_far *so_far);
 void		l_ps_init_so_far(t_ps_so_far *so_far);
 void		l_ps_start(t_li_node *ep_tk, t_ps_so_far *so_far);
+void		ps_cmd_free(t_ps_single_command *cmd);
 
 #endif
