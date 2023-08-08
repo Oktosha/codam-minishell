@@ -9,6 +9,6 @@ jobs:
     steps:
       - run: sudo apt-get install valgrind
       - uses: actions/checkout@v3
-      - run: make && valgrind --error-exitcode=23 --leak-check=full -s ./tk_tests
+      - run: make && valgrind --error-exitcode=23 --leak-check=full -s ./ps_tests
         working-directory: test/ps_tests
       - run: echo "Parse tests complete"
