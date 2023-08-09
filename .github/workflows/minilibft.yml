@@ -1,0 +1,14 @@
+name: Minilibft
+on: 
+  workflow_dispatch: 
+  pull_request:
+      branches: main
+jobs:
+  Minilibft-testing:
+    runs-on: ubuntu-latest
+    steps:
+      - run: sudo apt-get install valgrind
+      - uses: actions/checkout@v3
+      - run: make && valgrind --error-exitcode=23 --leak-check=full -s ./mini_tests
+        working-directory: test/mini_tests
+      - run: echo "Minilibft tests complete"
