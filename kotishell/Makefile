@@ -6,7 +6,7 @@
 #    By: elenavoronin <elnvoronin@gmail.com>          +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/12 11:12:29 by evoronin      #+#    #+#                  #
-#    Updated: 2023/08/09 14:36:12 by evoronin      ########   odam.nl          #
+#    Updated: 2023/08/09 14:53:20 by evoronin      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,10 @@ execute/execute_d.c \
 execute/execute_e.c \
 execute/execute_f.c \
 expand/expand_a.c \
+expand/expand_b.c \
 lex/lex_a.c \
+lex/lex_b.c \
+lex/lex_c.c \
 lifecycle/lifecycle_a.c \
 lifecycle/lifecycle_b.c \
 lifecycle/lifecycle_c.c \
@@ -55,11 +58,10 @@ minilibft/mini_strdup.c \
 minilibft/mini_strlen.c \
 minilibft/mini_substr.c \
 parse/parse_a.c \
+parse/parse_b.c \
+parse/parse_c.c \
 tokenize/tokenize_a.c \
 tokenize/tokenize_b.c \
-minilibft/mini_substr.c \
-execute/execute_a.c \
-tokenize/tokenize_d.c \
 tokenize/tokenize_c.c \
 tokenize/tokenize_d.c
 
@@ -73,7 +75,7 @@ all:  $(NAME)
 
 $(OBJS): $(OUT_DIR)/%.o: $(SRCS_DIR)/%.c
 	mkdir -p $(@D)
-	$(CC) $(CFLAGS) $(READLINEFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@ $(READLINEFLAGS)
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(READLINELINKFLAGS)
