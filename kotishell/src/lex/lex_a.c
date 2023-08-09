@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 14:19:41 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/08/09 16:26:36 by evoronin      ########   odam.nl         */
+/*   Updated: 2023/08/09 16:28:23 by evoronin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,7 @@ t_lx_result	lx_lex(t_li_node *tk_tk)
 {
 	t_lx_result	result;
 	t_lx_so_far	so_far;
-	// t_tk_token	*tk_token;
 
-	// tk_token = tk_tk->data;
 	l_lx_init_so_far(&so_far);
 	l_lx_replace_token(tk_tk, &so_far);
 	l_lx_token_result(&result, &so_far);
