@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 14:16:36 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/08/09 16:25:49 by evoronin      ########   odam.nl         */
+/*   Updated: 2023/08/09 16:15:45 by codespace     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	LX_test_tokenize(t_ks_kotistate *kotistate, t_lx_result *lx_res, t_EP_dummy
 	for (int i = 0; i < len; ++i)
 	{
 		t_ep_token *cur_token = cur->data;
-		if (cur_token->type == LX_BAD)
+		if (cur_token->type == EP_BAD)
 			break ;
 		if (!LX_are_dummy_equal(expected[i], *cur_token, i))
 		{
@@ -90,6 +90,7 @@ void	LX_test_tokenize(t_ks_kotistate *kotistate, t_lx_result *lx_res, t_EP_dummy
 		cur = cur->next;
 	}
 	ep_token_free(res.tokens);
+	lx_token_free(lx_res->tokens);
 }
 
 int	main(void)
@@ -109,6 +110,7 @@ int	main(void)
 	};
 	t_tk_result tk_res2 = tk_tokenize("ls|cat");
 	t_lx_result lx_res2 = lx_lex(tk_res2.tokens);
+	tk_token_free(tk_res2.tokens);
 	LX_test_tokenize(NULL, &lx_res2, expected2, 3);
 	return (0);
 }

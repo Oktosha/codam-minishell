@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 14:16:36 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/08/07 12:52:16 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/08/09 16:13:08 by codespace     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,12 @@ typedef struct s_LX_dummy_token {
 	char *s;
 	t_lx_token_type type;
 } t_LX_dummy_token;
+
+typedef struct s_TK_dummy_token {
+	char *s;
+	t_tk_token_type type;
+} t_TK_dummy_token;
+
 
 void	LX_print_list(t_li_node *list)
 {
@@ -89,6 +95,7 @@ void	LX_test_tokenize(t_tk_result *tk_res, t_LX_dummy_token *expected, int len)
 		cur = cur->next;
 	}
 	lx_token_free(res.tokens);
+	tk_token_free(tk_res->tokens);
 }
 
 int	main(void)
@@ -100,12 +107,13 @@ int	main(void)
 	// t_tk_result tk_res1 = tk_tokenize("whatever");
 	// LX_test_tokenize(&tk_res1, expected1, 1);
 	printf("PIPE TEST:\n");
-	t_LX_dummy_token expected2[3] = {
+	t_LX_dummy_token expected2[4] = {
 		{"ls", LX_WORD},
 		{"|", LX_PIPE},
 		{"cat", LX_WORD},
+		{"", LX_EOL},
 	};
 	t_tk_result tk_res2 = tk_tokenize("ls|cat");
-	LX_test_tokenize(&tk_res2, expected2, 3);
+	LX_test_tokenize(&tk_res2, expected2, 4);
 	return (0);
 }

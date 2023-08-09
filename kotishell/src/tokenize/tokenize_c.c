@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/10 14:12:29 by evoronin      #+#    #+#                 */
-/*   Updated: 2023/07/26 14:19:47 by codespace     ########   odam.nl         */
+/*   Updated: 2023/08/09 15:13:42 by codespace     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	tk_token_free(t_li_node *list)
 		list = list->next;
 		free(temp);
 	}
+	free(list);
 }
 
 void	l_tk_error_cleanup(t_tk_so_far *so_far)

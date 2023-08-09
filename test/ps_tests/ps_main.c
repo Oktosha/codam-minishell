@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 14:16:36 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/08/09 11:52:33 by evoronin      ########   odam.nl         */
+/*   Updated: 2023/08/09 16:16:43 by codespace     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,7 +161,7 @@ void ps_test_full_parse(char *name, char *s, t_li_node *cmds_generator())
 
 int	main(void)
 {
-	// ps_test_full_parse("SINGLE CMD TEST", "ls", ps_create_expected_ls);
-	ps_test_full_parse("SINGLE PIPE TEST", "ls|cat", ps_create_expected_ls__cat);
+	ps_test_full_parse("SINGLE CMD TEST", "ls", ps_create_expected_ls);
+	// ps_test_full_parse("SINGLE PIPE TEST", "ls|cat", ps_create_expected_ls__cat);
 	return (0);
 }
