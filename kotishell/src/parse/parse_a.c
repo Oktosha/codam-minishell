@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 15:17:18 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/08/09 12:03:51 by evoronin      ########   odam.nl         */
+/*   Updated: 2023/08/09 16:24:53 by evoronin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	l_ps_cmd_copy(t_ps_so_far *so_far)
 		return ;
 	}
 }
+
 void	l_ps_cmd(t_li_node *ep_tk, t_ps_so_far *so_far)
 {
 	t_ep_token	*tk;
