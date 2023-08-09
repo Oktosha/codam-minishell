@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 14:16:36 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/08/09 16:16:43 by codespace     ########   odam.nl         */
+/*   Updated: 2023/08/09 16:23:45 by codespace     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ void	PS_test_parse(t_ep_result *ep_res, t_li_node *expected)
 		cur_expected = cur_expected->next;
 	}
 	ps_node_free(cur);
+	ep_token_free(ep_res->tokens);
 }
 
 t_ps_single_command	*create_cmd(char **argv)
@@ -114,7 +115,7 @@ t_ps_single_command	*create_cmd(char **argv)
 	cmd->pid = -1;
 	cmd->inputs = NULL;
 	cmd->outputs = NULL;
-
+	
 	t_li_node	*argv_node = NULL;
 	int i = 0;
 	while (argv[i] != NULL)
@@ -155,6 +156,8 @@ void ps_test_full_parse(char *name, char *s, t_li_node *cmds_generator())
 	t_tk_result tk_res2 = tk_tokenize(s);
 	t_lx_result lx_res2 = lx_lex(tk_res2.tokens);
 	t_ep_result ep_res2 = ep_expand(NULL, lx_res2.tokens);
+	tk_token_free(tk_res2.tokens);
+	lx_token_free(lx_res2.tokens);
 	PS_test_parse(&ep_res2, expected_cmds);
 	ps_node_free(expected_cmds);
 }
