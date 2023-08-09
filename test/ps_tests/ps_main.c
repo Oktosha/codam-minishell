@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 14:16:36 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/08/08 09:27:40 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/08/09 11:52:33 by evoronin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 #include "expand.h"
 #include "parse.h"
 #include <string.h>
-
 
 void	PS_print_cmd(t_ps_single_command *cmd)
 {
@@ -79,10 +78,10 @@ int PS_are_equal(t_ps_single_command *expected, t_ps_single_command *real, int i
 void	PS_test_parse(t_ep_result *ep_res, t_li_node *expected)
 {
 	t_ps_result res = ps_parse(ep_res->tokens);
-	PS_print_cmds(res.cmds);
 	t_li_node 	*cur = res.cmds;
 	int			len = li_list_size(expected);
 	t_li_node	*cur_expected = expected;
+	PS_print_cmds(res.cmds);
 	int real_len = li_list_size(res.cmds);
 	if (real_len != len)
 	{
