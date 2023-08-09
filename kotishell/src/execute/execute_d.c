@@ -6,7 +6,7 @@
 /*   By: dkolodze <dkolodze@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/01 13:53:24 by dkolodze      #+#    #+#                 */
-/*   Updated: 2023/08/09 16:21:07 by dkolodze      ########   odam.nl         */
+/*   Updated: 2023/08/09 21:49:05 by dkolodze      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	l_ex_fork(t_ks_kotistate *state, t_ps_single_command *cmd, \
 	int		i;
 
 	cmd->pid = fork();
-	if (cmd->pid <= 0)
+	if (cmd->pid != 0)
 		return ;
 	l_ex_close_usseless_pipes(plumbing, cmd_index);
 	l_ex_connect_to_plumbing(plumbing, cmd_index);
