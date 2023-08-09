@@ -11,7 +11,7 @@ void ex_test_ls_grep(void)
 	cmd1.outputs = NULL;
 	cmd1.pid = -1;
 	t_li_node argv2_arg;
-	argv2_arg.data = "e";
+	argv2_arg.data = "exe";
 	argv2_arg.next = NULL;
 	t_li_node argv2_name;
 	argv2_name.data = "grep";
