@@ -9,6 +9,12 @@ jobs:
     steps:
       - run: sudo apt-get install valgrind
       - uses: actions/checkout@v3
-      - run: make && valgrind --error-exitcode=23 --leak-check=full -s ./ex_tests
+      - run: make
+        working-directory: test/ex_tests
+      - run: valgrind --error-exitcode=23 --leak-check=full -s ./ex_test_string_part.exe
+        working-directory: test/ex_tests
+      - run: valgrind --error-exitcode=23 --leak-check=full -s ./ex_test_ls.exe
+        working-directory: test/ex_tests
+      - run: valgrind --error-exitcode=23 --leak-check=full -s ./ex_test_ls_grep.exe
         working-directory: test/ex_tests
       - run: echo "Execute tests complete"
