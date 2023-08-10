@@ -6,7 +6,7 @@
 #    By: elenavoronin <elnvoronin@gmail.com>          +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/30 19:02:22 by evoronin      #+#    #+#                  #
-#    Updated: 2023/07/26 13:24:32 by codespace     ########   odam.nl          #
+#    Updated: 2023/08/10 17:03:55 by codespace     ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,9 @@ lex/lex_a.c lex/lex_b.c lex/lex_c.c \
 lists/lists_a.c \
 minilibft/mini_strlen.c \
 minilibft/mini_malloc.c \
-minilibft/mini_putstr_fd.c\
-minilibft/mini_assert.c
+minilibft/mini_putstr_fd.c \
+minilibft/mini_assert.c \ 
+minilibft/mini_write.c
 
 TEST_SRCS_NAMES = lx_main.c
 TEST_OBJS = $(addprefix $(OBJS_DIR)/,$(TEST_SRCS_NAMES:.c=.o))
