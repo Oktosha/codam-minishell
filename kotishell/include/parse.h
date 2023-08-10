@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/25 15:06:03 by mbp14         #+#    #+#                 */
-/*   Updated: 2023/08/10 16:56:09 by codespace     ########   odam.nl         */
+/*   Updated: 2023/08/10 17:19:46 by codespace     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ typedef enum e_ps_state
 typedef struct s_ps_so_far
 {
 	t_li_node			*head;
-	t_ps_single_command	*cmd;
+	t_ps_single_command	cmd;
 	int					cmd_length;
 	char				*cmd_data;
 	t_ps_status			status;
