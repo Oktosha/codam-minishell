@@ -6,7 +6,7 @@
 /*   By: dkolodze <dkolodze@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/01 13:53:24 by dkolodze      #+#    #+#                 */
-/*   Updated: 2023/08/04 14:37:31 by dkolodze      ########   odam.nl         */
+/*   Updated: 2023/08/09 21:49:05 by dkolodze      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ char	*l_ex_get_path_value(t_li_node *env)
 	return ("");
 }
 
-void	l_ex_fork(\
-	t_ks_kotistate *state, t_ps_single_command *cmd, int fd_in, int fd_out)
+void	l_ex_fork(t_ks_kotistate *state, t_ps_single_command *cmd, \
+	int cmd_index, t_ex_plumbing plumbing)
 {
 	char	**cmd_candidates;
 	char	**argv;
@@ -56,10 +56,10 @@ void	l_ex_fork(\
 	int		i;
 
 	cmd->pid = fork();
-	if (cmd->pid <= 0)
+	if (cmd->pid != 0)
 		return ;
-	dup2(fd_in, STDIN_FILENO);
-	dup2(fd_out, STDOUT_FILENO);
+	l_ex_close_usseless_pipes(plumbing, cmd_index);
+	l_ex_connect_to_plumbing(plumbing, cmd_index);
 	if (l_ex_is_builtin(cmd->argv->data))
 		exit(l_ex_builtin(state, cmd));
 	cmd_candidates = l_ex_get_cmd_candidates(cmd->argv->data, \
@@ -76,14 +76,14 @@ void	l_ex_fork(\
 }
 
 void	l_ex_launch_all(\
-	t_ks_kotistate *state, t_li_node *cmds, t_ex_pipe_array pipes)
+	t_ks_kotistate *state, t_li_node *cmds, t_ex_plumbing plumbing)
 {
 	int	i;
 
 	i = 1;
 	while (cmds)
 	{
-		l_ex_fork(state, cmds->data, pipes[i - 1][0], pipes[i][1]);
+		l_ex_fork(state, cmds->data, i, plumbing);
 		i += 1;
 		cmds = cmds->next;
 	}
