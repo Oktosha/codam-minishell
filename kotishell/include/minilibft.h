@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 15:23:07 by evoronin      #+#    #+#                 */
-/*   Updated: 2023/08/02 16:13:49 by dkolodze      ########   odam.nl         */
+/*   Updated: 2023/08/10 16:59:48 by codespace     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,13 @@
 # include <stdlib.h>
 # include <stdio.h>
 
-int			mini_putstr_fd(const char *s, int fd);
+void		mini_putstr_fd(const char *s, int fd);
 void		*mini_malloc(size_t size);
 int			mini_strlen(const char *s);
+char		*mini_substr(char *src, int len);
 void		mini_assert(int condition, const char *str);
 int			mini_strcmp(const char *a, const char *b);
+void		mini_write(int fd, const char *s, int length);
 
 /**
  * @brief searches for the first occurence of ch in null-terminated string s

@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 18:55:46 by evoronin      #+#    #+#                 */
-/*   Updated: 2023/07/25 18:13:56 by dkolodze      ########   odam.nl         */
+/*   Updated: 2023/08/10 19:03:56 by codespace     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,8 @@ void	TK_print_list(t_li_node *list)
 		token = list->data;
 		printf("[%d]: ", i);
 		fflush(stdout);
-		if (write(1, token->data, token->length) == -1)
-			mini_putstr_fd("Write error\n", 2);
-		if (write(1, "\n", 2) == -1)
-			mini_putstr_fd("Write error\n", 2);
+		mini_write(1, token->data, token->length);
+		mini_write(1, "\n", 2);
 		list = list->next;
 		i++;
 	}
@@ -75,7 +73,7 @@ void TK_test_tokenize(char *input, t_TK_dummy_token *expected, int len)
 {
 	t_tk_result res = tk_tokenize(input);
 	t_li_node *cur = res.tokens;
-	printf("Result tokens:\n");
+	printf("TK Result tokens:\n");
 	TK_print_list(res.tokens);
 	for (int i = 0; i < len; ++i)
 	{
@@ -94,15 +92,12 @@ void TK_test_tokenize(char *input, t_TK_dummy_token *expected, int len)
 int	main(void)
 {
 	printf("SIMPLE TEST:\n");
-	t_TK_dummy_token expected1[6] = {
-		{"\t\t\t\t\t ", TK_WHITESPACE},
-		{"asfa", TK_WORD},
-		{" ", TK_WHITESPACE},
-		{"tt", TK_WORD},
-		{"    ", TK_WHITESPACE},
-		{"", TK_EOL}
+	t_TK_dummy_token expected1[3] = {
+		{"ls", TK_WORD},
+		{"|", TK_PIPE},
+		{"cat", TK_WORD},
 	};
-	TK_test_tokenize("\t\t\t\t\t asfa tt    ", expected1, 6);
+	TK_test_tokenize("ls|cat", expected1, 3);
 	printf("EMPTY STR TEST:\n");
 	t_TK_dummy_token expected2[1] = {
 		{"", TK_EOL},

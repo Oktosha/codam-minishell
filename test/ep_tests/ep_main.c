@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   lx_main.c                                          :+:    :+:            */
+/*   ep_main.c                                          :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 14:16:36 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/08/10 19:04:24 by codespace     ########   odam.nl         */
+/*   Updated: 2023/08/10 19:11:17 by codespace     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,16 @@
 #include "lists.h"
 #include "minilibft.h"
 #include "tokenize.h"
+#include "expand.h"
 
-typedef struct s_LX_dummy_token {
+typedef struct s_EP_dummy_token {
 	char *s;
-	t_lx_token_type type;
-} t_LX_dummy_token;
+	t_ep_token_type type;
+} t_EP_dummy_token;
 
-typedef struct s_TK_dummy_token {
-	char *s;
-	t_tk_token_type type;
-} t_TK_dummy_token;
-
-
-void	LX_print_list(t_li_node *list)
+void	EP_print_list(t_li_node *list)
 {
-	t_lx_token	*token;
+	t_ep_token	*token;
 	int			i;
 
 	i = 0;
@@ -46,7 +41,7 @@ void	LX_print_list(t_li_node *list)
 	}
 }
 
-int LX_are_dummy_equal(t_LX_dummy_token expected, t_lx_token real, int i)
+int LX_are_dummy_equal(t_EP_dummy_token expected, t_ep_token real, int i)
 {
 	if (expected.type != real.type)
 	{
@@ -75,16 +70,16 @@ int LX_are_dummy_equal(t_LX_dummy_token expected, t_lx_token real, int i)
 	return 1;
 }
 
-void	LX_test_tokenize(t_tk_result *tk_res, t_LX_dummy_token *expected, int len)
+void	LX_test_tokenize(t_ks_kotistate *kotistate, t_lx_result *lx_res, t_EP_dummy_token *expected, int len)
 {
-	t_lx_result res = lx_lex(tk_res->tokens);
+	t_ep_result res = ep_expand(kotistate, lx_res->tokens);
 	t_li_node 	*cur = res.tokens;
-	printf("LX Result tokens:\n");
-	LX_print_list(res.tokens);
+	printf("EP Result tokens:\n");
+	EP_print_list(res.tokens);
 	for (int i = 0; i < len; ++i)
 	{
-		t_lx_token *cur_token = cur->data;
-		if (cur_token->type == LX_BAD)
+		t_ep_token *cur_token = cur->data;
+		if (cur_token->type == EP_BAD)
 			break ;
 		if (!LX_are_dummy_equal(expected[i], *cur_token, i))
 		{
@@ -92,26 +87,29 @@ void	LX_test_tokenize(t_tk_result *tk_res, t_LX_dummy_token *expected, int len)
 		}
 		cur = cur->next;
 	}
-	lx_token_free(res.tokens);
-	tk_token_free(tk_res->tokens);
+	ep_token_free(res.tokens);
+	lx_token_free(lx_res->tokens);
 }
 
 int	main(void)
 {
 	printf("SIMPLE TEST:\n");
-	t_LX_dummy_token expected1[1] = {
-		{"whatever", LX_WORD},
+	t_EP_dummy_token expected1[1] = {
+		{"whatever", EP_WORD},
 	};
 	t_tk_result tk_res1 = tk_tokenize("whatever");
-	LX_test_tokenize(&tk_res1, expected1, 1);
+	t_lx_result lx_res1 = lx_lex(tk_res1.tokens);
+	tk_token_free(tk_res1.tokens);
+	LX_test_tokenize(NULL, &lx_res1, expected1, 1);
 	printf("PIPE TEST:\n");
-	t_LX_dummy_token expected2[4] = {
-		{"ls", LX_WORD},
-		{"|", LX_PIPE},
-		{"cat", LX_WORD},
-		{"", LX_EOL},
+	t_EP_dummy_token expected2[3] = {
+		{"ls", EP_WORD},
+		{"|", EP_PIPE},
+		{"cat", EP_WORD},
 	};
 	t_tk_result tk_res2 = tk_tokenize("ls|cat");
-	LX_test_tokenize(&tk_res2, expected2, 4);
+	t_lx_result lx_res2 = lx_lex(tk_res2.tokens);
+	tk_token_free(tk_res2.tokens);
+	LX_test_tokenize(NULL, &lx_res2, expected2, 3);
 	return (0);
 }

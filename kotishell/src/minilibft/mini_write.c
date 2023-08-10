@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   mini_putstr_fd.c                                   :+:    :+:            */
+/*   mini_write.c                                       :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
+/*   By: codespace <codespace@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/06/30 15:21:11 by evoronin      #+#    #+#                 */
-/*   Updated: 2023/08/10 16:57:14 by codespace     ########   odam.nl         */
+/*   Created: 2023/08/10 16:48:35 by codespace     #+#    #+#                 */
+/*   Updated: 2023/08/10 17:00:33 by codespace     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minilibft.h"
 
-void	mini_putstr_fd(const char *s, int fd)
+void	mini_write(int fd, const char *s, int length)
 {
-	mini_write(fd, s, mini_strlen(s));
+	if (write(fd, s, length) < length)
+		exit(-10);
 }

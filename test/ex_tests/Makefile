@@ -6,7 +6,7 @@
 #    By: elenavoronin <elnvoronin@gmail.com>          +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/30 19:02:22 by evoronin      #+#    #+#                  #
-#    Updated: 2023/08/09 21:57:09 by dkolodze      ########   odam.nl          #
+#    Updated: 2023/08/10 19:14:31 by codespace     ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ minilibft/mini_strdup.c \
 minilibft/mini_malloc.c \
 minilibft/mini_putstr_fd.c \
 minilibft/mini_concat.c \
+minilibft/mini_write.c \
 lists/lists_a.c \
 execute/execute_b.c \
 execute/execute_a.c \
