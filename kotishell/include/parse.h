@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/25 15:06:03 by mbp14         #+#    #+#                 */
-/*   Updated: 2023/08/10 14:02:53 by codespace     ########   odam.nl         */
+/*   Updated: 2023/08/10 16:56:09 by codespace     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ typedef enum s_ps_status
 {
 	PS_SUCCESS,
 	PS_ERR_MALLOC,
-	PS_ERR_PRINT,
 	PS_ERR_SYNTAX,
 }	t_ps_status;
 
