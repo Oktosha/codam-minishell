@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/02 14:12:11 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/08/08 09:24:33 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/08/10 14:14:34 by codespace     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,13 @@ void	l_ps_syntax_error(t_ps_so_far *so_far)
 {
 	mini_putstr_fd(" \033[0;31m\x1B[1m-> syntax error near token \n\033[0m", 2);
 	mini_putstr_fd(so_far->cmd->argv->data, 2);
+	l_ps_error_cleanup(so_far);
+}
+
+void	l_ps_reset_single_cmd(t_ps_single_command *cmd)
+{
+	cmd->argv = NULL;
+	cmd->inputs = NULL;
+	cmd->outputs = NULL;
+	cmd->pid = -1;
 }

@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 15:17:18 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/08/09 16:24:53 by evoronin      ########   odam.nl         */
+/*   Updated: 2023/08/10 14:00:01 by codespace     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	l_ps_cmd_copy(t_ps_so_far *so_far)
 	if (li_new_stack(&so_far->head, so_far->cmd) == -1)
 	{
 		so_far->status = PS_ERR_MALLOC;
+		ps_free_single_cmd(so_far->cmd);
+		l_ps_reset_single_cmd(so_far->cmd);
 		return ;
 	}
 }
@@ -64,6 +66,7 @@ void	l_ps_pipe(t_li_node *ep_tk, t_ps_so_far *so_far)
 	tk = ep_tk->data;
 	so_far->state = l_ps_next_state(tk->type);
 	so_far->cmd_length = 0;
+	l_ps_reset_single_cmd(so_far->cmd);
 }
 
 void	l_ps_start(t_li_node *ep_tk, t_ps_so_far *so_far)

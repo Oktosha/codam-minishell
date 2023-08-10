@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/25 15:06:03 by mbp14         #+#    #+#                 */
-/*   Updated: 2023/08/10 13:26:23 by codespace     ########   odam.nl         */
+/*   Updated: 2023/08/10 14:02:53 by codespace     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef enum s_ps_status
 {
 	PS_SUCCESS,
 	PS_ERR_MALLOC,
+	PS_ERR_PRINT,
 	PS_ERR_SYNTAX,
 }	t_ps_status;
 
@@ -112,5 +113,6 @@ void		ps_free_single_cmd(t_ps_single_command *cmd);
 void		ps_cmd_argv_free(t_li_node *list);
 void		ps_cmd_output_free(t_li_node *list);
 void		ps_cmd_input_free(t_li_node *list);
+void		l_ps_reset_single_cmd(t_ps_single_command *cmd);
 
 #endif

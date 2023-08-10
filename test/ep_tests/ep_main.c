@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 14:16:36 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/08/09 16:15:45 by codespace     ########   odam.nl         */
+/*   Updated: 2023/08/10 16:53:21 by codespace     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,8 @@ void	EP_print_list(t_li_node *list)
 		token = list->data;
 		printf("[%d]: ", i);
 		fflush(stdout);
-		if (write(1, token->data, token->length) == -1)
-			mini_putstr_fd("Write error\n", 2);
-		if (write(1, "\n", 2) == -1)
-			mini_putstr_fd("Write error\n", 2);
+		mini_write(1, token->data, token->length);
+		mini_write(1, "\n", 2);
 		list = list->next;
 		i++;
 	}
