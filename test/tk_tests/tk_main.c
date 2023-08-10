@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 18:55:46 by evoronin      #+#    #+#                 */
-/*   Updated: 2023/08/10 16:54:15 by codespace     ########   odam.nl         */
+/*   Updated: 2023/08/10 19:03:56 by codespace     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,55 +98,55 @@ int	main(void)
 		{"cat", TK_WORD},
 	};
 	TK_test_tokenize("ls|cat", expected1, 3);
-	// printf("EMPTY STR TEST:\n");
-	// t_TK_dummy_token expected2[1] = {
-	// 	{"", TK_EOL},
-	// };
-	// TK_test_tokenize("", expected2, 1);
-	// printf("ONE PIPE TEST:\n");
-	// t_TK_dummy_token expected3[6] = {
-	// 	{"echo", TK_WORD},
-	// 	{" ", TK_WHITESPACE},
-	// 	{"|", TK_PIPE},
-	// 	{" ", TK_WHITESPACE},
-	// 	{"cat", TK_WORD},
-	// 	{"", TK_EOL},
-	// };
-	// TK_test_tokenize("echo | cat", expected3, 6);
-	// printf("TWO PIPES TEST\n");
-	// t_TK_dummy_token expected4[3] = {
-	// 	{"|", TK_PIPE},
-	// 	{"|", TK_PIPE},
-	// 	{"", TK_EOL},
-	// };	
-	// TK_test_tokenize("||", expected4, 3);
-	// printf("OTHER CHAR TEST\n");
-	// t_TK_dummy_token expected5[3] = {
-	// 	{"$", TK_DOLLAR},
-	// 	{"&@", TK_OTHER},
-	// 	{"", TK_EOL},
-	// };	
-	// TK_test_tokenize("$&@", expected5, 3);
-	// printf("NEWLINE TEST\n");
-	// t_TK_dummy_token expected6[6] = {
-	// 	{"\n", TK_NEWLINE},
-	// 	{"&@", TK_OTHER},
-	// 	{"\"", TK_QUOTE_2},
-	// 	{"abcdsd1234", TK_WORD},
-	// 	{"\"", TK_QUOTE_2},
-	// 	{"", TK_EOL},
-	// };	
-	// TK_test_tokenize("\n&@\"abcdsd1234\"", expected6, 6);
-	// printf("UNSUPORTED TEST\n");
-	// t_TK_dummy_token expected7[7] = {
-	// 	{"&@", TK_OTHER},
-	// 	{"\"", TK_QUOTE_2},
-	// 	{"\xf0\x9f\x98\x87", TK_BAD},
-	// 	{"?", TK_QUESTION},
-	// 	{"\"", TK_QUOTE_2},
-	// 	{"?", TK_QUESTION},
-	// 	{"", TK_EOL},
-	// };	
-	// TK_test_tokenize("&@\"😇?\"?", expected7, 7);
+	printf("EMPTY STR TEST:\n");
+	t_TK_dummy_token expected2[1] = {
+		{"", TK_EOL},
+	};
+	TK_test_tokenize("", expected2, 1);
+	printf("ONE PIPE TEST:\n");
+	t_TK_dummy_token expected3[6] = {
+		{"echo", TK_WORD},
+		{" ", TK_WHITESPACE},
+		{"|", TK_PIPE},
+		{" ", TK_WHITESPACE},
+		{"cat", TK_WORD},
+		{"", TK_EOL},
+	};
+	TK_test_tokenize("echo | cat", expected3, 6);
+	printf("TWO PIPES TEST\n");
+	t_TK_dummy_token expected4[3] = {
+		{"|", TK_PIPE},
+		{"|", TK_PIPE},
+		{"", TK_EOL},
+	};	
+	TK_test_tokenize("||", expected4, 3);
+	printf("OTHER CHAR TEST\n");
+	t_TK_dummy_token expected5[3] = {
+		{"$", TK_DOLLAR},
+		{"&@", TK_OTHER},
+		{"", TK_EOL},
+	};	
+	TK_test_tokenize("$&@", expected5, 3);
+	printf("NEWLINE TEST\n");
+	t_TK_dummy_token expected6[6] = {
+		{"\n", TK_NEWLINE},
+		{"&@", TK_OTHER},
+		{"\"", TK_QUOTE_2},
+		{"abcdsd1234", TK_WORD},
+		{"\"", TK_QUOTE_2},
+		{"", TK_EOL},
+	};	
+	TK_test_tokenize("\n&@\"abcdsd1234\"", expected6, 6);
+	printf("UNSUPORTED TEST\n");
+	t_TK_dummy_token expected7[7] = {
+		{"&@", TK_OTHER},
+		{"\"", TK_QUOTE_2},
+		{"\xf0\x9f\x98\x87", TK_BAD},
+		{"?", TK_QUESTION},
+		{"\"", TK_QUOTE_2},
+		{"?", TK_QUESTION},
+		{"", TK_EOL},
+	};	
+	TK_test_tokenize("&@\"😇?\"?", expected7, 7);
 	return (0);
 }

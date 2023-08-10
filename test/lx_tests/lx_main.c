@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 14:16:36 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/08/10 16:53:53 by codespace     ########   odam.nl         */
+/*   Updated: 2023/08/10 19:04:24 by codespace     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,11 +99,11 @@ void	LX_test_tokenize(t_tk_result *tk_res, t_LX_dummy_token *expected, int len)
 int	main(void)
 {
 	printf("SIMPLE TEST:\n");
-	// t_LX_dummy_token expected1[1] = {
-	// 	{"whatever", LX_WORD},
-	// };
-	// t_tk_result tk_res1 = tk_tokenize("whatever");
-	// LX_test_tokenize(&tk_res1, expected1, 1);
+	t_LX_dummy_token expected1[1] = {
+		{"whatever", LX_WORD},
+	};
+	t_tk_result tk_res1 = tk_tokenize("whatever");
+	LX_test_tokenize(&tk_res1, expected1, 1);
 	printf("PIPE TEST:\n");
 	t_LX_dummy_token expected2[4] = {
 		{"ls", LX_WORD},
