@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/30 15:02:03 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/08/09 12:03:17 by evoronin      ########   odam.nl         */
+/*   Updated: 2023/08/10 13:28:22 by codespace     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,27 +22,6 @@ void	l_ps_end(t_ps_so_far *so_far)
 		return ;
 }
 
-void	ps_node_free(t_li_node *list)
-{
-	t_li_node	*temp;
-
-	while (list)
-	{
-		temp = list;
-		free(temp->data);
-		list = list->next;
-		free(temp);
-	}
-}
-
-void	ps_cmd_free(t_ps_single_command *cmd)
-{
-	ps_node_free(cmd->argv);
-	ps_node_free(cmd->inputs);
-	ps_node_free(cmd->outputs);
-	free(cmd);
-}
-
 void	l_ps_result(t_ps_result *result, t_ps_so_far *so_far)
 {
 	result->cmds = so_far->head;
@@ -51,7 +30,7 @@ void	l_ps_result(t_ps_result *result, t_ps_so_far *so_far)
 
 void	l_ps_error_cleanup(t_ps_so_far *so_far)
 {
-	ps_cmd_free(so_far->cmd);
-	so_far->cmd = NULL;
+	ps_free_all_cmds(so_far->head);
+	so_far->head = NULL;
 	mini_putstr_fd("Failed malloc\n", 2);
 }

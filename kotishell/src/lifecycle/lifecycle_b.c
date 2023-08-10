@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 17:53:02 by dkolodze      #+#    #+#                 */
-/*   Updated: 2023/08/09 14:33:43 by evoronin      ########   odam.nl         */
+/*   Updated: 2023/08/10 13:30:35 by codespace     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	l_lc_process_data_cleanup(t_lc_process_data *data)
 	tk_token_free(data->tk_result.tokens);
 	lx_token_free(data->lx_result.tokens);
 	ep_token_free(data->ep_result.tokens);
-	ps_node_free(data->ps_result.cmds);
+	ps_free_all_cmds(data->ps_result.cmds);
 }
 
 void	l_lc_init_process_data(t_lc_process_data *data)

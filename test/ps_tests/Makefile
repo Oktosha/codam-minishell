@@ -6,7 +6,7 @@
 #    By: elenavoronin <elnvoronin@gmail.com>          +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/30 19:02:22 by evoronin      #+#    #+#                  #
-#    Updated: 2023/08/07 17:44:13 by elenavoroni   ########   odam.nl          #
+#    Updated: 2023/08/10 13:25:27 by codespace     ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = ps_tests
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -I ../../kotishell/include -g #-fsanitize=address
 SRCS_FOLDER = ../../kotishell/src
-SRCS_NAMES = parse/parse_a.c parse/parse_b.c parse/parse_c.c \
+SRCS_NAMES = parse/parse_a.c parse/parse_b.c parse/parse_c.c parse/parse_d.c \
 expand/expand_a.c expand/expand_b.c \
 lex/lex_a.c lex/lex_b.c lex/lex_c.c \
 tokenize/tokenize_a.c tokenize/tokenize_b.c tokenize/tokenize_c.c \

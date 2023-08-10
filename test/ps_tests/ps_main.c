@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 14:16:36 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/08/09 16:23:45 by codespace     ########   odam.nl         */
+/*   Updated: 2023/08/10 13:27:31 by codespace     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	PS_test_parse(t_ep_result *ep_res, t_li_node *expected)
 		cur = cur->next;
 		cur_expected = cur_expected->next;
 	}
-	ps_node_free(cur);
+	ps_free_all_cmds(res.cmds);
 	ep_token_free(ep_res->tokens);
 }
 
@@ -137,7 +137,7 @@ t_li_node *ps_create_expected_ls(void)
 	return expected_cmds;
 }
 
-t_li_node *ps_create_expected_ls__cat(void)
+t_li_node *ps_create_expected_ls_cat(void)
 {
 	char *argv_ls[2] = {strdup("ls"), NULL};
 	char *argv_cat[2] = {strdup("cat"), NULL};
@@ -156,15 +156,15 @@ void ps_test_full_parse(char *name, char *s, t_li_node *cmds_generator())
 	t_tk_result tk_res2 = tk_tokenize(s);
 	t_lx_result lx_res2 = lx_lex(tk_res2.tokens);
 	t_ep_result ep_res2 = ep_expand(NULL, lx_res2.tokens);
+	PS_test_parse(&ep_res2, expected_cmds);
 	tk_token_free(tk_res2.tokens);
 	lx_token_free(lx_res2.tokens);
-	PS_test_parse(&ep_res2, expected_cmds);
-	ps_node_free(expected_cmds);
+	ps_free_all_cmds(expected_cmds);
 }
 
 int	main(void)
 {
 	ps_test_full_parse("SINGLE CMD TEST", "ls", ps_create_expected_ls);
-	// ps_test_full_parse("SINGLE PIPE TEST", "ls|cat", ps_create_expected_ls__cat);
+	// ps_test_full_parse("SINGLE PIPE TEST", "ls|cat", ps_create_expected_ls_cat);
 	return (0);
 }

@@ -6,7 +6,7 @@
 #    By: elenavoronin <elnvoronin@gmail.com>          +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/12 11:12:29 by evoronin      #+#    #+#                  #
-#    Updated: 2023/08/09 14:53:20 by evoronin      ########   odam.nl          #
+#    Updated: 2023/08/10 13:30:01 by codespace     ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,6 +60,7 @@ minilibft/mini_substr.c \
 parse/parse_a.c \
 parse/parse_b.c \
 parse/parse_c.c \
+parse/parse_d.c \
 tokenize/tokenize_a.c \
 tokenize/tokenize_b.c \
 tokenize/tokenize_c.c \
