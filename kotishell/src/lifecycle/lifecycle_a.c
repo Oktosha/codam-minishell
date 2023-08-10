@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/26 16:18:32 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/08/10 20:07:51 by codespace     ########   odam.nl         */
+/*   Updated: 2023/08/10 20:10:38 by codespace     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ t_ks_status	l_lc_init_kotistate(t_ks_kotistate *kotistate, char **envp)
 	int				i;
 	int				eq_pos;
 
+	i = 0;
 	kotistate->env = NULL;
 	while (envp[i])
 	{
