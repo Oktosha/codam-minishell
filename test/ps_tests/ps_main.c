@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 14:16:36 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/08/10 13:27:31 by codespace     ########   odam.nl         */
+/*   Updated: 2023/08/10 13:44:03 by codespace     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void	PS_test_parse(t_ep_result *ep_res, t_li_node *expected)
 t_ps_single_command	*create_cmd(char **argv)
 {
 	t_ps_single_command *cmd;
-	cmd = malloc(sizeof(t_ps_single_command));
+	cmd = mini_malloc(sizeof(t_ps_single_command));
 	if (!cmd)
 	{
 		mini_putstr_fd("Cmd malloc bug\n", 2);

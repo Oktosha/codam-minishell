@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 12:08:29 by codespace     #+#    #+#                 */
-/*   Updated: 2023/08/09 15:09:52 by codespace     ########   odam.nl         */
+/*   Updated: 2023/08/10 13:43:22 by codespace     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	l_lx_token_copy(t_lx_so_far *so_far)
 {
 	t_lx_token	*ptr_token;
 
-	ptr_token = malloc(sizeof(t_lx_token));
+	ptr_token = mini_malloc(sizeof(t_lx_token));
 	if (!ptr_token)
 	{
 		so_far->status = LX_ERR_MALLOC;
