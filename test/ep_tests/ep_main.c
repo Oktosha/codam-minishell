@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 14:16:36 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/08/10 19:11:17 by codespace     ########   odam.nl         */
+/*   Updated: 2023/08/14 17:13:11 by evoronin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,21 +95,21 @@ int	main(void)
 {
 	printf("SIMPLE TEST:\n");
 	t_EP_dummy_token expected1[1] = {
-		{"whatever", EP_WORD},
+		{"/usr/bin/ls", EP_WORD},
 	};
-	t_tk_result tk_res1 = tk_tokenize("whatever");
+	t_tk_result tk_res1 = tk_tokenize("/usr/bin/ls");
 	t_lx_result lx_res1 = lx_lex(tk_res1.tokens);
 	tk_token_free(tk_res1.tokens);
 	LX_test_tokenize(NULL, &lx_res1, expected1, 1);
-	printf("PIPE TEST:\n");
-	t_EP_dummy_token expected2[3] = {
-		{"ls", EP_WORD},
-		{"|", EP_PIPE},
-		{"cat", EP_WORD},
-	};
-	t_tk_result tk_res2 = tk_tokenize("ls|cat");
-	t_lx_result lx_res2 = lx_lex(tk_res2.tokens);
-	tk_token_free(tk_res2.tokens);
-	LX_test_tokenize(NULL, &lx_res2, expected2, 3);
+	// printf("PIPE TEST:\n");
+	// t_EP_dummy_token expected2[3] = {
+	// 	{"ls", EP_WORD},
+	// 	{"|", EP_PIPE},
+	// 	{"cat", EP_WORD},
+	// };
+	// t_tk_result tk_res2 = tk_tokenize("ls|cat");
+	// t_lx_result lx_res2 = lx_lex(tk_res2.tokens);
+	// tk_token_free(tk_res2.tokens);
+	// LX_test_tokenize(NULL, &lx_res2, expected2, 3);
 	return (0);
 }

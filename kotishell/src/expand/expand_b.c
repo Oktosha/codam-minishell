@@ -6,11 +6,21 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/27 18:00:38 by evoronin      #+#    #+#                 */
-/*   Updated: 2023/08/01 17:56:00 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/08/14 14:20:08 by evoronin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expand.h"
+
+void	l_ep_init_so_far(t_ep_so_far *so_far)
+{
+	so_far->status = EP_SUCCESS;
+	so_far->head = NULL;
+	so_far->token.type = EP_EMPTY;
+	so_far->token.length = 0;
+	so_far->state = EP_ST_START;
+	so_far->token.data = NULL;
+}
 
 void	ep_token_free(t_li_node *list)
 {

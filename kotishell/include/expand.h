@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 19:57:44 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/08/04 15:07:55 by evoronin      ########   odam.nl         */
+/*   Updated: 2023/08/14 17:05:56 by evoronin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,18 +32,22 @@ typedef enum e_ep_token_type
 	EP_PIPE,
 	EP_QUOTE_1,
 	EP_QUOTE_2,
+	EP_WHITESPACE,
 	EP_WORD,
 }	t_ep_token_type;
 
 typedef enum e_ep_state
 {
 	EP_ST_BUG,
+	EP_ST_END,
 	EP_ST_ERROR,
 	EP_ST_HEREDOC,
 	EP_ST_IMPORTANT,
 	EP_ST_OTHER,
+	EP_ST_QUOTE,
 	EP_ST_START,
 	EP_ST_VARIABLE,
+	EP_ST_WHITESPACE,
 	EP_ST_WORD,
 }	t_ep_state;
 
@@ -74,9 +78,14 @@ typedef struct s_ep_result
 	t_ep_status	status;
 }	t_ep_result;
 
-t_ep_result	ep_expand(t_ks_kotistate *state, t_li_node *tokens);
-void		ep_token_free(t_li_node *list);
-void		l_ep_token_result(t_ep_result *result, t_ep_so_far *so_far);
-void		l_ep_token_copy(t_ep_so_far *so_far);
+t_ep_result			ep_expand(t_ks_kotistate *state, t_li_node *tokens);
+void				ep_token_free(t_li_node *list);
+void				l_ep_token_result(t_ep_result *result, t_ep_so_far *so_far);
+void				l_ep_token_copy(t_ep_so_far *so_far);
+void				l_ep_word(t_li_node *lx_res, t_ep_so_far *so_far);
+void				l_ep_start(t_li_node *lx_res, t_ep_so_far *so_far);
+void				l_ep_init_so_far(t_ep_so_far *so_far);
+t_ep_state			l_ep_next_state(t_lx_token_type lx_tk);
+void				l_ep_error_cleanup(t_li_node *lx_res, t_ep_so_far *so_far);
 
 #endif
