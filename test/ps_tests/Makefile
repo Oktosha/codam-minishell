@@ -6,24 +6,28 @@
 #    By: elenavoronin <elnvoronin@gmail.com>          +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/30 19:02:22 by evoronin      #+#    #+#                  #
-#    Updated: 2023/08/10 17:03:27 by codespace     ########   odam.nl          #
+#    Updated: 2023/08/10 16:50:54 by codespace     ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = tk_tests
+NAME = ps_tests
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I ../../kotishell/include -g
+CFLAGS = -Wall -Wextra -Werror -I ../../kotishell/include -g #-fsanitize=address
 SRCS_FOLDER = ../../kotishell/src
-SRCS_NAMES = tokenize/tokenize_a.c tokenize/tokenize_b.c tokenize/tokenize_c.c \
+SRCS_NAMES = parse/parse_a.c parse/parse_b.c parse/parse_c.c parse/parse_d.c \
+expand/expand_a.c expand/expand_b.c \
+lex/lex_a.c lex/lex_b.c lex/lex_c.c \
+tokenize/tokenize_a.c tokenize/tokenize_b.c tokenize/tokenize_c.c \
 tokenize/tokenize_d.c \
 lists/lists_a.c \
 minilibft/mini_strlen.c \
 minilibft/mini_malloc.c \
-minilibft/mini_putstr_fd.c\
+minilibft/mini_putstr_fd.c \
 minilibft/mini_assert.c \
+minilibft/mini_substr.c \
 minilibft/mini_write.c
 
-TEST_SRCS_NAMES = tk_main.c
+TEST_SRCS_NAMES = ps_main.c
 TEST_OBJS = $(addprefix $(OBJS_DIR)/,$(TEST_SRCS_NAMES:.c=.o))
 OBJS_DIR = ./objs
 ABSOLUTE_SRCS_NAMES = $(addprefix $(SRCS_FOLDER)/,$(SRCS_NAMES))

@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/10 14:12:29 by evoronin      #+#    #+#                 */
-/*   Updated: 2023/07/25 18:14:37 by dkolodze      ########   odam.nl         */
+/*   Updated: 2023/08/10 13:43:39 by codespace     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	l_tk_token_copy(t_tk_so_far *so_far)
 {
 	t_tk_token	*ptr_token;
 
-	ptr_token = malloc(sizeof(t_tk_token));
+	ptr_token = mini_malloc(sizeof(t_tk_token));
 	if (!ptr_token)
 	{
 		so_far->status = TK_ERR_MALLOC;
@@ -60,6 +60,7 @@ void	tk_token_free(t_li_node *list)
 		list = list->next;
 		free(temp);
 	}
+	free(list);
 }
 
 void	l_tk_error_cleanup(t_tk_so_far *so_far)
