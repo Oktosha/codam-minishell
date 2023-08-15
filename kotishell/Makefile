@@ -6,7 +6,7 @@
 #    By: elenavoronin <elnvoronin@gmail.com>          +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/12 11:12:29 by evoronin      #+#    #+#                  #
-#    Updated: 2023/08/10 16:50:28 by codespace     ########   odam.nl          #
+#    Updated: 2023/08/15 12:14:01 by evoronin      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ execute/execute_e.c \
 execute/execute_f.c \
 expand/expand_a.c \
 expand/expand_b.c \
+expand/expand_c.c \
 lex/lex_a.c \
 lex/lex_b.c \
 lex/lex_c.c \

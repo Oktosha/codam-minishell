@@ -6,7 +6,7 @@
 /*   By: evoronin <evoronin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/14 14:27:20 by evoronin      #+#    #+#                 */
-/*   Updated: 2023/08/14 17:07:41 by evoronin      ########   odam.nl         */
+/*   Updated: 2023/08/15 16:38:47 by evoronin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,20 @@ t_ep_state	l_ep_next_state(t_lx_token_type lx_tk)
 {
 	if (lx_tk == LX_EOL)
 		return (EP_ST_END);
-	if (lx_tk == LX_WHITESPACE)
-		return (EP_ST_WHITESPACE);
-	if (lx_tk == LX_WORD)
-		return (EP_ST_WORD);
-	if (lx_tk == LX_OTHER)
+	if (lx_tk == LX_WORD || lx_tk == LX_OTHER || lx_tk == LX_WHITESPACE)
 		return (EP_ST_WORD);
 	if (lx_tk == LX_BAD)
 		return (EP_ST_ERROR);
+	if (lx_tk == LX_HEREDOC)
+		return (EP_ST_HEREDOC);
+	if (lx_tk == LX_OUTPUT || lx_tk == LX_INPUT || lx_tk == LX_APPEND)
+		return (EP_ST_IMPORTANT);
+	if (lx_tk == LX_QUOTE_1 || lx_tk == LX_QUOTE_2)
+		return (EP_ST_IMPORTANT);
+	if (lx_tk == LX_VARIABLE)
+		return (EP_ST_VARIABLE);
+	if (lx_tk == LX_PIPE)
+		return (EP_ST_PIPE);
 	return (EP_ST_ERROR);
 }
 

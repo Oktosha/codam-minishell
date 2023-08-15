@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 14:16:36 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/08/10 19:04:11 by codespace     ########   odam.nl         */
+/*   Updated: 2023/08/15 16:08:16 by evoronin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,23 @@ t_ps_single_command	*create_cmd(char **argv)
 	return (cmd);
 }
 
+t_li_node *ps_create_expected_minishell(void)
+{
+	char *argv_mini[2] = {strdup("./minishell"), NULL};
+	t_ps_single_command *cmd_mini = create_cmd(argv_mini);
+	t_li_node *expected_cmds = NULL;
+	li_new_stack(&expected_cmds, cmd_mini);
+	return expected_cmds;
+}
+
+t_li_node *ps_create_expected_bin_ls(void)
+{
+	char *argv_bin[2] = {strdup("/bin/ls"), NULL};
+	t_ps_single_command *cmd_bin = create_cmd(argv_bin);
+	t_li_node *expected_cmds = NULL;
+	li_new_stack(&expected_cmds, cmd_bin);
+	return expected_cmds;
+}
 
 t_li_node *ps_create_expected_ls(void)
 {
@@ -167,5 +184,7 @@ int	main(void)
 {
 	ps_test_full_parse("SINGLE CMD TEST", "ls", ps_create_expected_ls);
 	ps_test_full_parse("SINGLE PIPE TEST", "ls|cat", ps_create_expected_ls_cat);
+	ps_test_full_parse("COMMAND PATH TEST", "/bin/ls", ps_create_expected_bin_ls);
+	ps_test_full_parse("EXECUTABLE TEST", "./minishell", ps_create_expected_minishell);
 	return (0);
 }

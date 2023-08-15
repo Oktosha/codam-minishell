@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 15:01:09 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/08/14 17:06:57 by evoronin      ########   odam.nl         */
+/*   Updated: 2023/08/15 15:24:36 by evoronin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,21 +28,42 @@ void	l_ep_word(t_li_node *lx_res, t_ep_so_far *so_far)
 	if (so_far->status != EP_SUCCESS)
 		return ;
 	cur_lx = lx_res->data;
-	so_far->token.type = EP_WORD;
-	so_far->token.data = cur_lx->data;
+	if (so_far->token.type == EP_EMPTY)
+	{
+		so_far->token.data = cur_lx->data;
+		so_far->token.type = EP_WORD;
+	}
 	so_far->token.length += cur_lx->length;
 	next_lx = lx_res->next->data;
-	while (next_lx->type == LX_WORD || next_lx->type == LX_OTHER)
+	so_far->state = l_ep_next_state(next_lx->type);
+	if (so_far->state != EP_ST_WORD)
 	{
-		so_far->token.length += next_lx->length;
-		next_lx = lx_res->next->data;
+		l_ep_token_copy(so_far);
+		if (so_far->status == EP_ERR_MALLOC)
+			return ;
+		so_far->token.type = EP_EMPTY;
+		so_far->token.length = 0;
 	}
+}
+
+void	l_ep_pipe(t_li_node *lx_res, t_ep_so_far *so_far)
+{
+	t_lx_token	*cur_lx;
+	t_lx_token	*next_lx;
+
+	cur_lx = lx_res->data;
+	if (so_far->status != EP_SUCCESS)
+		return ;
+	so_far->token.type = EP_PIPE;
+	so_far->token.length = cur_lx->length;
+	so_far->token.data = cur_lx->data;
 	l_ep_token_copy(so_far);
 	if (so_far->status == EP_ERR_MALLOC)
 		return ;
+	next_lx = lx_res->next->data;
+	so_far->state = l_ep_next_state(next_lx->type);
 	so_far->token.type = EP_EMPTY;
 	so_far->token.length = 0;
-	so_far->state = l_ep_next_state(next_lx->type);
 }
 
 void	l_ep_start(t_li_node *lx_res, t_ep_so_far *so_far)
@@ -50,10 +71,16 @@ void	l_ep_start(t_li_node *lx_res, t_ep_so_far *so_far)
 	t_lx_token	*lx_token;
 
 	lx_token = lx_res->data;
-	if (lx_token->type == LX_WORD || lx_token->type == LX_OTHER)
+	if (lx_token->type == LX_WORD || lx_token->type == LX_OTHER \
+		|| lx_token->type == LX_WHITESPACE)
 	{
 		so_far->state = EP_ST_WORD;
 		l_ep_word(lx_res, so_far);
+	}
+	if (lx_token->type == LX_PIPE)
+	{
+		so_far->state = EP_ST_PIPE;
+		l_ep_pipe(lx_res, so_far);
 	}
 }
 
@@ -67,6 +94,15 @@ t_ep_result	ep_expand(t_ks_kotistate *kotistate, t_li_node *lx_res)
 	result.status = EP_SUCCESS;
 	l_ep_init_so_far(&so_far);
 	l_ep_start(lx_res, &so_far);
+	while (lx_res)
+	{
+		lx_res = lx_res->next;
+		if (so_far.state == EP_ST_WORD)
+			l_ep_word(lx_res, &so_far);
+		if (so_far.state == EP_ST_PIPE)
+			l_ep_pipe(lx_res, &so_far);
+	}
+	l_ep_end(lx_res, &so_far);
 	l_ep_token_result(&result, &so_far);
 	return (result);
 }

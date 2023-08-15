@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 14:16:36 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/08/14 17:13:11 by evoronin      ########   odam.nl         */
+/*   Updated: 2023/08/15 15:29:51 by evoronin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ void	LX_test_tokenize(t_ks_kotistate *kotistate, t_lx_result *lx_res, t_EP_dummy
 {
 	t_ep_result res = ep_expand(kotistate, lx_res->tokens);
 	t_li_node 	*cur = res.tokens;
-	printf("EP Result tokens:\n");
 	EP_print_list(res.tokens);
 	for (int i = 0; i < len; ++i)
 	{
@@ -95,21 +94,40 @@ int	main(void)
 {
 	printf("SIMPLE TEST:\n");
 	t_EP_dummy_token expected1[1] = {
-		{"/usr/bin/ls", EP_WORD},
+		{"/bin/ls", EP_WORD},
 	};
-	t_tk_result tk_res1 = tk_tokenize("/usr/bin/ls");
+	t_tk_result tk_res1 = tk_tokenize("/bin/ls");
 	t_lx_result lx_res1 = lx_lex(tk_res1.tokens);
 	tk_token_free(tk_res1.tokens);
 	LX_test_tokenize(NULL, &lx_res1, expected1, 1);
-	// printf("PIPE TEST:\n");
-	// t_EP_dummy_token expected2[3] = {
-	// 	{"ls", EP_WORD},
-	// 	{"|", EP_PIPE},
-	// 	{"cat", EP_WORD},
-	// };
-	// t_tk_result tk_res2 = tk_tokenize("ls|cat");
-	// t_lx_result lx_res2 = lx_lex(tk_res2.tokens);
-	// tk_token_free(tk_res2.tokens);
-	// LX_test_tokenize(NULL, &lx_res2, expected2, 3);
+	
+	printf("MORE SIMPLE TEST:\n");
+	t_EP_dummy_token expected4[1] = {
+		{"./minishell", EP_WORD},
+	};
+	t_tk_result tk_res4 = tk_tokenize("./minishell");
+	t_lx_result lx_res4 = lx_lex(tk_res4.tokens);
+	tk_token_free(tk_res4.tokens);
+	LX_test_tokenize(NULL, &lx_res4, expected4, 1);
+
+	printf("PIPE TEST:\n");
+	t_EP_dummy_token expected2[3] = {
+		{"ls", EP_WORD},
+		{"|", EP_PIPE},
+		{"cat", EP_WORD}
+	};
+	t_tk_result tk_res2 = tk_tokenize("ls|cat");
+	t_lx_result lx_res2 = lx_lex(tk_res2.tokens);
+	tk_token_free(tk_res2.tokens);
+	LX_test_tokenize(NULL, &lx_res2, expected2, 3);
+	
+	printf("CMND with ARG TEST:\n");
+	t_EP_dummy_token expected3[1] = {
+		{"echo hello", EP_WORD},
+	};
+	t_tk_result tk_res3 = tk_tokenize("echo hello");
+	t_lx_result lx_res3 = lx_lex(tk_res3.tokens);
+	tk_token_free(tk_res3.tokens);
+	LX_test_tokenize(NULL, &lx_res3, expected3, 1);
 	return (0);
 }
