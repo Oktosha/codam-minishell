@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 14:16:36 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/08/10 19:04:11 by codespace     ########   odam.nl         */
+/*   Updated: 2023/08/15 14:36:27 by codespace     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 #include "expand.h"
 #include "parse.h"
 #include <string.h>
+
+typedef t_li_node t_ps_cmd_node;
 
 void	PS_print_cmd(t_ps_single_command *cmd)
 {
@@ -153,7 +155,7 @@ t_li_node *ps_create_expected_ls_cat(void)
 void ps_test_full_parse(char *name, char *s, t_li_node *cmds_generator())
 {
 	printf("%s: %s\n", name, s);
-	t_li_node *expected_cmds = cmds_generator();
+	t_ps_cmd_node *expected_cmds = cmds_generator();
 	t_tk_result tk_res2 = tk_tokenize(s);
 	t_lx_result lx_res2 = lx_lex(tk_res2.tokens);
 	t_ep_result ep_res2 = ep_expand(NULL, lx_res2.tokens);
