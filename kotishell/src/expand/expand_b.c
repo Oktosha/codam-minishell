@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/27 18:00:38 by evoronin      #+#    #+#                 */
-/*   Updated: 2023/08/15 16:38:34 by evoronin      ########   odam.nl         */
+/*   Updated: 2023/08/15 16:44:16 by codespace     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,13 @@ void	l_ep_init_so_far(t_ep_so_far *so_far)
 void	ep_token_free(t_li_node *list)
 {
 	t_li_node	*temp;
+	t_ep_token	*ep_tk;
 
 	while (list)
 	{
 		temp = list;
+		ep_tk = temp->data;
+		free(ep_tk->data);
 		free(temp->data);
 		list = list->next;
 		free(temp);
@@ -45,7 +48,7 @@ void	l_ep_token_copy(t_ep_so_far *so_far)
 {
 	t_ep_token	*ptr_token;
 
-	ptr_token = malloc(sizeof(t_ep_token));
+	ptr_token = mini_malloc(sizeof(t_ep_token));
 	if (!ptr_token)
 	{
 		so_far->status = EP_ERR_MALLOC;

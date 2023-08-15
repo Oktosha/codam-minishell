@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 15:01:09 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/08/15 15:24:36 by evoronin      ########   odam.nl         */
+/*   Updated: 2023/08/15 16:37:35 by codespace     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void	l_ep_end(t_li_node *lx_res, t_ep_so_far *so_far)
 {
-	if (so_far->status == EP_SUCCESS)
-		lx_token_free(lx_res);
 	if (so_far->status == EP_ERR_MALLOC)
 		l_ep_error_cleanup(lx_res, so_far);
 }
