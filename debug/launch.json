@@ -5,8 +5,8 @@
 			"name": "Pretty gdb",
 			"request": "launch",
 			"type": "cppdbg",
-			"program": "${workspaceRoot}/test/ps_tests/ps_tests",
-			"cwd": "${workspaceFolder}/debug",
+			"program": "${workspaceFolder}/test/ps_tests/ps_tests",
+			"cwd": "${workspaceFolder}",
 			"MIMode": "gdb",
 			"miDebuggerPath": "/usr/bin/gdb",
 			"setupCommands": [
@@ -15,7 +15,12 @@
 				  "text": "-enable-pretty-printing",
 				  "ignoreFailures": false
 				},
-			  ],
-		},
+				{
+					"description": "Load Kotishell printers",
+					"text": "source ${workspaceFolder}/debug/gdb/pretty.py",
+					"ignoreFailures": false
+				}
+			  ]
+		}
 	]
 }
