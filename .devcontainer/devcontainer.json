@@ -10,7 +10,10 @@
 			"extensions": [
 				"ms-vscode.cpptools",
 				"ms-python.vscode-pylance"
-			]
+			],
+			"settings": {
+				"python.linting.enabled": false,
+			}
 		}
 	}
 }
