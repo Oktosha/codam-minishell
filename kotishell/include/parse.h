@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/25 15:06:03 by mbp14         #+#    #+#                 */
-/*   Updated: 2023/08/10 17:19:46 by codespace     ########   odam.nl         */
+/*   Updated: 2023/08/16 14:21:55 by codespace     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ typedef enum e_ps_state
 	PS_ST_QUOTE,
 	PS_ST_PIPE,
 	PS_ST_START,
+	PS_ST_WHITESPACE,
 }	t_ps_state;
 
 typedef struct s_ps_so_far

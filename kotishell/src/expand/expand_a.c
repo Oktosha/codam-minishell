@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 15:01:09 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/08/15 16:37:35 by codespace     ########   odam.nl         */
+/*   Updated: 2023/08/16 15:09:47 by codespace     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,7 @@ void	l_ep_start(t_li_node *lx_res, t_ep_so_far *so_far)
 	t_lx_token	*lx_token;
 
 	lx_token = lx_res->data;
-	if (lx_token->type == LX_WORD || lx_token->type == LX_OTHER \
-		|| lx_token->type == LX_WHITESPACE)
+	if (lx_token->type == LX_WORD || lx_token->type == LX_OTHER)
 	{
 		so_far->state = EP_ST_WORD;
 		l_ep_word(lx_res, so_far);
@@ -79,6 +78,11 @@ void	l_ep_start(t_li_node *lx_res, t_ep_so_far *so_far)
 	{
 		so_far->state = EP_ST_PIPE;
 		l_ep_pipe(lx_res, so_far);
+	}
+	if (lx_token->type == LX_WHITESPACE)
+	{
+		so_far->state = EP_ST_WHITESPACE;
+		l_ep_whitespace(lx_res, so_far);
 	}
 }
 
@@ -99,6 +103,8 @@ t_ep_result	ep_expand(t_ks_kotistate *kotistate, t_li_node *lx_res)
 			l_ep_word(lx_res, &so_far);
 		if (so_far.state == EP_ST_PIPE)
 			l_ep_pipe(lx_res, &so_far);
+		if (so_far.state == EP_ST_WHITESPACE)
+			l_ep_whitespace(lx_res, &so_far);
 	}
 	l_ep_end(lx_res, &so_far);
 	l_ep_token_result(&result, &so_far);

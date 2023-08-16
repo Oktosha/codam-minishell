@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 14:16:36 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/08/15 18:22:03 by evoronin      ########   odam.nl         */
+/*   Updated: 2023/08/16 14:39:24 by codespace     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,6 +207,6 @@ int	main(void)
 	ps_test_full_parse("COMMAND PATH TEST", "/bin/ls", ps_create_expected_bin_ls);
 	ps_test_full_parse("EXECUTABLE TEST", "./minishell", ps_create_expected_minishell);
 	ps_test_full_parse("SLASH AND PIPE", "/bin/ls|wc", ps_create_expected_bin_wc);
-	// ps_test_full_parse("COMMAND WITH OPTION", "ls -la", ps_create_expected_ls_option);
+	ps_test_full_parse("COMMAND WITH OPTION", "ls -la", ps_create_expected_ls_option);
 	return (0);
 }

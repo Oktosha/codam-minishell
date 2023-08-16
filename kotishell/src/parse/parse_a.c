@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 15:17:18 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/08/15 15:34:53 by evoronin      ########   odam.nl         */
+/*   Updated: 2023/08/16 14:36:43 by codespace     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,24 @@ void	l_ps_cmd_copy(t_ps_so_far *so_far)
 	l_ps_reset_single_cmd(&so_far->cmd);
 }
 
+void	l_ps_whitespace(t_li_node *ep_tk,  t_ps_so_far *so_far)
+{	
+	t_ep_token	*tk;
+
+	tk = ep_tk->data;
+	if (so_far->status != PS_SUCCESS)
+		return ;
+	if (ep_tk->next != NULL)
+	{
+		ep_tk = ep_tk->next;
+		tk = ep_tk->data;
+		so_far->state = l_ps_next_state(tk->type);
+		l_ps_reset_single_cmd(&so_far->cmd);
+	}
+	else
+		so_far->state = PS_ST_END;	
+}
+
 void	l_ps_cmd(t_li_node *ep_tk, t_ps_so_far *so_far)
 {
 	t_ep_token	*tk;
@@ -76,6 +94,7 @@ void	l_ps_cmd(t_li_node *ep_tk, t_ps_so_far *so_far)
 		so_far->state = PS_ST_END;
 }
 
+
 void	l_ps_start(t_li_node *ep_tk, t_ps_so_far *so_far)
 {
 	t_ep_token	*ep_token;
@@ -91,6 +110,11 @@ void	l_ps_start(t_li_node *ep_tk, t_ps_so_far *so_far)
 	{
 		so_far->state = PS_ST_PIPE;
 		l_ps_pipe(ep_tk, so_far);
+	}
+	if (ep_token->type == EP_WHITESPACE)
+	{
+		so_far->state = PS_ST_WHITESPACE;
+		l_ps_whitespace(ep_tk, so_far);
 	}
 }
 
@@ -109,6 +133,8 @@ t_ps_result	ps_parse(t_li_node *ep_tk)
 			l_ps_cmd(ep_tk, &so_far);
 		else if (so_far.state == PS_ST_PIPE)
 			l_ps_pipe(ep_tk, &so_far);
+		else if (so_far.state == PS_ST_WHITESPACE)
+			l_ps_whitespace(ep_tk, &so_far);
 	}
 	l_ps_end(&so_far);
 	l_ps_result(&result, &so_far);
