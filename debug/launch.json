@@ -1,0 +1,29 @@
+// This is an example launch.json that configures a debug task with custom
+// pretty printers for gdb located in ${workspaceFolder}/debug/pretty.py
+// Copy it to the .vscode folder in the root of the repo
+{
+	"version": "0.1.0",
+	"configurations": [
+		{
+			"name": "Pretty gdb",
+			"request": "launch",
+			"type": "cppdbg",
+			"program": "${workspaceFolder}/test/ps_tests/ps_tests",
+			"cwd": "${workspaceFolder}",
+			"MIMode": "gdb",
+			"miDebuggerPath": "/usr/bin/gdb",
+			"setupCommands": [
+				{
+				  "description": "Enable pretty-printing for gdb",
+				  "text": "-enable-pretty-printing",
+				  "ignoreFailures": false
+				},
+				{
+					"description": "Load Kotishell printers",
+					"text": "source ${workspaceFolder}/debug/pretty.py",
+					"ignoreFailures": false
+				}
+			  ]
+		}
+	]
+}
