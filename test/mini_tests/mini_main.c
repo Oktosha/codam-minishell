@@ -6,12 +6,13 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/21 15:33:10 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/07/31 21:52:37 by dkolodze      ########   odam.nl         */
+/*   Updated: 2023/08/18 16:25:49 by codespace     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string.h>
 #include "minilibft.h"
+
 
 int main (void)
 {
@@ -28,5 +29,14 @@ int main (void)
 	s = mini_strdup("abc");
 	mini_assert(strcmp(s, "abc") == 0, "duplicate of abc is abc");
 	mini_free(s);
+
+	char *s1 = strdup("hello");
+	char *s2 = strdup(" world");
+	char *res = mini_strjoin(s1, s2);
+	printf("res: %s\n", res);
+	mini_assert(strcmp(res, "hello world") == 0, "mini_strjoin is not working");
+	mini_free(res);
+	mini_free(s1);
+	mini_free(s2); 
 	return (0);
 }
