@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/21 15:33:10 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/08/18 16:25:49 by codespace     ########   odam.nl         */
+/*   Updated: 2023/08/18 16:30:53 by codespace     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ int main (void)
 	char *res = mini_strjoin(s1, s2);
 	printf("res: %s\n", res);
 	mini_assert(strcmp(res, "hello world") == 0, "mini_strjoin is not working");
-	mini_free(res);
-	mini_free(s1);
-	mini_free(s2); 
+	free(res);
+	free(s1);
+	free(s2); 
 	return (0);
 }
