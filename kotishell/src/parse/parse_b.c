@@ -6,11 +6,28 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/30 15:02:03 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/08/10 18:55:27 by codespace     ########   odam.nl         */
+/*   Updated: 2023/08/18 17:50:45 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
+
+void	l_ps_whitespace(t_li_node *ep_tk, t_ps_so_far *so_far)
+{
+	t_ep_token	*tk;
+
+	tk = ep_tk->data;
+	if (so_far->status != PS_SUCCESS)
+		return ;
+	if (ep_tk->next != NULL)
+	{
+		ep_tk = ep_tk->next;
+		tk = ep_tk->data;
+		so_far->state = l_ps_next_state(tk->type);
+	}
+	else
+		so_far->state = PS_ST_END;
+}
 
 void	l_ps_end(t_ps_so_far *so_far)
 {

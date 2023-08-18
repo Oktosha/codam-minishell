@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/25 15:06:03 by mbp14         #+#    #+#                 */
-/*   Updated: 2023/08/16 14:21:55 by codespace     ########   odam.nl         */
+/*   Updated: 2023/08/18 17:52:59 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,5 +114,11 @@ void		ps_cmd_argv_free(t_li_node *list);
 void		ps_cmd_output_free(t_li_node *list);
 void		ps_cmd_input_free(t_li_node *list);
 void		l_ps_reset_single_cmd(t_ps_single_command *cmd);
+void		l_ps_add_option(t_ps_so_far *so_far);
+void		l_ps_cmd(t_li_node *ep_tk, t_ps_so_far *so_far);
+void		l_ps_whitespace(t_li_node *ep_tk, t_ps_so_far *so_far);
+void		l_ps_add_argv(t_ps_so_far *so_far);
+void		l_ps_add_option(t_ps_so_far *so_far);
+void		l_ps_cmd_copy(t_ps_so_far *so_far);
 
 #endif

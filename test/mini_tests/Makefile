@@ -6,7 +6,7 @@
 #    By: elenavoronin <elnvoronin@gmail.com>          +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/30 19:02:22 by evoronin      #+#    #+#                  #
-#    Updated: 2023/08/10 17:03:45 by codespace     ########   odam.nl          #
+#    Updated: 2023/08/18 11:50:09 by elenavoroni   ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ minilibft/mini_strdup.c \
 minilibft/mini_malloc.c \
 minilibft/mini_putstr_fd.c \
 minilibft/mini_concat.c \
-minilibft/mini_write.c
+minilibft/mini_write.c \
+minilibft/mini_strjoin.c
 
 TEST_SRCS_NAMES =  mini_main.c
 TEST_OBJS = $(addprefix $(OBJS_DIR)/,$(TEST_SRCS_NAMES:.c=.o))

@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 15:23:07 by evoronin      #+#    #+#                 */
-/*   Updated: 2023/08/10 16:59:48 by codespace     ########   odam.nl         */
+/*   Updated: 2023/08/18 17:49:32 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,10 @@ char		*mini_concat(const char *s1, const char *s2);
  * @brief calls free and returns NULL; used to save lines
 */
 void		*mini_free(void *p);
+
+/**
+ * @brief joins 2 strings and returns the resulted string
+*/
+char		*mini_strjoin(char *s1, char *s2);
 
 #endif
