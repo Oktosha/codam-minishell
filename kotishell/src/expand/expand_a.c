@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 15:01:09 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/08/21 14:12:13 by evoronin      ########   odam.nl         */
+/*   Updated: 2023/08/21 16:47:28 by evoronin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ t_ep_result	ep_expand(t_ks_kotistate *kotistate, t_lx_node_lx_token_ptr *lx_res)
 {
 	t_ep_result	result;
 	t_ep_so_far	so_far;
-
 
 	(void) kotistate;
 	result.tokens = NULL;
