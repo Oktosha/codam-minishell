@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 19:57:44 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/08/16 15:02:45 by codespace     ########   odam.nl         */
+/*   Updated: 2023/08/21 14:11:48 by evoronin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,30 +65,36 @@ typedef struct s_ep_token
 	char				*data;
 }	t_ep_token;	
 
+typedef struct s_ep_node_ep_token_ptr
+{
+	t_ep_token						*token;
+	struct s_ep_node_ep_token_ptr	*next;
+}	t_ep_node_ep_token_ptr;
+
 typedef struct s_ep_so_far
 {
-	t_li_node	*head;
-	t_ep_token	token;
-	t_ep_status	status;
-	t_ep_state	state;
+	t_ep_node_ep_token_ptr	*head;
+	t_ep_token				token;
+	t_ep_status				status;
+	t_ep_state				state;
 }	t_ep_so_far;
 
 typedef struct s_ep_result
 {
-	t_li_node	*tokens;
-	t_ep_status	status;
+	t_ep_node_ep_token_ptr	*tokens;
+	t_ep_status				status;
 }	t_ep_result;
 
-t_ep_result			ep_expand(t_ks_kotistate *state, t_li_node *tokens);
-void				ep_token_free(t_li_node *list);
+t_ep_result			ep_expand(t_ks_kotistate *state, t_lx_node_lx_token_ptr *l);
+void				ep_token_free(t_ep_node_ep_token_ptr *list);
 void				l_ep_token_result(t_ep_result *result, t_ep_so_far *so_far);
 void				l_ep_token_copy(t_ep_so_far *so_far);
-void				l_ep_word(t_li_node *lx_res, t_ep_so_far *so_far);
-void				l_ep_start(t_li_node *lx_res, t_ep_so_far *so_far);
+void				l_ep_word(t_lx_node_lx_token_ptr *l, t_ep_so_far *so_far);
+void				l_ep_start(t_lx_node_lx_token_ptr *l, t_ep_so_far *so_far);
 void				l_ep_init_so_far(t_ep_so_far *so_far);
 t_ep_state			l_ep_next_state(t_lx_token_type lx_tk);
-void				l_ep_error_cleanup(t_li_node *lx_res, t_ep_so_far *so_far);
-void				l_ep_pipe(t_li_node *lx_res, t_ep_so_far *so_far);
-void				l_ep_whitespace(t_li_node *lx_res, t_ep_so_far *so_far);
+void				l_ep_error_cleanup(t_lx_node_lx_token_ptr *l, t_ep_so_far *s);
+void				l_ep_pipe(t_lx_node_lx_token_ptr *l, t_ep_so_far *so_far);
+void				l_ep_whitespace(t_lx_node_lx_token_ptr *l, t_ep_so_far *s);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 14:16:36 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/08/18 16:12:10 by codespace     ########   odam.nl         */
+/*   Updated: 2023/08/21 14:07:39 by evoronin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ typedef struct s_EP_dummy_token {
 	t_ep_token_type type;
 } t_EP_dummy_token;
 
-void	EP_print_list(t_li_node *list)
+void	EP_print_list(t_ep_node_ep_token_ptr *list)
 {
 	t_ep_token	*token;
 	int			i;
@@ -31,7 +31,7 @@ void	EP_print_list(t_li_node *list)
 	i = 0;
 	while (list)
 	{
-		token = list->data;
+		token = list->token;
 		printf("[%d]: ", i);
 		fflush(stdout);
 		mini_write(1, token->data, token->length);
@@ -72,12 +72,12 @@ int EP_are_dummy_equal(t_EP_dummy_token expected, t_ep_token real, int i)
 
 void	EP_test_expand(t_ks_kotistate *kotistate, t_lx_result *lx_res, t_EP_dummy_token *expected, int len)
 {
-	t_ep_result res = ep_expand(kotistate, lx_res->tokens);
-	t_li_node 	*cur = res.tokens;
+	t_ep_result 			res = ep_expand(kotistate, lx_res->tokens);
+	t_ep_node_ep_token_ptr 	*cur = res.tokens;
 	EP_print_list(res.tokens);
 	for (int i = 0; i < len; ++i)
 	{
-		t_ep_token *cur_token = cur->data;
+		t_ep_token *cur_token = cur->token;
 		if (cur_token->type == EP_BAD)
 			break ;
 		if (!EP_are_dummy_equal(expected[i], *cur_token, i))

@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/25 15:06:03 by mbp14         #+#    #+#                 */
-/*   Updated: 2023/08/18 17:52:59 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/08/21 16:42:34 by evoronin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,37 @@ typedef struct s_ps_output
 	int		fd;
 }	t_ps_output;
 
+typedef struct t_ps_node_char_ptr
+{
+	char									*argv;
+	struct s_ps_node_char_ptr				*next;
+}	t_ps_node_char_ptr;
+
+typedef struct s_ps_node_ps_input_ptr
+{
+	t_ps_input								*inputs;
+	struct s_ps_node_ps_input_ptr			*next;
+}	t_ps_node_ps_input_ptr;
+
+typedef struct s_ps_node_ps_output_ptr
+{
+	t_ps_output								*outputs;
+	struct s_ps_node_ps_output_ptr			*next;
+}	t_ps_node_ps_output_ptr;
+
 typedef struct s_ps_single_command
 {
-	t_li_node		*argv;
-	t_li_node		*inputs;
-	t_li_node		*outputs;
-	int				pid;
+	t_ps_node_char_ptr						*argvs;
+	t_ps_node_ps_input_ptr					*inputs;
+	t_ps_node_ps_output_ptr					*outputs;
+	int										pid;
 }	t_ps_single_command;
+
+typedef struct s_ps_node_ps_single_command_ptr
+{
+	t_ps_single_command						*commands;
+	struct s_ps_node_ps_single_command_ptr	*next;
+}	t_ps_node_ps_single_command_ptr;
 
 /**
  * Included in PS_ERR_SYNTAX:
@@ -83,40 +107,40 @@ typedef enum e_ps_state
 
 typedef struct s_ps_so_far
 {
-	t_li_node			*head;
-	t_ps_single_command	cmd;
-	int					cmd_length;
-	char				*cmd_data;
-	t_ps_status			status;
-	t_ps_state			state;
+	t_ps_node_ps_single_command_ptr			*head;
+	t_ps_node_ps_single_command_ptr			cmd;
+	int										cmd_length;
+	char									*cmd_data;
+	t_ps_status								status;
+	t_ps_state								state;
 }	t_ps_so_far;
 
 typedef struct s_ps_result
 {
-	t_li_node	*cmds;
-	t_ps_status	status;
+	t_ps_node_ps_single_command_ptr			*cmds;
+	t_ps_status								status;
 }	t_ps_result;
 
-t_ps_result	ps_parse(t_li_node *tokens);
+t_ps_result	ps_parse(t_ep_node_ep_token_ptr *ep_tk);
 char		*mini_substr(char *src, int len);
 void		l_ps_result(t_ps_result *result, t_ps_so_far *so_far);
 void		l_ps_end(t_ps_so_far *so_far);
 void		l_ps_error_cleanup(t_ps_so_far *so_far);
 void		l_ps_syntax_error(t_ps_so_far *so_far);
 t_ps_state	l_ps_next_state(t_ep_token_type ep_tk);
-void		l_ps_input(t_li_node *ep_tk, t_ps_so_far *so_far);
-void		l_ps_pipe(t_li_node *ep_tk, t_ps_so_far *so_far);
+void		l_ps_input(t_ep_node_ep_token_ptr *ep_tk, t_ps_so_far *so_far);
+void		l_ps_pipe(t_ep_node_ep_token_ptr *ep_tk, t_ps_so_far *so_far);
 void		l_ps_init_so_far(t_ps_so_far *so_far);
-void		l_ps_start(t_li_node *ep_tk, t_ps_so_far *so_far);
-void		ps_free_all_cmds(t_li_node *list);
-void		ps_free_single_cmd(t_ps_single_command *cmd);
-void		ps_cmd_argv_free(t_li_node *list);
-void		ps_cmd_output_free(t_li_node *list);
-void		ps_cmd_input_free(t_li_node *list);
-void		l_ps_reset_single_cmd(t_ps_single_command *cmd);
+void		l_ps_start(t_ep_node_ep_token_ptr *ep_tk, t_ps_so_far *so_far);
+void		ps_free_all_cmds(t_ps_node_ps_single_command_ptr *list);
+void		ps_free_single_cmd(t_ps_node_ps_single_command_ptr *cmd);
+void		ps_cmd_argv_free(t_ps_node_ps_single_command_ptr *list);
+void		ps_cmd_output_free(t_ps_node_ps_single_command_ptr *list);
+void		ps_cmd_input_free(t_ps_node_ps_single_command_ptr *list);
+void		l_ps_reset_single_cmd(t_ps_node_ps_single_command_ptr *cmd);
 void		l_ps_add_option(t_ps_so_far *so_far);
-void		l_ps_cmd(t_li_node *ep_tk, t_ps_so_far *so_far);
-void		l_ps_whitespace(t_li_node *ep_tk, t_ps_so_far *so_far);
+void		l_ps_cmd(t_ep_node_ep_token_ptr *ep_tk, t_ps_so_far *so_far);
+void		l_ps_whitespace(t_ep_node_ep_token_ptr *ep_tk, t_ps_so_far *so_far);
 void		l_ps_add_argv(t_ps_so_far *so_far);
 void		l_ps_add_option(t_ps_so_far *so_far);
 void		l_ps_cmd_copy(t_ps_so_far *so_far);

@@ -6,17 +6,19 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/29 16:36:32 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/07/27 13:09:17 by evoronin      ########   odam.nl         */
+/*   Updated: 2023/08/21 16:02:10 by evoronin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lists.h"
 
-int	li_list_size(t_li_node *list)
+int	li_list_size(void *data)
 {
-	int		i;
+	int			i;
+	t_li_node	*list;
 
 	i = 0;
+	list = data;
 	while (list)
 	{
 		i++;
@@ -37,14 +39,16 @@ t_li_node	*li_new_list(void *data)
 	return (node);
 }
 
-int	li_new_stack(t_li_node **list, void *data)
+int	li_new_stack(void **void_list, void *data)
 {
 	t_li_node	*node;
+	t_li_node	*list;
 
-	if (!(*list))
+	list = *void_list;
+	if (!list)
 	{
-		*list = li_new_list(data);
-		if (!(*list))
+		list = li_new_list(data);
+		if (!list)
 			return (-1);
 	}
 	else

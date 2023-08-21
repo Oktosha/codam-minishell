@@ -6,7 +6,7 @@
 /*   By: evoronin <evoronin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/14 14:27:20 by evoronin      #+#    #+#                 */
-/*   Updated: 2023/08/16 15:05:37 by codespace     ########   odam.nl         */
+/*   Updated: 2023/08/21 14:13:28 by evoronin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_ep_state	l_ep_next_state(t_lx_token_type lx_tk)
 	return (EP_ST_ERROR);
 }
 
-void	l_ep_error_cleanup(t_li_node *lx_res, t_ep_so_far *so_far)
+void	l_ep_error_cleanup(t_lx_node_lx_token_ptr *lx_res, t_ep_so_far *so_far)
 {
 	lx_token_free(lx_res);
 	ep_token_free(so_far->head);

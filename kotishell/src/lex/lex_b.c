@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 12:08:29 by codespace     #+#    #+#                 */
-/*   Updated: 2023/08/15 16:43:38 by codespace     ########   odam.nl         */
+/*   Updated: 2023/08/21 13:58:58 by evoronin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	l_lx_token_copy(t_lx_so_far *so_far)
 	ptr_token->data = so_far->token.data;
 	ptr_token->length = so_far->token.length;
 	ptr_token->type = so_far->token.type;
-	if (li_new_stack(&so_far->head, ptr_token) == -1)
+	if (li_new_stack((void *)&so_far->head, ptr_token) == -1)
 	{
 		so_far->status = LX_ERR_MALLOC;
 		free(ptr_token);
@@ -60,14 +60,14 @@ void	l_lx_token_copy(t_lx_so_far *so_far)
 	}
 }
 
-void	lx_token_free(t_li_node *list)
+void	lx_token_free(t_lx_node_lx_token_ptr *list)
 {
-	t_li_node	*temp;
+	t_lx_node_lx_token_ptr	*temp;
 
 	while (list)
 	{
 		temp = list;
-		free(temp->data);
+		free(temp->token);
 		list = list->next;
 		free(temp);
 	}

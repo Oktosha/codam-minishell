@@ -6,13 +6,13 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/30 15:02:03 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/08/18 17:50:45 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/08/21 16:09:19 by evoronin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-void	l_ps_whitespace(t_li_node *ep_tk, t_ps_so_far *so_far)
+void	l_ps_whitespace(t_ep_node_ep_token_ptr *ep_tk, t_ps_so_far *so_far)
 {
 	t_ep_token	*tk;
 
@@ -53,7 +53,7 @@ void	l_ps_error_cleanup(t_ps_so_far *so_far)
 	mini_putstr_fd("Failed malloc\n", 2);
 }
 
-void	l_ps_pipe(t_li_node *ep_tk, t_ps_so_far *so_far)
+void	l_ps_pipe(t_ep_node_ep_token_ptr *ep_tk, t_ps_so_far *so_far)
 {
 	t_ep_token	*tk;
 

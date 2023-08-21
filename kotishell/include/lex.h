@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/18 19:05:28 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/08/14 15:32:13 by evoronin      ########   odam.nl         */
+/*   Updated: 2023/08/21 13:56:07 by evoronin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,22 +74,28 @@ typedef struct s_lx_token
 	char				*data;
 }	t_lx_token;	
 
+typedef struct s_lx_node_lx_token_ptr
+{
+	t_lx_token						*token;
+	struct s_lx_node_lx_token_ptr	*next;
+}	t_lx_node_lx_token_ptr;
+
 typedef struct s_lx_so_far
 {
-	t_li_node	*head;
-	t_lx_token	token;
-	t_lx_status	status;
-	t_lx_state	state;
+	t_lx_node_lx_token_ptr	*head;
+	t_lx_token				token;
+	t_lx_status				status;
+	t_lx_state				state;
 }	t_lx_so_far;
 
 typedef struct s_lx_result
 {
-	t_li_node	*tokens;
-	t_lx_status	status;
+	t_lx_node_lx_token_ptr	*tokens;
+	t_lx_status				status;
 }	t_lx_result;
 
 t_lx_result	lx_lex(t_li_node *tk_tk);
-void		lx_token_free(t_li_node *list);
+void		lx_token_free(t_lx_node_lx_token_ptr *list);
 void		l_lx_start(t_lx_so_far *so_far, t_li_node *tk_tk);
 void		l_lx_init_so_far(t_lx_so_far *so_far);
 void		l_lx_token_copy(t_lx_so_far *so_far);
@@ -97,7 +103,6 @@ void		l_lx_quotes_2(t_lx_so_far *so_far, t_tk_result *tk_res);
 void		l_lx_token_result(t_lx_result *result, t_lx_so_far *so_far);
 void		LX_print_list_test(t_li_node *list);
 void		l_lx_err_unclosed_quote(t_lx_so_far *so_far);
-
 void		l_lx_token_copy(t_lx_so_far *so_far);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 15:17:18 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/08/18 17:51:12 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/08/21 16:11:01 by evoronin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	l_ps_add_option(t_ps_so_far *so_far)
 
 void	l_ps_cmd_copy(t_ps_so_far *so_far)
 {
-	t_ps_single_command	*cmd;
+	t_ps_node_ps_single_command_ptr	*cmd;
 
 	cmd = mini_malloc(sizeof(t_ps_single_command));
 	if (!cmd)
@@ -69,11 +69,11 @@ void	l_ps_cmd_copy(t_ps_so_far *so_far)
 	l_ps_reset_single_cmd(&so_far->cmd);
 }
 
-void	l_ps_start(t_li_node *ep_tk, t_ps_so_far *so_far)
+void	l_ps_start(t_ep_node_ep_token_ptr *ep_tk, t_ps_so_far *so_far)
 {
 	t_ep_token	*ep_token;
 
-	ep_token = ep_tk->data;
+	ep_token = ep_tk->token;
 	l_ps_init_so_far(so_far);
 	if (ep_token->type == EP_WORD)
 	{
@@ -92,7 +92,7 @@ void	l_ps_start(t_li_node *ep_tk, t_ps_so_far *so_far)
 	}
 }
 
-t_ps_result	ps_parse(t_li_node *ep_tk)
+t_ps_result	ps_parse(t_ep_node_ep_token_ptr *ep_tk)
 {
 	t_ps_result	result;
 	t_ps_so_far	so_far;
