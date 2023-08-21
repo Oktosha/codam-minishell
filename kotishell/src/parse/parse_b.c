@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/30 15:02:03 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/08/21 16:09:19 by evoronin      ########   odam.nl         */
+/*   Updated: 2023/08/21 20:33:39 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ void	l_ps_whitespace(t_ep_node_ep_token_ptr *ep_tk, t_ps_so_far *so_far)
 {
 	t_ep_token	*tk;
 
-	tk = ep_tk->data;
+	tk = ep_tk->token;
 	if (so_far->status != PS_SUCCESS)
 		return ;
 	if (ep_tk->next != NULL)
 	{
 		ep_tk = ep_tk->next;
-		tk = ep_tk->data;
+		tk = ep_tk->token;
 		so_far->state = l_ps_next_state(tk->type);
 	}
 	else
@@ -35,9 +35,9 @@ void	l_ps_end(t_ps_so_far *so_far)
 		l_ps_syntax_error(so_far);
 	if (so_far->status == PS_ERR_MALLOC)
 		l_ps_error_cleanup(so_far);
-	ps_cmd_argv_free(so_far->cmd.argv);
-	ps_cmd_argv_free(so_far->cmd.inputs);
-	ps_cmd_argv_free(so_far->cmd.outputs);
+	ps_cmd_argv_free(so_far->cmd.argvs);
+	ps_cmd_input_free(so_far->cmd.inputs);
+	ps_cmd_output_free(so_far->cmd.outputs);
 }
 
 void	l_ps_result(t_ps_result *result, t_ps_so_far *so_far)
@@ -60,7 +60,7 @@ void	l_ps_pipe(t_ep_node_ep_token_ptr *ep_tk, t_ps_so_far *so_far)
 	if (so_far->status != PS_SUCCESS)
 		return ;
 	ep_tk = ep_tk->next;
-	tk = ep_tk->data;
+	tk = ep_tk->token;
 	so_far->state = l_ps_next_state(tk->type);
 	so_far->cmd_length = 0;
 	l_ps_reset_single_cmd(&so_far->cmd);

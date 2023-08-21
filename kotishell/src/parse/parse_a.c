@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 15:17:18 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/08/21 16:11:01 by evoronin      ########   odam.nl         */
+/*   Updated: 2023/08/21 20:33:25 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	l_ps_add_argv(t_ps_so_far *so_far)
 		so_far->status = PS_ERR_MALLOC;
 		return ;
 	}
-	if (li_new_stack(&so_far->cmd.argv, cmd_arg) == -1)
+	if (li_new_stack(&so_far->cmd.argvs, cmd_arg) == -1)
 	{
 		so_far->status = PS_ERR_MALLOC;
 		free(cmd_arg);
@@ -42,7 +42,7 @@ void	l_ps_add_option(t_ps_so_far *so_far)
 		so_far->status = PS_ERR_MALLOC;
 		return ;
 	}
-	if (li_new_stack(&so_far->cmd.argv, new) == -1)
+	if (li_new_stack(&so_far->cmd.argvs, new) == -1)
 	{
 		so_far->status = PS_ERR_MALLOC;
 		free(new);
@@ -52,7 +52,7 @@ void	l_ps_add_option(t_ps_so_far *so_far)
 
 void	l_ps_cmd_copy(t_ps_so_far *so_far)
 {
-	t_ps_node_ps_single_command_ptr	*cmd;
+	t_ps_single_command	*cmd;
 
 	cmd = mini_malloc(sizeof(t_ps_single_command));
 	if (!cmd)

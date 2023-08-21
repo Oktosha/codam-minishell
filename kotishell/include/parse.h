@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/25 15:06:03 by mbp14         #+#    #+#                 */
-/*   Updated: 2023/08/21 16:42:34 by evoronin      ########   odam.nl         */
+/*   Updated: 2023/08/21 20:35:20 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct s_ps_output
 	int		fd;
 }	t_ps_output;
 
-typedef struct t_ps_node_char_ptr
+typedef struct s_ps_node_char_ptr
 {
 	char									*argv;
 	struct s_ps_node_char_ptr				*next;
@@ -108,7 +108,7 @@ typedef enum e_ps_state
 typedef struct s_ps_so_far
 {
 	t_ps_node_ps_single_command_ptr			*head;
-	t_ps_node_ps_single_command_ptr			cmd;
+	t_ps_single_command						cmd;
 	int										cmd_length;
 	char									*cmd_data;
 	t_ps_status								status;
@@ -133,11 +133,11 @@ void		l_ps_pipe(t_ep_node_ep_token_ptr *ep_tk, t_ps_so_far *so_far);
 void		l_ps_init_so_far(t_ps_so_far *so_far);
 void		l_ps_start(t_ep_node_ep_token_ptr *ep_tk, t_ps_so_far *so_far);
 void		ps_free_all_cmds(t_ps_node_ps_single_command_ptr *list);
-void		ps_free_single_cmd(t_ps_node_ps_single_command_ptr *cmd);
-void		ps_cmd_argv_free(t_ps_node_ps_single_command_ptr *list);
-void		ps_cmd_output_free(t_ps_node_ps_single_command_ptr *list);
-void		ps_cmd_input_free(t_ps_node_ps_single_command_ptr *list);
-void		l_ps_reset_single_cmd(t_ps_node_ps_single_command_ptr *cmd);
+void		ps_free_single_cmd(t_ps_single_command *cmd);
+void		ps_cmd_argv_free(t_ps_node_char_ptr *list);
+void		ps_cmd_output_free(t_ps_node_ps_output_ptr *list);
+void		ps_cmd_input_free(t_ps_node_ps_input_ptr *list);
+void		l_ps_reset_single_cmd(t_ps_single_command *cmd);
 void		l_ps_add_option(t_ps_so_far *so_far);
 void		l_ps_cmd(t_ep_node_ep_token_ptr *ep_tk, t_ps_so_far *so_far);
 void		l_ps_whitespace(t_ep_node_ep_token_ptr *ep_tk, t_ps_so_far *so_far);
