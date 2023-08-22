@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 14:16:36 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/08/15 18:22:03 by evoronin      ########   odam.nl         */
+/*   Updated: 2023/08/18 17:44:47 by elenavoroni   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,16 @@ t_li_node *ps_create_expected_minishell(void)
 	li_new_stack(&expected_cmds, cmd_mini);
 	return expected_cmds;
 }
+
+t_li_node *ps_create_expected_echo_hi_bye(void)
+{
+	char *argv_echo_hi_bye[4] = {strdup("echo"), strdup("hi"), strdup("bye"), NULL};
+	t_ps_single_command *cmd_echo_hi_bye = create_cmd(argv_echo_hi_bye);
+	t_li_node *expected_cmds = NULL;
+	li_new_stack(&expected_cmds, cmd_echo_hi_bye);
+	return expected_cmds;
+}
+
 t_li_node *ps_create_expected_ls_option(void)
 {
 	char *argv_ls_o[3] = {strdup("ls"), strdup("-la"), NULL};
@@ -207,6 +217,7 @@ int	main(void)
 	ps_test_full_parse("COMMAND PATH TEST", "/bin/ls", ps_create_expected_bin_ls);
 	ps_test_full_parse("EXECUTABLE TEST", "./minishell", ps_create_expected_minishell);
 	ps_test_full_parse("SLASH AND PIPE", "/bin/ls|wc", ps_create_expected_bin_wc);
-	// ps_test_full_parse("COMMAND WITH OPTION", "ls -la", ps_create_expected_ls_option);
+	ps_test_full_parse("COMMAND WITH OPTION", "ls -la", ps_create_expected_ls_option);
+	ps_test_full_parse("COMMAND WITH OPTION", "echo hi bye", ps_create_expected_echo_hi_bye);
 	return (0);
 }

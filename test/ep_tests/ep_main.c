@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 14:16:36 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/08/15 16:44:27 by codespace     ########   odam.nl         */
+/*   Updated: 2023/08/18 16:12:10 by codespace     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,12 +122,13 @@ int	main(void)
 	EP_test_expand(NULL, &lx_res2, expected2, 3);
 	
 	printf("CMND with ARG TEST:\n");
-	t_EP_dummy_token expected3[1] = {
-		{"echo hello", EP_WORD},
+	t_EP_dummy_token expected3[2] = {
+		{"echo", EP_WORD},
+		{"hello", EP_WORD},
 	};
 	t_tk_result tk_res3 = tk_tokenize("echo hello");
 	t_lx_result lx_res3 = lx_lex(tk_res3.tokens);
 	tk_token_free(tk_res3.tokens);
-	EP_test_expand(NULL, &lx_res3, expected3, 1);
+	EP_test_expand(NULL, &lx_res3, expected3, 2);
 	return (0);
 }

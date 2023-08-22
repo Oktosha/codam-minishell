@@ -6,11 +6,30 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/27 18:00:38 by evoronin      #+#    #+#                 */
-/*   Updated: 2023/08/15 16:44:16 by codespace     ########   odam.nl         */
+/*   Updated: 2023/08/16 15:09:50 by codespace     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expand.h"
+
+void	l_ep_whitespace(t_li_node *lx_res, t_ep_so_far *so_far)
+{
+	t_lx_token	*cur_lx;
+
+	cur_lx = lx_res->data;
+	if (so_far->status != EP_SUCCESS)
+		return ;
+	if (lx_res->next != NULL)
+	{
+		lx_res = lx_res->next;
+		cur_lx = lx_res->data;
+		so_far->state = l_ep_next_state(cur_lx->type);
+		so_far->token.type = EP_EMPTY;
+		so_far->token.length = 0;
+	}
+	else
+		so_far->state = EP_ST_END;
+}
 
 void	l_ep_init_so_far(t_ep_so_far *so_far)
 {

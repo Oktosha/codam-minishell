@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 19:57:44 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/08/15 15:23:44 by evoronin      ########   odam.nl         */
+/*   Updated: 2023/08/16 15:02:45 by codespace     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,5 +89,6 @@ void				l_ep_init_so_far(t_ep_so_far *so_far);
 t_ep_state			l_ep_next_state(t_lx_token_type lx_tk);
 void				l_ep_error_cleanup(t_li_node *lx_res, t_ep_so_far *so_far);
 void				l_ep_pipe(t_li_node *lx_res, t_ep_so_far *so_far);
+void				l_ep_whitespace(t_li_node *lx_res, t_ep_so_far *so_far);
 
 #endif

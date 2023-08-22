@@ -6,7 +6,7 @@
 #    By: elenavoronin <elnvoronin@gmail.com>          +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/12 11:12:29 by evoronin      #+#    #+#                  #
-#    Updated: 2023/08/15 12:14:01 by evoronin      ########   odam.nl          #
+#    Updated: 2023/08/18 12:31:42 by elenavoroni   ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,6 +59,7 @@ minilibft/mini_strdup.c \
 minilibft/mini_strlen.c \
 minilibft/mini_substr.c \
 minilibft/mini_write.c \
+minilibft/mini_strjoin.c \
 parse/parse_a.c \
 parse/parse_b.c \
 parse/parse_c.c \
