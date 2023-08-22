@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/19 17:12:15 by evoronin      #+#    #+#                 */
-/*   Updated: 2023/08/10 16:48:29 by codespace     ########   odam.nl         */
+/*   Updated: 2023/08/14 12:02:42 by codespace     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,12 @@ t_tk_symbol_type	l_tk_get_symbol_type(char c)
 
 void	l_tk_symbol_error(t_tk_so_far *so_far)
 {
-	mini_write(2, so_far->token.data, so_far->token.length);
+	int	len;
+
+	len = mini_strlen(so_far->token.data);
+	if (len > (so_far->token.length + 4))
+		mini_write(2, so_far->token.data, so_far->token.length + 4);
+	else
+		mini_write(2, so_far->token.data, len);
 	mini_putstr_fd(" \033[0;31m\x1B[1m-> Unsupported symbol\n\033[0m", 2);
 }

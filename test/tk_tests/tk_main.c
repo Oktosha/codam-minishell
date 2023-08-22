@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 18:55:46 by evoronin      #+#    #+#                 */
-/*   Updated: 2023/08/10 19:03:56 by codespace     ########   odam.nl         */
+/*   Updated: 2023/08/14 12:02:31 by codespace     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,12 +141,12 @@ int	main(void)
 	t_TK_dummy_token expected7[7] = {
 		{"&@", TK_OTHER},
 		{"\"", TK_QUOTE_2},
-		{"\xf0\x9f\x98\x87", TK_BAD},
+		{"4036991129", TK_BAD},
 		{"?", TK_QUESTION},
 		{"\"", TK_QUOTE_2},
 		{"?", TK_QUESTION},
 		{"", TK_EOL},
 	};	
-	TK_test_tokenize("&@\"😇?\"?", expected7, 7);
+	TK_test_tokenize("&@\"😙?\"?", expected7, 7);
 	return (0);
 }
