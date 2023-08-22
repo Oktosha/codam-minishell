@@ -6,10 +6,57 @@
 # define DEBUG_H
 
 # include "tokenize.h"
+# include "lex.h"
+# include "expand.h"
+# include "parse.h"
 
-typedef struct s_dbg_tk_result {
-    t_tk_token  tokens[50];
-    t_tk_status status;
-} t_dbg_tk_result;
+typedef struct s_dbg_dummy_tk_token {
+	t_tk_token_type	type;
+	char			*data;
+}	t_dbg_dummy_tk_token;
+
+typedef struct s_dbg_dummy_lx_token {
+	t_lx_token_type	type;
+	char			*data;
+}	t_dbg_dummy_lx_token;
+
+typedef struct s_dbg_dummy_ep_token {
+	t_lx_token_type	type;
+	char			*data;
+}	t_dbg_dummy_ep_token;
+
+typedef struct s_dbg_dummy_ps_input {
+	char			*name;
+	t_ps_input_type	type;
+}	t_dbg_dummy_ps_input;
+
+typedef struct s_dbg_dummy_ps_output {
+	char				*name;
+	t_ps_output_type	type;
+}	t_dbg_dummy_ps_output;
+
+typedef struct s_dbg_dummy_ps_command {
+	char					*argv[20];
+	t_dbg_dummy_ps_input	inputs[7];
+	t_dbg_dummy_ps_output	outputs[7];
+}	t_dbg_dummy_ps_command;
+
+typedef struct s_dbg_tk_token_sequence {
+	t_li_node	*tokens;
+	char		*s;
+}	t_dbg_tk_token_sequence;
+
+typedef struct s_dbg_lx_token_sequence {
+	t_li_node *tokens;
+	char *s;
+}	t_dbg_lx_token_sequence;
+
+s_dbg_tk_token_sequence	dbg_create_tk_tokens(t_dbg_dummy_tk_token *tk_token_dummies);
+t_dbg_lx_token_sequence	dbg_create_lx_tokens(t_dbg_dummy_lx_token *lx_token_dummies);
+t_li_node				*dbg_create_ep_tokens(t_dbg_dummy_ep_token *ep_token_dummies);
+t_li_node				*dbg_create_ps_commands(t_dbg_dummy_ps_command *ps_command_dummies);
+
+void					dbg_clear_tk_token_sequence(t_dbg_tk_token_sequence *seq);
+void					dbg_clear_lx_token_sequence(t_dbg_lx_token_sequence *seq);
 
 #endif

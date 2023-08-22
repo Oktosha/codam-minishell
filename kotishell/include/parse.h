@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/25 15:06:03 by mbp14         #+#    #+#                 */
-/*   Updated: 2023/08/18 17:52:59 by elenavoroni   ########   odam.nl         */
+/*   Updated: 2023/08/22 14:37:57 by codespace     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,30 +21,31 @@
 # include "lists.h"
 # include "minilibft.h"
 
-typedef enum e_ps_token_type
+typedef enum e_ps_input_type
 {
-	PS_BAD,
-	PS_COMMAND,
-	PS_HEREDOC,
-	PS_APPEND,
-	PS_OUTPUT,
-	PS_EMPTY,
-	PS_EOL,
-	PS_INPUT,
-}	t_ps_token_type;
+	PS_INPUT_TYPE_FILE,
+	PS_INPUT_TYPE_HEREDOC_EXPANDED,
+	PS_INPUT_TYPE_HEREDOC_NOT_EXPANDED,
+}	t_ps_input_type;
+
+typedef enum e_ps_output_type
+{
+	PS_OUTPUT_TYPE_WRITE,
+	PS_OUTPUT_TYPE_APPEND,
+}	t_ps_output_type;
 
 typedef struct s_ps_input
 {
-	char	*name;
-	int		type;	
-	int		fd;
+	char			*name;
+	t_ps_input_type	type;	
+	int				fd;
 }	t_ps_input;
 
 typedef struct s_ps_output
 {
-	char	*name;
-	int		type;
-	int		fd;
+	char				*name;
+	t_ps_output_type	type;
+	int					fd;
 }	t_ps_output;
 
 typedef struct s_ps_single_command
