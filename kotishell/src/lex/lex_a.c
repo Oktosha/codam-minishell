@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 14:19:41 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/08/22 18:14:54 by evoronin      ########   odam.nl         */
+/*   Updated: 2023/08/23 14:52:47 by evoronin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	l_lx_quote_1(t_li_node *tk_tk, t_lx_so_far *so_far)
 	}
 	so_far->token.type = LX_WORD;
 	so_far->token.data = token->data + 1;
-	while (token->type != TK_QUOTE_2 && tk_tk->next != NULL)
+	while (token->type != TK_QUOTE_1 && tk_tk->next != NULL)
 	{
 		token = tk_tk->data;
 		so_far->token.length += token->length;
@@ -37,6 +37,8 @@ void	l_lx_quote_1(t_li_node *tk_tk, t_lx_so_far *so_far)
 	}
 	so_far->token.length -= 2;
 	l_lx_token_copy(so_far);
+	if (so_far->status == LX_ERR_MALLOC)
+			return ;
 	if (tk_tk->next == NULL)
 	{
 		so_far->state = LX_ST_END;
@@ -46,9 +48,6 @@ void	l_lx_quote_1(t_li_node *tk_tk, t_lx_so_far *so_far)
 	token = tk_tk->data;
 	if (l_lx_next_state(token->type) != so_far->state)
 	{
-		l_lx_token_copy(so_far);
-		if (so_far->status == LX_ERR_MALLOC)
-			return ;
 		so_far->token.type = LX_EMPTY;
 		so_far->token.length = 0;
 		so_far->state = l_lx_next_state(token->type);

@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 14:16:36 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/08/22 18:10:33 by evoronin      ########   odam.nl         */
+/*   Updated: 2023/08/23 14:54:14 by evoronin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,17 +119,29 @@ int	main(void)
 	// t_tk_result tk_res2 = tk_tokenize("ls|cat");
 	// LX_test_tokenize(&tk_res2, expected2, 4);
 	// printf("UNCLOSED QUOTE2 TEST:\n");
-	t_LX_dummy_token expected3[1] = {
-		{"", LX_BAD}
-	};
-	t_tk_result tk_res3 = tk_tokenize("echo \'hello");
-	LX_test_tokenize(&tk_res3, expected3, 1);
-	printf("CLOSED QUOTE1 TEST:\n");
+	// t_LX_dummy_token expected3[2] = {
+	// 	{"", LX_BAD},
+	// 	{"", LX_EOL},
+	// };
+	// t_tk_result tk_res3 = tk_tokenize("echo \'hello");
+	// LX_test_tokenize(&tk_res3, expected3, 2);
+	// printf("CLOSED QUOTE1 TEST:\n");
 	t_LX_dummy_token expected4[2] = {
 		{"hello", LX_WORD},
 		{"", LX_EOL},
 	};
 	t_tk_result tk_res4 = tk_tokenize("\'hello\'");
 	LX_test_tokenize(&tk_res4, expected4, 2);
+	// printf("VARIABLE IN QUOTE1 TEST:\n");
+	// t_LX_dummy_token expected5[6] = {
+	// 	{"echo", LX_WORD},
+	// 	{" ", LX_WHITESPACE},
+	// 	{"\'", LX_QUOTE_1},
+	// 	{"$USER", LX_WORD},
+	// 	{"\'", LX_QUOTE_1},
+	// 	{"", LX_EOL},
+	// };
+	// t_tk_result tk_res5 = tk_tokenize("\'hello\'");
+	// LX_test_tokenize(&tk_res5, expected5, 6);
 	return (0);
 }

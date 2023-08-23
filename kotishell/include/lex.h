@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/18 19:05:28 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/08/22 18:07:08 by evoronin      ########   odam.nl         */
+/*   Updated: 2023/08/23 12:15:05 by evoronin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,7 @@ int			l_lx_closed_quote_check_1(t_li_node *tk_tk);
 void		l_lx_quote_2(t_li_node *tk_tk, t_lx_so_far *so_far);
 void		l_lx_end(t_li_node *tk_tk, t_lx_so_far *so_far);
 t_lx_state	l_lx_next_state(t_tk_token_type type);
+void		l_lx_word(t_li_node *tk_tk, t_lx_so_far *so_far);
+void		l_lx_whitespace(t_li_node *tk_tk, t_lx_so_far *so_far);
 
 #endif
