@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 12:08:29 by codespace     #+#    #+#                 */
-/*   Updated: 2023/08/23 14:49:12 by evoronin      ########   odam.nl         */
+/*   Updated: 2023/08/25 14:05:50 by evoronin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,16 +53,14 @@ void	l_lx_word(t_li_node *tk_tk, t_lx_so_far *so_far)
 	so_far->token.type = LX_WORD;
 	so_far->token.length = token->length;
 	so_far->token.data = token->data;
-	if (tk_tk->next != NULL)
+	if (tk_tk->next == NULL)
 	{
-		tk_tk = tk_tk->next;
-		token = tk_tk->data;
-	}
-	else
-	{
+		l_lx_token_copy(so_far);
 		so_far->state = LX_ST_END;
 		return ;
 	}
+	tk_tk = tk_tk->next;
+	token = tk_tk->data;
 	if (l_lx_next_state(token->type) != so_far->state)
 	{
 		l_lx_token_copy(so_far);

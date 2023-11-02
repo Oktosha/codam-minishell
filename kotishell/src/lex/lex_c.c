@@ -6,38 +6,29 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 12:57:58 by codespace     #+#    #+#                 */
-/*   Updated: 2023/08/23 14:43:27 by evoronin      ########   odam.nl         */
+/*   Updated: 2023/08/25 14:25:18 by evoronin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lex.h"
 
-int	l_lx_closed_quote_check_1(t_li_node *tk_tk)
+bool	l_lx_closed_quotes_check(t_li_node *tk_tk)
 {
-	int			count1;
-	int			count2;
 	t_tk_token	*token;
+	int			count;
 
-	count1 = 0;
-	count2 = 0;
-	token = tk_tk->data;
-	while (token->type == TK_QUOTE_1)
+	count = 0;
+	while (tk_tk->next != NULL)
 	{
-		count1++;
+		token = tk_tk->data;
+		if (token->type == TK_QUOTE_1 || token->type == TK_QUOTE_2)
+			count++;
 		tk_tk = tk_tk->next;
 	}
-	while (token->type != TK_QUOTE_1)
-		tk_tk = tk_tk->next;
-	while (token->type == TK_QUOTE_1)
-	{
-		count2++;
-		tk_tk = tk_tk->next;
-	}
-	if (count1 != count2)
-		return (1);
-	if (count1 % 2 != 0)
-		return (2);
-	return (0);
+	printf("count: %d\n", count);
+	if (count % 2 == 0)
+		return (true);
+	return (false);
 }
 
 t_lx_state	l_lx_next_state(t_tk_token_type type)

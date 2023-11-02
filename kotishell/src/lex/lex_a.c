@@ -6,7 +6,7 @@
 /*   By: elenavoronin <elnvoronin@gmail.com>          +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 14:19:41 by elenavoroni   #+#    #+#                 */
-/*   Updated: 2023/08/23 14:52:47 by evoronin      ########   odam.nl         */
+/*   Updated: 2023/08/25 14:23:46 by evoronin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	l_lx_quote_1(t_li_node *tk_tk, t_lx_so_far *so_far)
 	token = tk_tk->data;
 	if (so_far->status != LX_SUCCESS)
 		return ;
-	if (l_lx_closed_quote_check_1(tk_tk) != 0)
+	if (l_lx_closed_quotes_check(tk_tk) == false)
 	{
 		so_far->token.data = token->data;
 		so_far->token.length = token->length;
@@ -38,7 +38,7 @@ void	l_lx_quote_1(t_li_node *tk_tk, t_lx_so_far *so_far)
 	so_far->token.length -= 2;
 	l_lx_token_copy(so_far);
 	if (so_far->status == LX_ERR_MALLOC)
-			return ;
+		return ;
 	if (tk_tk->next == NULL)
 	{
 		so_far->state = LX_ST_END;
